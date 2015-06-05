@@ -1,0 +1,249 @@
+<?php
+
+/**
+ * Description of User Email
+ *
+ * @author Aniket
+ */
+class User {
+
+    private $_con = NULL;
+    private $_dateTime = NULL;
+
+    public function __construct() {
+        $this->_con = Propel::getConnection();
+        $this->_dateTime = date('Y-m-d H:i:s');
+    }
+
+    /**
+     * This Method sends the password reset email to the user
+     * @param type $user
+     * @param type $forgotPasswordKey
+     * @param type $context 
+     */
+    public function sendPasswordResetEmail($userDetail, $forgotPassword) {
+        $mailerBody = 'Hi ' . $userDetail["0"]['FIRSTNAME'] . ',<br/><br/>
+               Your New Password is: ' . $forgotPassword . '<br/><br/>Regards,<br/><br/>
+        Berkshire Hathaway Specialty Insurance';
+        // Failure mail to amit
+        $message = sfContext::getInstance()->getMailer()->compose(
+                array(sfConfig::get('app_mail_from') => ' Berkshire Hathaway Specialty Insurance'), $userDetail['0']['EMAIL_ID'], 'Reservation - Password Reset', $mailerBody
+        );
+        $message->setContentType('text/html');
+        $userDetail['0']['EMAIL_ID'] . $isMail = sfContext::getInstance()->getMailer()->send($message);
+        if ($isMail)
+            return true;
+        else
+            return false;
+    }
+
+    public function isEmailRegistered($email) {
+        $criteria = new Criteria();
+        $criteria->clearSelectColumns();
+        $criteria->addSelectColumn(UsersPeer::USER_ID);
+        $criteria->addSelectColumn(UsersPeer::EMAIL_ID);
+        $criteria->addSelectColumn(UsersPeer::FIRSTNAME);
+        $criteria->add(UsersPeer::EMAIL_ID, $email, Criteria::EQUAL);
+        $criteria->add(UsersPeer::USER_STATUS, 'Active', Criteria::EQUAL);
+        $userRecords = UsersPeer::doSelectStmt($criteria)->fetchAll(PDO::FETCH_ASSOC);
+        if (UsersPeer::doCount($criteria) > 0) {
+            return $userRecords;
+        } else {
+            return false;
+        }
+    }
+
+    public function generateUserPassword($length = 8, $strength = 7) {
+        $vowels = 'aeuyi';
+        $consonants = 'bdghjmnpqrstvz';
+        if ($strength & 1) {
+            $consonants .= 'BDGHJLMNPQRSTVWXZ';
+        }
+        if ($strength & 2) {
+            $vowels .= "AEUY";
+        }
+        if ($strength & 4) {
+            $consonants .= '23456789';
+        }
+        if ($strength & 8) {
+            $consonants .= '@#$%';
+        }
+
+        $password = '';
+        $alt = time() % 2;
+        for ($i = 0; $i < $length; $i++) {
+            if ($alt == 1) {
+                $password .= $consonants[(rand() % strlen($consonants))];
+                $alt = 0;
+            } else {
+                $password .= $vowels[(rand() % strlen($vowels))];
+                $alt = 1;
+            }
+        }
+        return $password;
+    }
+
+    /**
+     * This method saves the forgot password key for the user
+     * @param type $key
+     * @return boolean true if forgot password key has been saved otherwise false
+     */
+    public function saveForgotPassword($UserId, $password) {
+        /**
+         * Saving the new forgot password key
+         */
+        if ($UserId) {
+            $con = Propel::getConnection();
+            $query = "UPDATE users SET PASSWORD = '" . md5($password) . "' , MODIFIED_ON = GETDATE() ,MODIFIED_BY_ID = '" . $UserId . "' WHERE USER_ID = '" . $UserId . "'";
+            $insert = $con->prepare($query);
+            $insert->execute();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /*
+
+      Create New User
+
+     */
+
+    public function CreateUser(array $UserDetails) {
+
+        $userID = User::userEmailCheck($UserDetails['email']);
+        if (!$userID) {
+            $response['msg'] = 'User already exists';
+            $response['success'] = false;
+        } else {
+            $emailId = $UserDetails['email'];
+            $firstName = $UserDetails['firstname'];
+            $lastName = $UserDetails['lastname'];
+            $password = md5($UserDetails['password']);
+            $groupId = $UserDetails['groupName'];
+            $userStatus = $UserDetails['status'];
+            $createdByID = $UserDetails['userId'];
+            //$createdOn = $this->_dateTime;
+
+            $con = Propel::getConnection();
+            $query = "INSERT INTO USERS 
+                     (EMAIL_ID, FIRSTNAME, LASTNAME, PASSWORD, GROUP_ID, USER_STATUS, CREATED_ON, CREATED_BY_ID,MODIFIED_BY_ID) 
+                     VALUES 
+                     ('" . $emailId . "','" . $firstName . "','" . $lastName . "','" . $password . "','" . $groupId . "','" . $userStatus . "',GetDate(), '" . $createdByID . "', '0')";
+            $insert = $con->prepare($query);
+
+            if ($insert->execute()) {
+                $STH = $con->query("SELECT CAST(COALESCE(SCOPE_IDENTITY(), @@IDENTITY) AS int)");
+                $STH->execute();
+                $result = $STH->fetch();
+                $userAddId = $result[0];
+            }
+            if ($userAddId != '') {
+                $response['success'] = true;
+            } else {
+                $response['msg'] = 'User not saved due to some error';
+                $response['success'] = false;
+            }
+        }
+        return $response;
+    }
+
+    /*
+
+      Edit New User
+
+     */
+
+    public function EditUser($UserDetails) {
+        $userID = User::isValidUserId($UserDetails['userId']);
+        if ($userID) {
+            $con = Propel::getConnection();
+            $Recorderquery = "UPDATE users SET MODIFIED_ON = GetDate(), EMAIL_ID = '" . $UserDetails['email'] . "', FIRSTNAME = '" . $UserDetails['firstname'] . "', LASTNAME = '" . $UserDetails['lastname'] . "' , GROUP_ID = '" . $UserDetails['groupName'] . "', USER_STATUS = '" . $UserDetails['status'] . "', MODIFIED_BY_ID = '" . $UserDetails['adminId'] . "' WHERE USER_ID = '" . $UserDetails['userId'] . "'";
+            $updateRecorderData = $con->prepare($Recorderquery);
+            $updateRecorderData->execute();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /*
+
+      Check wheather email already exit or not in Users table
+
+     */
+
+    public static function userEmailCheck($email_id) {
+        $con = Propel::getConnection();
+        $stmt = $con->query("SELECT USER_ID,EMAIL_ID FROM USERS WHERE EMAIL_ID = '" . $email_id . "'");
+        $result = $stmt->fetchAll();
+        if (count($result) == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function isValidUserId($userId) {
+        $con = Propel::getConnection();
+        $stmt = $con->query("SELECT USER_ID FROM USERS WHERE USER_ID = '" . $userId . "'");
+        $result = $stmt->fetchAll();
+        if (count($result) > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function getUserSearchCriteria(array $input) {
+
+        $criteria = new Criteria();
+        $isFilterChoosen = false;
+        if ($input['groupName'] != '') {
+            $filterCriteria = $criteria->add(UsersPeer::GROUP_NAME, trim($input['groupName']) . '%', Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+        if ($input['groupStatus'] != '') {
+            $filterCriteria = $criteria->add(GroupsPeer::STATUS, trim($input['groupStatus']), Criteria::EQUAL);
+            $isFilterChoosen = true;
+        } else {
+            $criteria->add(GroupsPeer::STATUS, 'active', Criteria::EQUAL);
+        }
+        $isDateFilterChoosen = false;
+        if ($input['fromDate'] != '' && $input['toDate'] != '') {
+            $isDateFilterChoosen = true;
+            $dateCriteria = $criteria->getNewCriterion(GroupsPeer::CREATED_ON, $input['fromDate'] . ' 00:00:00', Criteria::GREATER_EQUAL);
+            $endDateCriteria = $criteria->getNewCriterion(GroupsPeer::CREATED_ON, $input['toDate'] . ' 23:59:59', Criteria::LESS_EQUAL);
+            $dateCriteria->addAnd($endDateCriteria);
+        } else if ($input['fromDate'] != '') {
+            $isDateFilterChoosen = true;
+            $dateCriteria = $criteria->add(GroupsPeer::CREATED_ON, $input['fromDate'] . ' 00:00:00', Criteria::GREATER_EQUAL);
+        } else if ($input['toDate'] != '') {
+            $isDateFilterChoosen = true;
+            $dateCriteria = $criteria->add(GroupsPeer::CREATED_ON, $input['toDate'] . ' 23:59:59', Criteria::LESS_EQUAL);
+        }
+
+        if ($isFilterChoosen) {
+            $criteria->add($filterCriteria);
+        }
+
+        if ($isDateFilterChoosen) {
+            $criteria->add($dateCriteria);
+        }
+        $criteria->addAscendingOrderByColumn(UsersPeer::FIRSTNAME);
+        return $criteria;
+    }
+
+//    public static function handleException(sfEvent $event) {
+//        $moduleName = sfConfig::get('sf_error_500_module', 'errorActions');
+//        $actionName = sfConfig::get('sf_error_500_action', 'InternalError');
+//        sfContext::getInstance()->getRequest()->addRequestParameters(array('exception' => $event->getSubject()));
+//        $event->setReturnValue(true);
+//        sfContext::getInstance()->getController()->forward($moduleName, $actionName);
+//        echo "hi";
+//        exit;
+//    }
+
+}
+
+?>

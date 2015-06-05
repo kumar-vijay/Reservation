@@ -1,0 +1,167 @@
+default:  
+  layout: layout
+  stylesheets: [layout.css,reset.css,stylesheet.css,jquery-ui-1.10.3.custom.css]
+  javascripts: [jquery-1.9.1.js,custom-jquery.js,jquery-ui.min.js]  
+
+usersSuccess:  
+  stylesheets: [jquery-ui-1.10.3.custom.css]
+  javascripts: [jquery.js,custom-jquery.js,jquery-ui-1.10.3.custom.js,userListing-js.js,jquery.validate.js]  
+  metas:
+    title: List of Users presents in the system
+    description: List of Users presents in the system
+  
+groupsSuccess:
+  stylesheets: [jquery-ui-1.10.3.custom.css]
+  javascripts: [jquery.js,custom-jquery.js,jquery-ui-1.10.3.custom.js,reservation-js.js,jquery.validate.js]  
+  metas:
+    title: List of groups presents in the system
+    description: List of groups presents in the system
+  
+addGroupSuccess:
+  javascripts: [jquery.js,custom-jquery.js,jquery-ui-1.10.3.custom.js,reservation-js.js,jquery.validate.js]
+  metas:
+    title: Add new group in the system
+    description: Add new group in the system
+    
+editGroupSuccess:
+  javascripts: [jquery.js,custom-jquery.js,jquery-ui-1.10.3.custom.js,reservation-js.js,jquery.validate.js]
+  metas:
+    title: Edit existing group in the system
+    description: Edit existing group in the system   
+    
+viewGroupSuccess:
+  javascripts: [jquery.js,custom-jquery.js,jquery-ui-1.10.3.custom.js,reservation-js.js,jquery.validate.js]
+  metas:
+    title: view existing group in the system
+    description: view existing group in the system 
+
+addUserSuccess:
+  metas:
+  javascripts: [jquery.validate.js,addUserValidation.js]
+  
+editUserSuccess:
+  metas:
+  javascripts: [editUserValidation.js,jquery.validate.js]
+  
+viewUserSuccess:
+  metas:
+  javascripts: [editUserValidation.js,jquery.validate.js]
+
+adminSuccess:
+  metas:
+  
+InsuredSuccess:
+  metas:
+  javascripts: [jquery.validate.js,editUserValidation.js]
+  
+AddInsuredSuccess:
+  metas:
+  javascripts: [jquery.validate.js,editUserValidation.js]
+  
+EditInsuredSuccess:
+  metas:
+  javascripts: [jquery.validate.js,editUserValidation.js]
+  
+ViewInsuredSuccess:
+  metas:
+  javascripts: [editUserValidation.js]
+  
+CloneInsuredSuccess:
+  metas:
+  javascripts: [jquery.validate.js,editUserValidation.js]
+  
+BrokerSuccess:
+  metas:
+  javascripts: [editUserValidation.js,jquery.validate.js]
+  
+AddBrokerSuccess:
+  metas:
+  stylesheets: [jquery-ui-1.10.3.custom.css]
+  javascripts: [jquery.validate.js,jquery-ui.min.js,editUserValidation.js]
+  
+EditBrokerSuccess:
+  metas:
+  javascripts: [jquery.validate.js,editUserValidation.js]
+  
+ViewBrokerSuccess:
+  metas:
+    
+ContactPersonSuccess:
+  metas:
+  stylesheets: [jquery-ui-1.10.3.custom.css]
+  javascripts: [jquery.validate.js,jquery-ui.min.js,editUserValidation.js]
+  
+AddContactPersonSuccess:
+  metas:
+  stylesheets: [jquery-ui-1.10.3.custom.css]
+  javascripts: [jquery.validate.js,jquery-ui.min.js,editUserValidation.js]
+  
+EditContactPersonSuccess:
+  metas:
+  stylesheets: [jquery-ui-1.10.3.custom.css]
+  javascripts: [jquery.validate.js,jquery-ui.min.js,editUserValidation.js]
+  
+ViewContactPersonSuccess:
+  metas:
+ 
+RenewalReferenceSuccess:
+  metas:
+  stylesheets: [jquery-ui-1.10.3.custom.css]
+  javascripts: [jquery.validate.js,jquery-ui.min.js,editUserValidation.js]
+  
+AddRenewalReferenceSuccess:
+  metas:
+  stylesheets: [jquery-ui-1.10.3.custom.css]
+  javascripts: [jquery.validate.js,jquery-ui.min.js,editUserValidation.js]
+  
+EditRenewalReferenceSuccess:
+  metas:
+  stylesheets: [jquery-ui-1.10.3.custom.css]
+  javascripts: [jquery.validate.js,jquery-ui.min.js,editUserValidation.js]
+  
+ViewRenewalReferenceSuccess:
+  metas:
+
+UnderwriterSuccess:
+  metas:
+  javascripts: [jquery.validate.js]
+  
+AddUnderwriterSuccess:
+  metas:
+  javascripts: [jquery.validate.js, underwriter.js]
+  
+EditUnderwriterSuccess:
+  metas:
+  javascripts: [jquery.validate.js, underwriter.js]
+  
+CountrySuccess:
+  metas:
+  javascripts: [jquery.validate.js]
+  
+AddCountrySuccess:
+  metas:
+  javascripts: [jquery.validate.js, country.js]
+
+EditCountrySuccess:
+  metas:
+  javascripts: [jquery.validate.js, country.js]
+  
+StateSuccess:
+  metas:
+  #javascripts: [s,custom-jquery.js]
+  
+AddStateSuccess:
+  metas:
+  javascripts: [jquery.validate.js, state.js]
+  
+EditStateSuccess:
+  metas:
+  javascripts: [jquery.validate.js, state.js]
+  
+AddCitySuccess:
+  metas:
+  javascripts: [jquery.validate.js, city.js]
+
+EditCitySuccess:
+  metas:
+  javascripts: [jquery.validate.js, city.js]

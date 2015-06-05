@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/reservation/!svn/ver/65/branches/03-12-2013_Newreservation/apps/reservation/modules/submission/lib
+END
+ViewSubmission.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/reservation/!svn/ver/72/branches/03-12-2013_Newreservation/apps/reservation/modules/submission/lib/ViewSubmission.class.php
+END
+Submission.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/reservation/!svn/ver/71/branches/03-12-2013_Newreservation/apps/reservation/modules/submission/lib/Submission.class.php
+END
+EditSubmission.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/reservation/!svn/ver/71/branches/03-12-2013_Newreservation/apps/reservation/modules/submission/lib/EditSubmission.class.php
+END

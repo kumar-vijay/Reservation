@@ -1,0 +1,69 @@
+<div class="container"> 
+                    <ul id="breadcrumb">
+                        <li><a href="/">Home</a></li>
+                        <li class="selected-2"><a href="/admin/manageadmin">Admin</a></li>
+                        <li class="selected-1"><a href="/admin/users">Manage user</a></li>
+                        <li class="selected"><a href="/admin/viewuser?userId=<?php echo $userId?>">View User</a></li>
+                    </ul>
+</div>
+<div class="container container-center" style="padding-top:60px;">
+<div class="white-bg black-border border-radius-10">
+<?php
+        
+if(count($userDetails)>0)
+          { ?>
+
+ <h1 class="section-header border-radius-10">View User
+     <div class="arrow"></div>
+ </h1>
+    <!--content border start-->
+    <div class="content view" style="display: block;">
+        <form method="post" id="editUserForm" action="/admin/edituser?userId=<?php echo $userId?>">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="12%"><label for="firstname">First Name:</label></td>
+                    <td width="22%"><?php echo $userDetails['0']['FIRSTNAME']?></td>
+                    <td width="3%">&nbsp;</td>
+                    <td width="12%" ><label for="lastname">Last Name:</label></td>
+                    <td width="22%"><?php echo $userDetails['0']['LASTNAME']?></td>
+                </tr>
+                <tr>
+                    <td width="12%"><label for="email">Email:</label></td>
+                    <td width="22%"><?php echo $userDetails['0']['EMAIL_ID']?></td>
+                    <td width="3%">&nbsp;</td>
+                    <td width="12%"><label for="status">Status:</label></td>
+                    <?php if ($userDetails['0']['USER_STATUS'] == 'Active') { ?>
+                    <td width="22%" class="active">
+                           <?php echo $userDetails['0']['USER_STATUS'] ?>
+                    </td>
+                    <?php } else { ?>
+                    <td width="22%" class="inactive">
+                           <?php echo $userDetails['0']['USER_STATUS'] ?>
+                    </td>
+                    <?php } ?>
+                </tr>
+                <tr>
+                    <td width="12%"><label for="group">Group:</label></td>
+                    <td colspan="3" width="22%"> <?php echo $groupDetails['0']->GROUP_NAME ?> </td>
+                    <td align="left">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="5">&nbsp;</td>
+                </tr>
+            </table>
+            <div class="margin-top-20 text-center">
+                <input type="reset" value="Back" onclick="location.href = '/admin/users';" class="button ML10" /></div>
+        </form>
+    </div> 
+    </div>
+    </div>
+         <?php } else { ?>
+<table>
+   <tr>
+          <td colspan="5"><?php echo $errMsg?></td>
+   </tr>
+</table>
+<?php } ?>
+    <!--content border end-->
+
+</div>

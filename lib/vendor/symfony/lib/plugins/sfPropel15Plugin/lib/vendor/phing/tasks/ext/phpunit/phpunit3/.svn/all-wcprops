@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/tasks/ext/phpunit/phpunit3
+END
+PHPUnit3ResultFormatter.php
+K 25
+svn:wc:ra_dav:version-url
+V 178
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/tasks/ext/phpunit/phpunit3/PHPUnit3ResultFormatter.php
+END
+XMLPHPUnit3ResultFormatter.php
+K 25
+svn:wc:ra_dav:version-url
+V 181
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/tasks/ext/phpunit/phpunit3/XMLPHPUnit3ResultFormatter.php
+END
+PlainPHPUnit3ResultFormatter.php
+K 25
+svn:wc:ra_dav:version-url
+V 183
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/tasks/ext/phpunit/phpunit3/PlainPHPUnit3ResultFormatter.php
+END
+SummaryPHPUnit3ResultFormatter.php
+K 25
+svn:wc:ra_dav:version-url
+V 185
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/tasks/ext/phpunit/phpunit3/SummaryPHPUnit3ResultFormatter.php
+END

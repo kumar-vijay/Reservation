@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel/validator
+END
+MatchValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel/validator/MatchValidator.php
+END
+NotMatchValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 156
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel/validator/NotMatchValidator.php
+END
+ValidValuesValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 159
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel/validator/ValidValuesValidator.php
+END
+MinValueValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 156
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel/validator/MinValueValidator.php
+END
+RequiredValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 156
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel/validator/RequiredValidator.php
+END
+BasicValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel/validator/BasicValidator.php
+END
+TypeValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel/validator/TypeValidator.php
+END
+MaxValueValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 156
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel/validator/MaxValueValidator.php
+END
+MinLengthValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel/validator/MinLengthValidator.php
+END
+UniqueValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel/validator/UniqueValidator.php
+END
+MaxLengthValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel/validator/MaxLengthValidator.php
+END
+ValidationFailed.php
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel/validator/ValidationFailed.php
+END

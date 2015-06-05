@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/tasks/ext/phpunit
+END
+PHPUnitUtil.php
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/tasks/ext/phpunit/PHPUnitUtil.php
+END
+PHPUnitReportTask.php
+K 25
+svn:wc:ra_dav:version-url
+V 163
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/tasks/ext/phpunit/PHPUnitReportTask.php
+END
+PHPUnitTask.php
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/tasks/ext/phpunit/PHPUnitTask.php
+END
+FormatterElement.php
+K 25
+svn:wc:ra_dav:version-url
+V 162
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/tasks/ext/phpunit/FormatterElement.php
+END
+BatchTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/tasks/ext/phpunit/BatchTest.php
+END
+PHPUnitTestRunner.php
+K 25
+svn:wc:ra_dav:version-url
+V 163
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/tasks/ext/phpunit/PHPUnitTestRunner.php
+END

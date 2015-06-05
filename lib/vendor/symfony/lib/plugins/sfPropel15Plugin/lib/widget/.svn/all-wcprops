@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/widget
+END
+sfWidgetFormDelete.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/widget/sfWidgetFormDelete.class.php
+END
+sfWidgetFormSchemaOptional.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/widget/sfWidgetFormSchemaOptional.class.php
+END
+sfWidgetFormSchemaDecoratorEscaped.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 162
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/widget/sfWidgetFormSchemaDecoratorEscaped.class.php
+END
+sfWidgetFormPropelChoice.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/widget/sfWidgetFormPropelChoice.class.php
+END
+sfWidgetFormPlain.php
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/widget/sfWidgetFormPlain.php
+END

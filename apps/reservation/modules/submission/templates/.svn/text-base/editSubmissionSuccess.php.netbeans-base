@@ -1,0 +1,668 @@
+<div id="content">
+    <div class="container"> 
+        <ul id="breadcrumb">
+            <li class="selected-3"><a href="/">Home</a></li>
+            <li class="selected-2"><a href="/submission/Submission">Submission</a></li>
+            <li class="selected-1"><a href="/submission/List">Submission Listing</a></li>
+            <li class="selected">Edit</li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+    <div class="container"><a href="/submission/List"><img src="/images/back.jpg" alt="back" class="fright" /></a>
+        <div class="clear"></div>
+    </div>
+    <div class="container">
+        <ul class="tabbed-menu">
+            <li class="active"><a href="/submission/edit?submission=<?php echo $submissionId; ?>" id="submissiondetails">Submission Details</a></li>
+            <li><a href="/submission/history?submission=<?php echo $submissionId; ?>" id="submissionhistory">Submission History</a></li>
+        </ul>	
+        <div class="dates">
+            <em>Created Date: <strong><?php echo date("Y-m-d", strtotime($DataRecorder['CreatedOn'])); ?></strong></em>
+            <em>Updated Date: <strong><?php if ($DataRecorder['ModifiedOn'] != '') {
+                echo date("Y-m-d", strtotime($DataRecorder['ModifiedOn']));
+            } else {
+                echo '';
+            } ?></strong></em>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <form name="editSubmissionForm" id="editSubmissionForm" method="POST" action="">
+        <div class="container">
+            <div class="white-bg black-border border-radius-10">
+                <h1 class="section-header border-radius-10">Create Submission
+                    <div class="arrow"></div>
+                </h1>
+                <div class="content" style="display: block;">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td width="12%">New/Renewal</td>
+                            <td width="22%">
+                                <select class="listbox-small" name="newrenewal" id="submissiontype">
+                                    <option value="">-- Select --</option>
+                                    <?php
+                                    foreach ($nerrenewal as $value) {
+                                        if ($submissionRow['NewRenewalLookupId'] == $value['Id'])
+                                            $select = 'selected="selected"';
+                                        else
+                                            $select = '';
+                                        ?>
+                                        <option value="<?php echo $value['Id'] ?>" <?php echo $select; ?> ><?php echo $value['Alias'] ?></option>
+                                    <?php } ?>
+                                </select>
+                            </td>
+                            </td>
+                            <td width="12%">Underwriter</td>
+                            <td width="22%">
+                                <select name="editunderwriter" id="underwriter_id" class="listbox-small">
+                                    <option value="">-- Select --</option>
+                                    <?php foreach ($underwriters as $underwriter) { ?>
+                                        <option value="<?php echo $underwriter->Id; ?>" 
+                                                <?php
+                                                if ($underwriter->Id == $submissionRow['UnderwriterId']) {
+                                                    echo "selected = selected";
+                                                }
+                                                ?>><?php echo $underwriter->Name; ?></option>
+                                      <?php } ?>
+                                </select>
+                            </td>
+                            <td width="12%">Product Line</td>
+                            <td width="22%">
+                                <input type="text" name="editproductline" id="productline" class="listbox-small" readonly/>
+                                <input type="hidden" id="productLinePrefix1" name="productLinePrefix">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="12%">Product Line Subtype</td>
+                            <td width="22%">
+                                <select name="editproductlinesubtype" id="productlinesubtype" class="listbox-small">
+                                    <option value="0">-- Select --</option>
+                                </select>
+                                <input type="hidden" id="productLineSubTypeHidden" value="<?php echo $submissionRow['LobSubTypeId']; ?>">
+                            </td>
+                            <td>Section</td>
+                            <td>
+                                <select name="editsection" id="sectionCode" class="listbox-small">
+                                    <option value="0">-- Select --</option>
+                                </select>
+                                <input type="hidden" id="sectionCodeHidden" value="<?php echo $submissionRow['SectionId']; ?>">
+                            </td>
+                            <td width="12%">Profit Code</td>
+                            <td width="22%">
+                                <select name="editprofitcode" id="profitCode" class="listbox-small">
+                                    <option value="0">-- Select --</option>
+                                </select> 
+                                <input type="hidden" id="profitCodeHidden" value="<?php echo $submissionRow['ProfitCodeId']; ?>">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Current Status</td>
+                            <td>
+                                <select name="editprimarystatus"  id="primary_status" class="listbox-small">
+                                    <option value="0">-- Select --</option>
+                                    <?php
+                                    foreach ($status as $value) {
+                                        if ($submissionRow['CurrentStatusId'] == $value['Id'])
+                                            $select = 'selected="selected"';
+                                        else
+                                            $select = '';
+                                        ?>
+                                        <option value="<?php echo $value['Id'] ?>" <?php echo $select; ?> ><?php echo $value['StatusName'] ?></option>
+                                    <?php } ?>
+                                </select>
+                            </td>
+                            <td>Effective Date</td>
+                            <td>
+                                <input type="text" name="effectiveDate" id="effective_date" class="txtbox-small tcal" value="<?php echo $submissionRow['EffectiveDate']; ?>" readonly/>
+                                <div id="dateAlert" class="error display-none">The date selected is more than 120 days from today</div>
+                            </td>
+                            <td>Expiry Date</td>
+                            <td><input type="text" name="expityDate" id="expiration_date" class="txtbox-small tcal" value="<?php echo $submissionRow['ExpiryDate']; ?>" readonly/></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="white-bg black-border border-radius-10">
+                <h1 class="section-header border-radius-10">Insured Details
+                    <div class="arrow"></div>
+                </h1>
+                <div class="content" style="display: block;">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td width="12%">Insured Name</td>
+                            <td width="22%">
+                                <div style="position: relative;">
+                                    <input type="text" name="editinsuredname" id="editinsuredname"  value="<?php echo $insuredName; ?> " class="txtbox-small"/>
+                                    <input type="hidden"id="insuredId" name="insuredId" class="txtbox-small" value="<?php echo $submissionRow['InsuredId']; ?>"/>
+                                    <input type="button" id="insured_name_submit" class="open-modal" value="" name="insured_name_submit"/>
+                                    <a href="/admin/insured" target="_blank" class="manage">Manage</a>
+                                </div>
+                                 <div class="modal-container">
+                                    <div class="modal"> 
+                                        <div class="container">
+                                            <h2>Insured Details List</h2>
+                                            <table class="insuredTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Choose</th>
+                                                        <th>Insured Name</th>
+                                                        <th>Address Line 1</th>
+                                                        <th>Country</th>
+                                                        <th>State</th>
+                                                        <th>City</th>
+                                                        <th>Zipcode</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody> </tbody>
+                                            </table>
+                                            <input type="button" class="button" style="display: block; margin: auto;" value="submit" id="insuredsubmit"/>
+                                        </div>
+                                        <button class="close-modal">x</button>
+                                    </div>
+                                </div>
+                            </td>
+                            <td colspan="2">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr style="border:1px solid;">
+                                        <td width="60%" style="padding-left:5px;">Is DBA name different then insured name ?</td>
+                                        <td width="1%">
+                                            <input type="radio" value="Y" id="insured_name_yes" name="insured_name_status" class="insurednamestatus" <?php
+                                            if (trim($submissionRow['IsDifferentDba']) == 'Y') {
+                                                echo "checked";
+                                            }
+                                            ?> />
+                                        </td>
+                                        <td style="padding-top:8px;">Yes</td>
+                                        <td width="1%">
+                                            <input type="radio" id="insured_name_no" value="N" name="insured_name_status" class="insurednamestatus" <?php
+                                            if (trim($submissionRow['IsDifferentDba']) == 'N') {
+                                                echo "checked";
+                                            }
+                                            ?> />
+                                        </td>
+                                        <td style="padding-top:8px;">No</td>
+                                        <td width=""><span class="arrow-col"></span></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td colspan="2" rowspan="6" style="padding:5px;">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="dba_table" style="background-color:#fff;">
+                                    <!--tr>
+                                        <td>DBA Name</td>
+                                        <td><input type="text" name="dbaName" id="insured_name_dnb"  value="<?php echo $submissionRow['DbaName']; ?>" class="txtbox-small" disabled/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Address Line 1</td>
+                                        <td><input type="text"  name="altAddressLine1" id="sub_address_line1" value="<?php echo $submissionAddressSubmission['AddressLine1']; ?>" maxlength="50"  class="txtbox-small mailingaddress" disabled/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Country</td>
+                                        <td> 
+                                            <select id="mail_country" name="altCountry"  class="listbox-small mailingaddress" disabled>
+                                                <option value="">-- Select --</option>
+                                                <?php
+                                                foreach ($country as $value) {
+                                                    if ($submissionAddressSubmission['CounrtyId'] == $value['Id'])
+                                                        $select = 'selected="selected"';
+                                                    else
+                                                        $select = '';
+                                                    ?>
+                                                    <option value="<?php echo $value['Id'] ?>" <?php echo $select; ?> ><?php echo $value['InsuredCountry'] ?></option>
+                                                    <?php } ?>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>State</td>
+                                        <td> 
+                                            <select id="mail_state_id" name="altState"  class="listbox-small mailingaddress" disabled>
+                                                <option>-- Select --</option>
+                                            </select>
+                                            <input type="hidden" id="mailStateHidden" value="<?php echo $submissionAddressSubmission['StateId']; ?>">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>City</td>
+                                        <td> <select id="mail_city" name="altCity"  class="listbox-small mailingaddress" disabled>
+                                                <option>-- Select --</option>
+                                            </select>
+                                            <input type="hidden" id="mailCityHidden" value="<?php echo $submissionAddressSubmission['CityId']; ?>">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Zipcode</td>
+                                        <td> 
+                                            <input name="altZipCode" id="sub_zip_code" value="<?php echo $submissionAddressSubmission['Zip']; ?>" maxlength="10"  class="txtbox-small mailingaddress" disabled />
+                                        </td>
+                                    </tr-->
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Address Line 1</td>
+                            <td>
+                                <input type="text" name="insured_address" id="insured_address" value="<?php echo $insuredaddress; ?>" class="txtbox-small" disabled/>
+                            </td>
+                            <!--td colspan="2">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr style="border:1px solid;">
+                                        <td width="60%" style="padding-left:5px;">Is Mailing Address Different ?</td>
+                                        <td width="1%"><input type="radio" value="Y" name="insured_address_status" id="insured_mailingaddress_yes" class="insuredaddressstatus" <?php
+                                        if (trim($submissionRow['IsDifferentMaillingAddress']) == 'Y') {
+                                            echo "checked=\"true\"";
+                                        }
+                                        ?> /></td>
+                                        <td style="padding-top:8px;">Yes</td> 
+                                        <td width="1%"><input type="radio" value="N" name="insured_address_status" id="insured_mailingaddress_no" class="insuredaddressstatus" <?php
+                                            if (trim($submissionRow['IsDifferentMaillingAddress']) == 'N') {
+                                                echo "checked=\"true\"";
+                                            }
+                                            ?> /></td>
+                                        <td style="padding-top:8px;">No </td>
+                                        <td><span class="arrow-col"></span></td>
+                                    </tr>
+                                </table>
+                            </td-->
+                            <td>DBA Name</td>
+                                        <td><input type="text" name="dbaName" id="insured_name_dnb"  value="<?php echo $submissionRow['DbaName']; ?>" class="txtbox-small" disabled/></td>
+                        </tr>
+                        <tr>
+                            <td>Country</td>
+                            <td> 
+                                <input type="text" name="insured_country" id="insured_country" class="txtbox-small" value="<?php echo $insuredCountry; ?>" disabled/>
+                            </td>
+                            <td width="12%">D&amp;B Number</td>
+                            <td width="22%"><input type="text" name="db_number" id="db_number" value="<?php echo $submissionRow['DBNumber']; ?>" class="txtbox-small"/></td>
+                        </tr>
+                        <tr>
+                            <td>State</td>
+                            <td> 
+                                <input type="text" name="insured_state" id="insured_state" class="txtbox-small" value="<?php echo $insuredState; ?>" disabled />
+                            </td>
+                            <td>CAB Companies</td>
+                            <td> <select name="editcabcompanies" class="listbox-small" id="editcabcompanies">
+                                    <option value="0">--Select--</option>
+                                    <?php
+                                    foreach ($cabCompanies as $value) {
+                                        if ($submissionRow['CABCompaniesLookupId'] == $value['Id'])
+                                            $select = 'selected="selected"';
+                                        else
+                                            $select = '';
+                                        ?>
+                                        <option value="<?php echo $value['Id'] ?>" <?php echo $select; ?> ><?php echo $value['Alias'] ?></option>
+                                        <?php } ?>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>City</td>
+                            <td> 
+                                <input type="text" name="insured_city" id="insured_city" class="listbox-small" value="<?php echo $insuredCity; ?>" disabled />
+                            </td>
+                            <td>Reinsured Company</td>
+                            <td><input type="text" name="reinsured_company" id="reinsured_company" value="<?php echo $submissionRow['ReinsuredCompany']; ?>" class="listbox-small"/></td>
+                        </tr>
+                        <tr>
+                            <td>Zipcode</td>
+                            <td><input type="text" name="insured_zipcode" id="insured_zipcode" class="listbox-small" value="<?php echo $insuredZipcode; ?>" disabled/></td>
+                            <td>Submission Type Identifier</td>
+                            <td><select name="editsubmissiontypeidrntifier" class="listbox-small">
+                                    <option value="0">--Select--</option>
+                                    <?php
+                                        foreach ($submissionIdetifier as $value) {
+                                            if ($submissionRow['SubmissionIdentifier'] == $value['Id'])
+                                                $select = 'selected="selected"';
+                                            else
+                                                $select = '';
+                                        ?>
+                                        <option value="<?php echo $value['Id'] ?>" <?php echo $select; ?> ><?php echo $value['Name'] ?></option>
+                                    <?php } ?>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="container" id="business_dependent_details">
+            <div class="white-bg black-border border-radius-10">
+                <h1 class="section-header border-radius-10">Line of Business Dependent Details
+                    <div class="arrow"></div>
+                </h1>
+                <div class="content" style="display: block;">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td width="12%">Project Name</td>
+                            <td width="22%">
+                                <input type="text" name="project_name" id="project_name" value="<?php echo $businessDetails['ProjectName']; ?>" class="txtbox-small project" disabled/>
+                            </td>
+                            <td width="12%">Name of General Contractor</td>
+                            <td width="22%">
+                                <input type="text" name="general_contrator_name" id="general_contrator_name" value="<?php echo $businessDetails['ProjectGeneralContractorName']; ?>" class="txtbox-small project" disabled/>
+                            </td>
+                            <td width="12%">Project Owner Name</td>
+                            <td width="22%"><input type="text" name="project_owner_name" id="project_owner_name" value="<?php echo $businessDetails['ProjectOwnerName']; ?>" class="txtbox-small project" disabled/></td>
+                        </tr>
+                        <tr>
+
+                            <td>Project Country</td>
+                            <td>
+                                <select name="project_country" id="sub_country"class="listbox-small project" disabled>
+                                    <option value="">-- Select --</option>
+                                    <?php
+                                    foreach ($country as $value) {
+                                        if ($businessDetails['ProjectCountry'] == $value['Id'])
+                                            $select = 'selected="selected"';
+                                        else
+                                            $select = '';
+                                        ?>
+                                        <option value="<?php echo $value['Id'] ?>" <?php echo $select; ?> ><?php echo $value['InsuredCountry'] ?></option>
+                                    <?php } ?>
+                                </select>
+                            </td>
+                            <td>Project State</td>
+                            <td>
+                                <select name="project_state" id="sub_state" class="listbox-small project" disabled>
+                                    <option>-- Select --</option>
+                                </select>
+                                <input type="hidden" id="newMailStateHidden" value="<?php echo $businessDetails['ProjectState']; ?>">
+                            </td>
+                            <td>Project City</td>
+                            <td colspan="3">
+                                <select name="project_city" id="sub_city" class="listbox-small project" disabled>
+                                    <option>-- Select --</option>
+                                </select>
+                                <input type="hidden" id="newMailCityHidden" value="<?php echo $businessDetails['ProjectCity']; ?>">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Project Street Address</td>
+                            <td>
+                                <input type="text" name="project_street_address" id="project_street_address" value="<?php echo $businessDetails['ProjectAddress']; ?>" class="listbox-small project" disabled>
+                            </td>
+                            <td>Bid Situation</td>
+                            <td>
+                                <select name="bid_situation" id="bid_situation" class="listbox-small project" disabled>
+                                    <option>-- Select --</option>
+                                    <?php
+                                    foreach ($bidSituation as $value) {
+                                        if ($businessDetails['BidSituation'] == $value['Id'])
+                                            $select = 'selected="selected"';
+                                        else
+                                            $select = '';
+                                        ?>
+                                        <option value="<?php echo $value['Id'] ?>" <?php echo $select; ?> ><?php echo $value['Alias'] ?></option>
+                                    <?php } ?>
+                                </select>
+                            </td>
+                            <td>Total Insured Value<input type="checkbox" name= "yesTrue" id="yesTrue" class="ct4" value="<?php echo $submissionRow['IsTotalInsuredValue'] ?>" <?php
+                                            if (trim($submissionRow['IsTotalInsuredValue']) == 'Y') {
+                                                echo "checked";
+                                            }
+                                            ?> disabled/>
+                            </td>
+                            <td id="total_insured">
+                                <input type="text" name="edittotalinsuredvalue" id="edittotalinsuredvalue" class="txtbox-small" value="<?php  if(is_numeric($submissionRow['TotalInsuredValue'])) {echo $submissionRow['TotalInsuredValue'];} else { echo '';} ?>"/>
+                            </td>
+                            <td style="display: none;" id="total_insured_values">
+                                    <select name="total_insured_value_select" id="total_insured_value_select" class="listbox-small project">
+                                    <option value="0" <?php
+                                            if ($submissionRow['TotalInsuredValue'] == '') {
+                                                echo "selected";
+                                            }
+                                            ?>>-- Select --</option>
+                                    <option value="N/A" <?php
+                                            if ($submissionRow['TotalInsuredValue'] == 'N/A') {
+                                                echo "selected";
+                                            }
+                                            ?>>Not Available</option>
+                                    <option value="TBE" <?php
+                                            if ($submissionRow['TotalInsuredValue'] == 'TBE') {
+                                                echo "selected";
+                                            }
+                                            ?>>To Be Entered</option>
+                                </select>  
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="white-bg black-border border-radius-10">
+                <h1 class="section-header border-radius-10">Broker Details
+                    <div class="arrow"></div>
+                </h1>
+                <div class="content" style="display: block;">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+                        <td width="12%">Broker Name</td>
+                        <td width="22%"> 
+                            <select name="brokerCode" id="brokerCode" class="listbox-small">
+                                <option value="">-- Select --</option>
+                                <?php
+                                foreach ($brokerDetails as $value) {
+                                    if ($brokerCode == $value['code'])
+                                        $select = 'selected="selected"';
+                                    else
+                                        $select = '';
+                                    ?>
+                                    <option value="<?php echo $value['code']; ?>" class="<?php echo $value['cat']; ?>" <?php echo $select; ?>><?php echo $value['name']; ?></option>
+                                <?php } ?>
+                            </select>
+                        </td>
+                        <td width="12%">Wholesaler or Retailer</td>
+                        <td width="22%">
+                            <input type="text" id="isWholesaler" name="wholesaler_retailer" value="<?php echo $brokerType['Alias']; ?>"  class="listbox-small" readonly />
+                        </td>
+                        </tr>
+                        <tr>
+                            <td>Broker Country</td>
+                            <td> 
+                                <select name="brokerCountryCode" id="brokerCountryCode" size="1" class="listbox-small">
+                                    <option value="0">-- Select --</option>
+                                    <?php
+                                    foreach ($country as $value) {
+                                        if ($brokerCountryCode == $value['Id'])
+                                            $select = 'selected="selected"';
+                                        else
+                                            $select = '';
+                                        ?>
+                                        <option value="<?php echo $value['Id']; ?>" <?php echo $select; ?> ><?php echo $value['InsuredCountry']; ?></option>
+                                    <?php } ?>
+                                </select>
+                            </td>
+                            <td>Broker State</td>
+                            <td> 
+                                <select name="brokerStateCode" id="brokerStateCode"  class="listbox-small">
+                                    <option value="">-- Select --</option>
+                                </select>
+                                <input type="hidden" name="brokerStateCodeHidden" id="brokerStateCodeHidden" value="<?php echo $brokerStateCode; ?>" >
+                            </td>
+                            <td>Broker City</td>
+                            <td> 
+                                <select name="brokerCityCode" id="brokerCityCode"  class="listbox-small">
+                                    <option value="0">-- Select --</option>
+                                </select>
+                                <input type="hidden" name="brokerCityCodeHidden" id="brokerCityCodeHidden" value="<?php echo $brokerCityCode; ?>" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Broker Contact Person</td>
+                            <td><input type="text" name="broker_contact_person" id="broker_contact_person" value="<?php echo $submissionRow['BrokerContactPerson']; ?>" class="listbox-small"/></td>
+
+                            <td>Broker Contact Person’s Email</td>
+                            <td><input type="text" name="broker_contact_person_email" id="broker_contact_person_email" value="<?php echo $submissionRow['BrokerContactPersonEmail']; ?>" class="listbox-small"/></td>
+                            <td width="12%">Broker Contact Person’s Number(O)</td>
+                                <td colspan="3"><input type="text" name="borker_contact_peson_number" id="borker_contact_peson_number" value="<?php echo $submissionRow['BrokerContactPersonNumber']; ?>" class="listbox-small"/></td>
+                        </tr>
+                        <tr>
+                            <td>Broker Code</td>
+                            <td><input type="text" name="broker_code" id="brokerCodeGen" value="<?php echo $submissionRow['BrokerCode']; ?>" class="txtbox-small" readonly/></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="white-bg black-border border-radius-10">
+                <h1 class="section-header border-radius-10">Status Dependent Details
+                    <div class="arrow"></div>
+                </h1>
+                <div class="content" style="display: block;">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td width="12%">Reason Code</td>
+                            <td width="22%"> 
+                                <select name="reason_code" id="reason_code" class="listbox-small" disabled>
+                                    <option value="0">-- Select --</option>
+                                </select>
+                                <input type="hidden" id="hiddenReasonCode" name="hiddenReasonCode" value="<?php echo $statusDetails['ReasonCodeId']; ?>"  />
+                            </td>
+                            <td width="12%">Process Date</td>
+                            <td width="22%"><input type="text" name="processdate" id="processdate" class="date txtbox-small" value="<?php if(!empty($statusDetails['ProcessDate'])){ echo date("Y-m-d", strtotime($statusDetails['ProcessDate']));} else { echo "";} ?>"  disabled readonly/></td>
+
+                        </tr>
+                        <tr> 
+                            <td width="12%">Gross Premium <input type="checkbox" name= "yesGross" id="yesGross" class="ct4 statusDetails" value="Y" <?php
+                                            if (trim($submissionRow['IsGrossPremium']) == 'Y') {
+                                                echo "checked";
+                                            }
+                                            ?>/></td>
+                            <td width="22%" id="gross_premium_value"> 
+                                <input type="text" name="gross_premium_text" id="gross_premium" class="txtbox-small statusDetails" value="<?php if(is_numeric($statusDetails['GrossPremium'])){ echo $statusDetails['GrossPremium'];} else { echo '';} ?>" disabled />
+                            </td>
+                            <td style="display:none;" id="gross_premium_values">
+                                <select name="gross_premium_select" id="gross_premium_select" disabled class="listbox-small statusDetails">
+                                    <option value="0" <?php
+                                            if ($statusDetails['GrossPremium'] == '') {
+                                                echo "selected";
+                                            }
+                                            ?>>-- Select --</option>
+                                    <option value="N/A" <?php
+                                            if ($statusDetails['GrossPremium'] == 'N/A') {
+                                                echo "selected";
+                                            }
+                                            ?>>Not Available</option>
+                                    <option value="TBE" <?php
+                                            if ($statusDetails['GrossPremium'] == 'TBE') {
+                                                echo "selected";
+                                            }
+                                            ?>>To Be Entered</option>
+                                </select>  
+                            </td>
+                            </td>
+                            <td width="12%">Limit <input type="checkbox" name= "yesLimit" id="yesLimit" class="ct4 statusDetails" value="Y" <?php
+                                            if (trim($submissionRow['IsLimit']) == 'Y') {
+                                                echo "checked";
+                                            }
+                                            ?>/></td>
+                            <td width="22%" id="limit_value">
+                                <input type="text" name="limit_text" id="limit" class="txtbox-small statusDetails" value="<?php if(is_numeric($statusDetails['Limit'])){ echo $statusDetails['Limit'];} else { echo '';} ?>" disabled>
+                            </td>
+                            <td style="display:none;" id="limit_values">
+                                <select name="limit_select" id="limit_select" disabled class="listbox-small statusDetails">
+                                    <option value="0" <?php
+                                            if ($statusDetails['IsAttachmentPoint'] == '') {
+                                                echo "selected";
+                                            }
+                                            ?>>-- Select --</option>
+                                    <option value="N/A" <?php
+                                            if ($statusDetails['Limit'] == 'N/A') {
+                                                echo "selected";
+                                            }
+                                            ?>>Not Available</option>
+                                    <option value="TBE" <?php
+                                            if ($statusDetails['Limit'] == 'TBE') {
+                                                echo "selected";
+                                            }
+                                            ?>>To Be Entered</option>
+                                </select>  
+                            </td>
+                            <td width="12%">Attachment Point <input type="checkbox" name= "yesAttachment" id="yesAttachment" class="ct4 statusDetails" value="Y" <?php
+                                            if (trim($submissionRow['IsAttachmentPoint']) == 'Y') {
+                                                echo "checked";
+                                            }
+                                            ?>/></td>
+                            <td id="attachment_value"><input type="text" name="attachment_point_text" id="attachment_point" class="txtbox-small statusDetails" value="<?php if(is_numeric($statusDetails['AttachmentPoint'])){ echo $statusDetails['AttachmentPoint'];} else { echo '';} ?>" disabled/></td>
+                            <td style="display:none;" id="attachment_values">
+                                <select name="attachment_point_select" id="attachment_point_select" disabled class="listbox-small statusDetails">
+                                    <option value="0" <?php
+                                            if ($statusDetails['AttachmentPoint'] == '') {
+                                                echo "selected";
+                                            }
+                                            ?>>-- Select --</option>
+                                    <option value="N/A" <?php
+                                            if ($statusDetails['AttachmentPoint'] == 'N/A') {
+                                                echo "selected";
+                                            }
+                                            ?>>Not Available</option>
+                                    <option value="TBE" <?php
+                                            if ($statusDetails['AttachmentPoint'] == 'TBE') {
+                                                echo "selected";
+                                            }
+                                            ?>>To Be Entered</option>
+                                </select>  
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div><!--status dependacy-->
+
+        <div class="container">
+            <div class="white-bg black-border border-radius-10">
+                <h1 class="section-header border-radius-10">Other Details
+                    <div class="arrow"></div>
+                </h1>
+                <div class="content" style="display: block;">
+                    <table>
+                        <tr>
+                            <td width="12%">Date of Receiving-By Berk SI From Broker</td>
+                            <td width="3%"><input type="checkbox" name= "yesBroker" id="yesBroker" value="<?php echo $submissionRow['IsBerksiBroker'];?>" <?php
+                                            if (trim($submissionRow['IsBerksiBroker']) == 'Y') {
+                                                echo "checked";
+                                            }
+                                            ?>/></td>
+                            <td width="18%"><input type="text" name="received_date_by_berkshire" class="date listbox-small" value="<?php if(!empty($submissionRow['byBerkSi']) && date('Y-m-d', strtotime($submissionRow['byBerkSi'])) != '1970-01-01'){ echo $submissionRow['byBerkSi'];} else { echo "";} ?>" id="byBerkSi" required="true" readonly disabled /></td>
+                            <td width="12%">Date of Receiving-By India From Berk SI</td>
+                            <td width="3%"><input type="checkbox" name= "yesIndia" id="yesIndia" value="<?php echo $submissionRow['IsBerksiIndia'];?>" <?php
+                                            if (trim($submissionRow['IsBerksiIndia']) == 'Y') {
+                                                echo "checked";
+                                            }
+                                            ?>></td>
+                            <td width="18%"><input type="text" name="received_date_by_india" class="date listbox-small" value="<?php if(!empty($submissionRow['byIndia'])&& date('Y-m-d', strtotime($submissionRow['byIndia'])) != '1970-01-01'){ echo date('m/d/Y', strtotime($submissionRow['byIndia']));} else { echo "";} ?>" id="byIndia" required="true" readonly disabled/></td>
+                            <td width="12%">Branch Office</td>
+                            <td width="12%"><input type="text" name="branch_office" id="branchid" class="listbox-small" readonly/></td>
+                            <input type="hidden" id="branchcode1" name="branchcode1" value="<?php echo $branches; ?>"  />
+                        </tr> 
+                        <tr> 
+                            <td colspan="2">Remarks</td>
+                            <td width="12%"><input type="text" name="editRemark" id="editRemark" value="<?php echo $remarks[0]['Remarks']; ?>" class="txtbox-small"/></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td align="center">
+                        <input type="submit" class="button" value="Submit" id="editSubmissionFormSubmit" />
+                        <input type="button" class="button ML10" value="Cancel" id="editSubmissionFormCancel" />
+                        <input type="hidden" name="businessDependentDetailsId" id="businessDependentDetailsId" value="<?php echo $submissionRow['BusinessDependentDetailId']; ?>" />
+                        <input type="hidden" name="statusDependentDetailsId" id="statusDependentDetailsId" value="<?php echo $submissionRow['StatusDependentDetailsId']; ?>" />
+                        <input type="hidden" name="alternativeAddressId" value="<?php echo $submissionRow['AlternativeAddressId']; ?>" />
+                        <input type="hidden" name="dataRecorderId" id="dataRecorderId" value="<?php echo $submissionRow['DataRecorderMetaDataId']; ?>" />
+                        <input type="hidden" name="submissionNumber" id="submissionNumber" value="<?php echo $submissionRow['SubmissionNumber']; ?>" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <input type="hidden" id="branchcode1" name="branchcode1" value=""  />
+               
+    </form>
+</div>

@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/task/plugin
+END
+sfPluginListTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/task/plugin/sfPluginListTask.class.php
+END
+sfPluginAddChannelTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/task/plugin/sfPluginAddChannelTask.class.php
+END
+sfPluginInstallTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/task/plugin/sfPluginInstallTask.class.php
+END
+sfPluginUpgradeTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/task/plugin/sfPluginUpgradeTask.class.php
+END
+sfPluginPublishAssetsTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/task/plugin/sfPluginPublishAssetsTask.class.php
+END
+sfPluginUninstallTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/task/plugin/sfPluginUninstallTask.class.php
+END
+sfPluginBaseTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/task/plugin/sfPluginBaseTask.class.php
+END

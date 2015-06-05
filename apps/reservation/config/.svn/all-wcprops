@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/reservation/!svn/ver/64/branches/03-12-2013_Newreservation/apps/reservation/config
+END
+view.yml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/apps/reservation/config/view.yml
+END
+factories.yml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/apps/reservation/config/factories.yml
+END
+app.yml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/reservation/!svn/ver/64/branches/03-12-2013_Newreservation/apps/reservation/config/app.yml
+END
+settings.yml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/apps/reservation/config/settings.yml
+END
+cache.yml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/apps/reservation/config/cache.yml
+END
+reservationConfiguration.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/apps/reservation/config/reservationConfiguration.class.php
+END
+routing.yml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/reservation/!svn/ver/66/branches/03-12-2013_Newreservation/apps/reservation/config/routing.yml
+END
+security.yml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/reservation/!svn/ver/69/branches/03-12-2013_Newreservation/apps/reservation/config/security.yml
+END
+filters.yml
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/apps/reservation/config/filters.yml
+END

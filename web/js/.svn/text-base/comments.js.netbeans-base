@@ -1,0 +1,300 @@
+$(document).ready(function() {
+    $('#newaddress1').blur(function() {
+        $(this).val($.trim($(this).val()));
+    });
+    $('#reinsured_company').blur(function() {
+        $(this).val($.trim($(this).val()));
+    });
+    $('#insuredName').blur(function() {
+        $(this).val($.trim($(this).val()));
+    });
+    $('#borker_contact_peson_number').blur(function() {
+        $(this).val($.trim($(this).val()));
+    });
+    $('#total_insured_value').blur(function() {
+        $('#total_insured_value').formatCurrency();
+    });
+
+    $('#effectivedate').datepicker({
+        minDate: 0,
+        //maxDate: "+364D",
+        showTime: true,
+        dateFormat: 'mm/dd/yy',
+        onClose: function(selectedDate) {
+            if (selectedDate) {
+                var today = new Date();
+                var currentDateArr = selectedDate.split('/');
+                var alertDate = new Date();
+                alertDate.setDate(today.getDate() + 120);
+                var maxDate = new Date(currentDateArr[2], currentDateArr[0] - 1, currentDateArr[1]);
+                if (maxDate > alertDate) {
+                    var didConfirm = confirm("The effective date for this submission is more than 120 days in advance.Are you sure you want to reserve the submission?");
+                    if (didConfirm == true) {
+                        $('#dateAlert').addClass('display-none');
+                    } else {
+                        $('#dateAlert').removeClass('display-none');
+                        $('#effectivedate').val("");
+                        $('#expirydate').val("");
+                        return false;
+                    }
+
+                } else {
+                    $('#dateAlert').addClass('display-none');
+                }
+                var maxYear = maxDate.getFullYear() + 1;
+                maxDate.setFullYear(maxYear);
+                maxDate.setDate(maxDate.getDate());
+                $('#expirydate').datepicker();
+                $('#expirydate').datepicker('option', 'minDate', selectedDate);
+                $("#expirydate").val(('0' + (maxDate.getMonth() + 1)).slice(-2) + "/" + ('0' + maxDate.getDate()).slice(-2) + "/" + maxDate.getFullYear());
+            }
+        },
+        onSelect: function() {
+            $(this).valid();
+            $("#expirydate").valid();
+        }
+    });
+    $('#processdate').datepicker({
+        minDate: 0,
+        showTime: true,
+        dateFormat: 'mm/dd/yy',
+        onSelect: function() {
+            $(this).valid();
+        }
+    });
+    //////////////////////////////////////////////////////////////////////////////////
+    $('#Submitdata').click(function() {
+        if ($('#SubmissiondataFrm').valid()) {
+            return true;
+        }
+    });
+    $.validator.addMethod("checkName", function(value, element, params) {
+        var x = value;
+        if (x == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    });
+    $.validator.addMethod(
+            "regex",
+            function(value, element, regexp) {
+                var re = new RegExp(regexp);
+                return this.optional(element) || re.test(value);
+            },
+            "Please check your input."
+            );
+    $('#SubmissiondataFrm').validate({
+        rules: {
+            new_renewal: {required: true, checkName: $('#new_renewal').val()},
+            underwriter: {required: true, checkName: $('#underwriter').val()},
+            product_line_subtype: {required: true, checkName: $('#product_line_subtype').val()},
+            section: {required: true, checkName: $('#section').val()},
+            profitcode: {required: true, checkName: $('#profitcode').val()},
+            primarystatus: {required: true, checkName: $('#primarystatus').val()},
+            effectivedate: {required: true},
+            //expirydate: {required: true},
+            insuredName: {required: true, maxlength: 100, minlength: 3},
+            dbaname: {required: function() {
+                    if ($('#insured_name_yes').val() == 'Y')
+                        return true;
+                    else
+                        return false;
+                }, maxlength: 50},
+            newaddress1: {required: function() {
+                    if ($('#insured_mailingaddress_yes').val() == 'Y')
+                        return true;
+                    else
+                        return false;
+                }, maxlength: 50},
+            newcountry: {required: function() {
+                    if ($('#insured_mailingaddress_yes').val() == 'Y')
+                        return true;
+                    else
+                        return false;
+                }, checkName: $('#newcountry').val()},
+            newstate: {required: function() {
+                    if ($('#insured_mailingaddress_yes').val() == 'Y')
+                        return true;
+                    else
+                        return false;
+                }, checkName: $('#newstate').val()},
+            newcity: {required: function() {
+                    if ($('#insured_mailingaddress_yes').val() == 'Y')
+                        return true;
+                    else
+                        return false;
+                }, checkName: $('#newcity').val()},
+            newzipcode: {regex: '^([0-9]{5})$'},
+            dbnumber: {regex: '^([Not Available]{13}|[0-9]{9})$'},
+            cab_companies: {required: true, checkName: $('#cab_companies').val()},
+            brokercode: {required: true, checkName: $('#brokercode').val()},
+            countrycode: {required: true, checkName: $('#countrycode').val()},
+            statecode: {required: true, checkName: $('#statecode').val()},
+            citycode: {required: true, checkName: $('#citycode').val()},
+            broker_contact_person_email: {email: true},
+            borker_contact_peson_number: {regex: '^([0-9]{10})$'},
+            total_insured_value_text: {required: true},
+            total_insured_value_select: {required: true, checkName: $('#total_insured_value_select').val()}
+        },
+        messages: {
+            new_renewal: '<br />Please select a valid value',
+            underwriter: '<br />Please select a valid underwriter name',
+            product_line_subtype: '<br />Please select a valid product line subtype',
+            section: '<br />Please select a valid section',
+            profitcode: '<br />Please select a valid profit code  ',
+            primarystatus: '<br />Please select a valid Current Status',
+            effectivedate: '<br />Please select a valid date',
+            //expirydate: '<br />Please select a valid date',
+            insuredName: {required: '<br />Please enter valid insured name', minlength: '<br />Please enter atleast first 3 characters'},
+            dbaname: '<br />Please enter valid DBA Name',
+            newaddress1: '<br />Please enter valid address',
+            newcountry: '<br />Please select a valid country',
+            newstate: '<br />Please select a valid state',
+            newcity: '<br />Please select a valid city',
+            newzipcode: {regex: '<br />Please enter valid zipcode'},
+            dbnumber: {regex: "<br />Please enter 9 digits D&B Number"},
+            cab_companies: '<br />Please select a valid CAB Companies',
+            brokercode: '<br />Please select a valid Broker Name',
+            countrycode: '<br />Please select a valid Broker country',
+            statecode: '<br />Please select a valid Broker state',
+            citycode: '<br />Please select a valid Broker city',
+            broker_contact_person_email: '<br />Please enter a valid email id',
+            total_insured_value_text: '<br />Please enter a valid Total Insured Value',
+            total_insured_value_select: '<br />Please select a valid Total Insured Value',
+            borker_contact_peson_number: {regex: '<br /> Please enter a valid number'},
+            byBerkSi: '<br />Please select a valid Date',
+            byIndia: '<br />Please select a valid Date'
+        },
+        highlight: function(element) {
+            $(element).addClass('error');
+        },
+        unhighlight: function(element) {
+            $(element).removeClass('error');
+        }
+    });
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    function brokerDateHandler1() {
+        $('#byBerkSi').val("");
+        $('#byBerkSi').removeAttr('required');
+        $('#byBerkSi').removeClass('error');
+        $('#byBerkSi').next('.error').hide();
+        $('#byBerkSi').datepicker("disable");
+        $("#yesBroker").one("click", brokerDateHandler2);
+    }
+    function brokerDateHandler2() {
+        $('#byBerkSi').attr('required', true);
+        $('#byBerkSi').datepicker("enable");
+        $("#yesBroker").one("click", brokerDateHandler1);
+    }
+    $("#yesBroker").one("click", brokerDateHandler1);
+
+    function indiaDateHandler1() {
+        $('#byIndia').val("");
+        $('#byIndia').removeAttr('required');
+        $('#byIndia').removeClass('error');
+        $('#byIndia').next('.error').hide();
+        $('#byIndia').datepicker("disable");
+        $("#yesIndia").one("click", indiaDateHandler2);
+    }
+    function indiaDateHandler2() {
+        $('#byIndia').attr('required', true);
+        $('#byIndia').datepicker("enable");
+        $("#yesIndia").one("click", indiaDateHandler1);
+    }
+    $("#yesIndia").one("click", indiaDateHandler1);
+
+    $("#yesTrue").on("click", function() {
+        $("#total_insured_values").toggleClass('dp-block');
+        $("#total_insured").toggleClass('dp-none');
+    });
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    $('[name="insured_name"]').on('click', function() {
+        if ($(this).val() === 'Y') {
+            $('#dbaname').prop('disabled', false);
+        } else {
+            $('#dbaname').prop('disabled', true);
+            $('#dbaname').val("");
+        }
+    });
+    $('[name="insured_mailingaddress"]').on('click', function() {
+        if ($(this).val() === 'Y') {
+            $('[class*="mailingaddress"]').prop('disabled', false);
+        } else {
+            $('[class*="mailingaddress"]').prop('disabled', true);
+            $('#newaddress1').val("");
+            $('#newcountry').val("");
+            $('#newstate').val("");
+            $('#newcity').val("");
+            $('#newzipcode').val("");
+        }
+    });
+    var toggleModal = function() {
+        $('body').toggleClass('body-locked');
+        $('.modal-container').toggleClass('dp-block');
+    };
+    $('.open-modal').on('click', toggleModal);
+    $('.close-modal').on('click', toggleModal);
+
+    $('[id="product_line_subtype"]').on('change', function() {
+        if ($('#product_line').val() == 'Property') {
+            $('#total_insured_value').prop('disabled', false);
+            $('#total_insured_value_select').prop('disabled', false);
+            $('#yesTrue').prop('disabled', false);
+        } else {
+            $('#total_insured_value').prop('disabled', true);
+            $('#total_insured_value_select').prop('disabled', true);
+            $('#yesTrue').prop('disabled', true);
+            $('#total_insured_value').val("");
+            $('#total_insured_value_select').val("");
+        }
+        if ($('#product_line').val() == 'Property' && $('#product_line_subtype').val() == '3') {
+            $('[class*="project"]').prop('disabled', false);
+        } else {
+            $('[class*="project"]').prop('disabled', true);
+            $('#projectname').val("");
+            $('#generalcontratorname').val("");
+            $('#projectownername').val("");
+            $('#projectcountry').val("");
+            $('#projectstate').val("");
+            $('#projectcity').val("");
+            $('#projectstreetaddress').val("");
+            $('#bidsituation').val("");
+        }
+    });
+
+    $('[id="underwriter"]').on('change', function() {
+        $('[class*="project"]').prop('disabled', true);
+        $('#projectname').val("");
+        $('#generalcontratorname').val("");
+        $('#projectownername').val("");
+        $('#projectcountry').val("");
+        $('#projectstate').val("");
+        $('#projectcity').val("");
+        $('#projectstreetaddress').val("");
+        $('#bidsituation').val("");
+    });
+    
+    $('[id="section"]').on('change', function() {
+        if ($('#product_line').val() == 'Property' && $('#product_line_subtype').val() == '3' || $('#product_line').val() == 'Casualty' && $('#product_line_subtype').val() == '11' && $('#section').val() == '616' || $('#product_line').val() == 'Casualty' && $('#product_line_subtype').val() == '11' && $('#section').val() == '617' || $('#product_line').val() == 'Casualty' && $('#product_line_subtype').val() == '11' && $('#section').val() == '618' || $('#product_line').val() == 'Casualty' && $('#product_line_subtype').val() == '11' && $('#section').val() == '619' || $('#product_line').val() == 'Casualty' && $('#product_line_subtype').val() == '11' && $('#section').val() == '620') {
+            $('[class*="project"]').prop('disabled', false);
+        } else {
+            $('[class*="project"]').prop('disabled', true);
+            $('#projectname').val("");
+            $('#generalcontratorname').val("");
+            $('#projectownername').val("");
+            $('#projectcountry').val("");
+            $('#projectstate').val("");
+            $('#projectcity').val("");
+            $('#projectstreetaddress').val("");
+            $('#bidsituation').val("");
+        }
+    });
+
+//////////////////////////////////////////////////Feedback Section End////////////////////////////////////////
+});
+
+

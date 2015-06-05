@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/helper
+END
+NumberHelper.php
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/helper/NumberHelper.php
+END
+EscapingHelper.php
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/helper/EscapingHelper.php
+END
+TagHelper.php
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/helper/TagHelper.php
+END
+PartialHelper.php
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/helper/PartialHelper.php
+END
+DateHelper.php
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/helper/DateHelper.php
+END
+AssetHelper.php
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/helper/AssetHelper.php
+END
+HelperHelper.php
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/helper/HelperHelper.php
+END
+I18NHelper.php
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/helper/I18NHelper.php
+END
+JavascriptBaseHelper.php
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/helper/JavascriptBaseHelper.php
+END
+UrlHelper.php
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/helper/UrlHelper.php
+END
+CacheHelper.php
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/helper/CacheHelper.php
+END
+TextHelper.php
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/helper/TextHelper.php
+END
+DebugHelper.php
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/helper/DebugHelper.php
+END

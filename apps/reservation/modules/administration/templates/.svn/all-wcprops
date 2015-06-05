@@ -1,0 +1,101 @@
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/reservation/!svn/ver/64/branches/03-12-2013_Newreservation/apps/reservation/modules/administration/templates
+END
+editUserSuccess.php
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/reservation/!svn/ver/69/branches/03-12-2013_Newreservation/apps/reservation/modules/administration/templates/editUserSuccess.php
+END
+addUserSuccess.php
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/reservation/!svn/ver/69/branches/03-12-2013_Newreservation/apps/reservation/modules/administration/templates/addUserSuccess.php
+END
+viewGroupSuccess.php
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/reservation/!svn/ver/69/branches/03-12-2013_Newreservation/apps/reservation/modules/administration/templates/viewGroupSuccess.php
+END
+adminSuccess.php
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/reservation/!svn/ver/37/branches/03-12-2013_Newreservation/apps/reservation/modules/administration/templates/adminSuccess.php
+END
+_groupSearchFilter.php
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/reservation/!svn/ver/69/branches/03-12-2013_Newreservation/apps/reservation/modules/administration/templates/_groupSearchFilter.php
+END
+usersSuccess.php
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/reservation/!svn/ver/66/branches/03-12-2013_Newreservation/apps/reservation/modules/administration/templates/usersSuccess.php
+END
+editGroupSuccess.php
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/reservation/!svn/ver/69/branches/03-12-2013_Newreservation/apps/reservation/modules/administration/templates/editGroupSuccess.php
+END
+_usersSearchFilter.php
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/reservation/!svn/ver/69/branches/03-12-2013_Newreservation/apps/reservation/modules/administration/templates/_usersSearchFilter.php
+END
+ViewInsuredSuccess.php
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/reservation/!svn/ver/69/branches/03-12-2013_Newreservation/apps/reservation/modules/administration/templates/ViewInsuredSuccess.php
+END
+addGroupSuccess.php
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/reservation/!svn/ver/69/branches/03-12-2013_Newreservation/apps/reservation/modules/administration/templates/addGroupSuccess.php
+END
+insuredSuccess.php
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/reservation/!svn/ver/69/branches/03-12-2013_Newreservation/apps/reservation/modules/administration/templates/insuredSuccess.php
+END
+viewUserSuccess.php
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/reservation/!svn/ver/69/branches/03-12-2013_Newreservation/apps/reservation/modules/administration/templates/viewUserSuccess.php
+END
+_insuredSearchFilter.php
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/reservation/!svn/ver/69/branches/03-12-2013_Newreservation/apps/reservation/modules/administration/templates/_insuredSearchFilter.php
+END
+groupsSuccess.php
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/reservation/!svn/ver/66/branches/03-12-2013_Newreservation/apps/reservation/modules/administration/templates/groupsSuccess.php
+END
+EditInsuredSuccess.php
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/reservation/!svn/ver/72/branches/03-12-2013_Newreservation/apps/reservation/modules/administration/templates/EditInsuredSuccess.php
+END
+AddInsuredSuccess.php
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/reservation/!svn/ver/71/branches/03-12-2013_Newreservation/apps/reservation/modules/administration/templates/AddInsuredSuccess.php
+END

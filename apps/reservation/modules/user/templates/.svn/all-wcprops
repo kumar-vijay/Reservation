@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/reservation/!svn/ver/64/branches/03-12-2013_Newreservation/apps/reservation/modules/user/templates
+END
+forgotPasswordSuccess.php
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/reservation/!svn/ver/18/branches/03-12-2013_Newreservation/apps/reservation/modules/user/templates/forgotPasswordSuccess.php
+END
+indexSuccess.php
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/reservation/!svn/ver/64/branches/03-12-2013_Newreservation/apps/reservation/modules/user/templates/indexSuccess.php
+END
+signInSuccess.php
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/reservation/!svn/ver/64/branches/03-12-2013_Newreservation/apps/reservation/modules/user/templates/signInSuccess.php
+END
+changePasswordSuccess.php
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/reservation/!svn/ver/64/branches/03-12-2013_Newreservation/apps/reservation/modules/user/templates/changePasswordSuccess.php
+END

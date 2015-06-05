@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/test
+END
+sfTesterForm.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/test/sfTesterForm.class.php
+END
+sfTestFunctionalBase.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/test/sfTestFunctionalBase.class.php
+END
+sfTesterRequest.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/test/sfTesterRequest.class.php
+END
+sfTesterMailer.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/test/sfTesterMailer.class.php
+END
+sfTestFunctional.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/test/sfTestFunctional.class.php
+END
+sfTestBrowser.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/test/sfTestBrowser.class.php
+END
+sfTesterResponse.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/test/sfTesterResponse.class.php
+END
+sfTesterUser.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/test/sfTesterUser.class.php
+END
+sfTesterViewCache.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/test/sfTesterViewCache.class.php
+END
+sfTester.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/test/sfTester.class.php
+END

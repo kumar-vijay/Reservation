@@ -1,0 +1,193 @@
+<?php
+
+/**
+ * administration actions.
+ *
+ * @package    reservation
+ * @subpackage administration
+ * @author     Your name here
+ * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
+ */
+class administrationActions extends sfActions {
+
+    /**
+     * Executes index action
+     *
+     * @param sfRequest $request A request object
+     */
+    public function executeGroups(sfWebRequest $request) {
+
+        // if (sfContext::getInstance()->getUser()->hasCredential('ADD_EDIT_GROUP')) {
+        //$con=Propel::getConnection();    
+        ///Gettin request parameters        
+
+        $groupName = $request->getParameter('groupName', '');
+        $groupStatus = $request->getParameter('groupStatus', '');
+        $fromDate = $request->getParameter('fromDate', '');
+        $toDate = $request->getParameter('toDate', '');
+
+        //Saving this last search criteria
+        $lastSearchCriteria = array(
+            'groupName' => $groupName,
+            'groupStatus' => $groupStatus,
+            'fromDate' => $fromDate,
+            'toDate' => $toDate,
+        );
+
+
+
+        $criteria = MyGroup::getSearchCriteria($lastSearchCriteria);
+
+        $this->lastSearchCriteria = json_encode($lastSearchCriteria);
+        $this->numberofResults = GroupsPeer::doCount($criteria);
+        $this->pager = new sfPropelPager('Groups', sfConfig::get('app_pagination_groups', 1));
+        $this->pager->setCriteria($criteria);
+        $this->pager->setPage($request->getParameter('page', 1));
+        $this->pager->init();
+        // } else {
+        //   $this->redirect('@unauthorised_access');
+        //}
+    }
+
+    public function executeAddGroup(sfWebRequest $request) {
+
+        if ($request->isMethod('POST')) {
+            $postArray = $request->getPostParameters();
+            $group = new MyGroup();
+            $result = $group->saveGroup($postArray);
+            if ($result['success'] == true) {
+                $this->getUser()->setFlash('success', 'Group has been created successfully');
+                $this->redirect('/admin/groups');
+            } else {
+                $this->errorArr = $result['msg'];
+            }
+        }
+        //Fetching all group rights
+        $this->groupRights = Right::getAllRightsFromTable();
+    }
+
+    public function executeEditGroup(sfWebRequest $request) {
+
+        if ($request->getParameter('groupId') != '') {
+            //if (sfContext::getInstance()->getUser()->hasCredential('ADD_EDIT_GROUP')) {
+
+            if ($request->isMethod('POST')) {
+                $postArray = $request->getPostParameters();
+
+                $group = new MyGroup();
+                $updateResponse = $group->saveGroup($postArray);
+
+                if ($updateResponse['success'] == true) {
+                    $this->getUser()->setFlash('success', 'Group has been updated successfully');
+                    $this->redirect('/admin/groups');
+                } else {
+                    $this->errorArr = $updateResponse['msg'];
+                }
+            }
+
+            $this->groupRights = Right::getAllRightsFromTable();
+            $this->groupInfo = MyGroup::getGroupInfo($request->getParameter('groupId'));
+            if (!$this->groupInfo) {
+                $this->redirect('/admin/groups');
+            }
+            //}
+        } else {
+            $this->redirect('/admin/groups');
+        }
+    }
+    
+    public function executeViewGroup(sfWebRequest $request) {
+
+        if ($request->getParameter('groupId') != '') {
+            $this->groupInfo = MyGroup::getGroupInfo($request->getParameter('groupId'));
+            
+            if (!$this->groupInfo) {
+                $this->redirect('/admin/groups');
+            }
+        } else {
+            $this->redirect('/admin/groups');
+        }
+    }
+
+
+    public function executeAddUser(sfWebRequest $request) {
+        $groupList = new UserFunctions;
+        $this->groupDetails = $groupList->groupList();
+        if ($request->isMethod('POST')) {
+            $userDetails = $request->isMethod('POST');
+            $postArray = $request->getPostParameters();
+            $postArray['userId']=$this->getUser()->getAttribute('id');
+            $user = new User();
+            $result = $user->CreateUser($postArray);
+            if ($result['success'] == true) {
+                $this->getUser()->setFlash('success', 'User has been created successfully');
+                $this->redirect('/admin/users');
+            } else {
+                $this->errorArr = $result['msg'];
+            }
+        }
+    }
+
+    public function executeEditUser(sfWebRequest $request) {
+        $this->userId = $this->getRequestParameter('userId');
+        $userList = new UserFunctions;
+        $this->groupDetails = $userList->groupList();
+        if ($this->userId) {
+            $this->userDetails = $userList->userEditInfo($this->userId);
+            $this->currentUserGroupId = $this->getUser()->getAttribute('groupId');
+        } else {
+            $this->errMsg = "User is not exist";
+        }
+        if ($request->isMethod('POST')) {
+            $userDetails = $request->isMethod('POST');
+            $postArray = $request->getPostParameters();
+            $user = new User();
+            $postArray['userId'] = $this->getRequestParameter('userId');
+            $postArray['adminId'] = $this->getUser()->getAttribute('id');
+            $result = $user->EditUser($postArray);
+            if ($result == true) {
+                $this->getUser()->setFlash('success', 'User has been updated successfully');
+                $this->redirect('/admin/users');
+            } else {
+                $this->errorArr = 'User is not create due to some error';
+            }
+        }
+    }
+    
+    public function executeViewUser(sfWebRequest $request) {
+        $this->userId = $this->getRequestParameter('userId');
+        $userList = new UserFunctions;
+        if ($this->userId) {
+            $this->userDetails = $userList->userEditInfo($this->userId);
+            $this->currentUserGroupId = $this->userDetails['0']['GROUP_ID'];
+            $this->groupDetails = $userList->getGroupName($this->currentUserGroupId);
+        } else {
+            $this->errMsg = "User does not exist";
+        }
+    }
+
+    public function executeUsers(sfWebRequest $request) {
+        //Saving this last search criteria
+        $userSearchCriteria = array(
+            'userName' => $request->getParameter('userName'),
+            'userStatus' => $request->getParameter('userStatus'),
+            'fromDate' => $request->getParameter('fromDate'),
+            'toDate' => $request->getParameter('toDate')
+        );
+        $userList = new UserFunctions;
+        
+        $criteria = $userList->userList($userSearchCriteria);
+        $this->lastSearchCriteria = json_encode($userSearchCriteria);
+        $this->currentUserGroupId = $this->getUser()->getAttribute('groupId');
+        $this->numberofResults = UsersPeer::doCount($criteria);
+        $this->pager = new sfPropelPager('Users', sfConfig::get('app_pagination_users', 5));
+        $this->pager->setCriteria($criteria);
+        $this->pager->setPage($request->getParameter('page', 1));
+        $this->pager->init();
+      
+    }
+    
+    public function executeAdmin($request) {
+        }
+
+}

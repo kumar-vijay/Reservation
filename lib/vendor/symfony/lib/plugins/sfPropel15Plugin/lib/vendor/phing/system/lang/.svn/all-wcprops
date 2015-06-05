@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/system/lang
+END
+SecurityException.php
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/system/lang/SecurityException.php
+END
+EventObject.php
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/system/lang/EventObject.php
+END
+NullPointerException.php
+K 25
+svn:wc:ra_dav:version-url
+V 160
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/system/lang/NullPointerException.php
+END
+FileNotFoundException.php
+K 25
+svn:wc:ra_dav:version-url
+V 161
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/system/lang/FileNotFoundException.php
+END
+Character.php
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/system/lang/Character.php
+END

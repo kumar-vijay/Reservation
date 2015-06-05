@@ -1,0 +1,221 @@
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift
+END
+CharacterReader.php
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/CharacterReader.php
+END
+DependencyContainer.php
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/DependencyContainer.php
+END
+Image.php
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/Image.php
+END
+Message.php
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/Message.php
+END
+FailoverTransport.php
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/FailoverTransport.php
+END
+Encoding.php
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/Encoding.php
+END
+Attachment.php
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/Attachment.php
+END
+FileStream.php
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/FileStream.php
+END
+FileSpool.php
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/FileSpool.php
+END
+Spool.php
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/Spool.php
+END
+InputByteStream.php
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/InputByteStream.php
+END
+MailTransport.php
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/MailTransport.php
+END
+StreamFilter.php
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/StreamFilter.php
+END
+CharacterStream.php
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/CharacterStream.php
+END
+SendmailTransport.php
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/SendmailTransport.php
+END
+Filterable.php
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/Filterable.php
+END
+Mailer.php
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/Mailer.php
+END
+SwiftException.php
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/SwiftException.php
+END
+Encoder.php
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/Encoder.php
+END
+RfcComplianceException.php
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/RfcComplianceException.php
+END
+IoException.php
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/IoException.php
+END
+NullTransport.php
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/NullTransport.php
+END
+EmbeddedFile.php
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/EmbeddedFile.php
+END
+Transport.php
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/Transport.php
+END
+DependencyException.php
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/DependencyException.php
+END
+ReplacementFilterFactory.php
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/ReplacementFilterFactory.php
+END
+OutputByteStream.php
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/OutputByteStream.php
+END
+SmtpTransport.php
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/SmtpTransport.php
+END
+Preferences.php
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/Preferences.php
+END
+LoadBalancedTransport.php
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/LoadBalancedTransport.php
+END
+CharacterReaderFactory.php
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/CharacterReaderFactory.php
+END
+SpoolTransport.php
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/SpoolTransport.php
+END
+TransportException.php
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/TransportException.php
+END
+KeyCache.php
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/KeyCache.php
+END
+ConfigurableSpool.php
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/ConfigurableSpool.php
+END
+MimePart.php
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/vendor/swiftmailer/classes/Swift/MimePart.php
+END

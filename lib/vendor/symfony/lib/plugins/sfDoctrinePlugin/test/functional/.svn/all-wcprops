@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional
+END
+AdminGenBrowser.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/AdminGenBrowser.class.php
+END
+FormGeneratorTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/FormGeneratorTest.php
+END
+PagerTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/PagerTest.php
+END
+RouteTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/RouteTest.php
+END
+ActionRedirectTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/ActionRedirectTest.php
+END
+I18nTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/I18nTest.php
+END
+sfDoctrineRecordTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/sfDoctrineRecordTest.php
+END
+SchemaMergeTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/SchemaMergeTest.php
+END
+AdminGenTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/AdminGenTest.php
+END
+FormTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/FormTest.php
+END
+UploadTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/UploadTest.php
+END
+EnvironmentSetupTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/EnvironmentSetupTest.php
+END
+UniqueTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/UniqueTest.php
+END

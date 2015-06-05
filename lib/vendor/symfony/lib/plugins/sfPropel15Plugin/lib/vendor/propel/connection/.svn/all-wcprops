@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel/connection
+END
+PropelPDO.php
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel/connection/PropelPDO.php
+END
+DebugPDO.php
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel/connection/DebugPDO.php
+END
+DebugPDOStatement.php
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel/connection/DebugPDOStatement.php
+END

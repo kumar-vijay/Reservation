@@ -1,0 +1,89 @@
+10
+
+dir
+65
+http://svn.bil.com/reservation/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/task/generator/skeleton/project
+http://svn.bil.com/reservation
+
+
+
+2013-12-03T06:16:34.784112Z
+4
+sumit.pachouri
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+721f21b2-5006-11e3-9cba-e33837192d26
+
+log
+dir
+
+plugins
+dir
+
+apps
+dir
+
+cache
+dir
+
+symfony
+file
+
+
+
+
+2013-12-03T06:27:01.161461Z
+ec0244c82ba8f52899e48b4e473f78e8
+2013-12-03T06:16:34.784112Z
+4
+sumit.pachouri
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+446
+
+config
+dir
+
+lib
+dir
+
+data
+dir
+
+web
+dir
+
+test
+dir
+

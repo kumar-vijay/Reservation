@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/lib/vendor/phing/tasks/ext/pdo
+END
+PDOResultFormatter.php
+K 25
+svn:wc:ra_dav:version-url
+V 158
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/lib/vendor/phing/tasks/ext/pdo/PDOResultFormatter.php
+END
+PDOSQLExecFormatterElement.php
+K 25
+svn:wc:ra_dav:version-url
+V 166
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/lib/vendor/phing/tasks/ext/pdo/PDOSQLExecFormatterElement.php
+END
+PDOTask.php
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/lib/vendor/phing/tasks/ext/pdo/PDOTask.php
+END
+XMLPDOResultFormatter.php
+K 25
+svn:wc:ra_dav:version-url
+V 161
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/lib/vendor/phing/tasks/ext/pdo/XMLPDOResultFormatter.php
+END
+PlainPDOResultFormatter.php
+K 25
+svn:wc:ra_dav:version-url
+V 163
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/lib/vendor/phing/tasks/ext/pdo/PlainPDOResultFormatter.php
+END
+PDOSQLExecTask.php
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/lib/vendor/phing/tasks/ext/pdo/PDOSQLExecTask.php
+END

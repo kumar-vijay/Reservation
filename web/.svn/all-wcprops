@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/reservation/!svn/ver/65/branches/03-12-2013_Newreservation/web
+END
+.htaccess
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/web/.htaccess
+END
+index.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/reservation/!svn/ver/34/branches/03-12-2013_Newreservation/web/index.php
+END
+favicon.ico
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/reservation/!svn/ver/68/branches/03-12-2013_Newreservation/web/favicon.ico
+END
+reservation_dev.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/web/reservation_dev.php
+END
+robots.txt
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/web/robots.txt
+END

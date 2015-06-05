@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel/map
+END
+DatabaseMap.php
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel/map/DatabaseMap.php
+END
+ValidatorMap.php
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel/map/ValidatorMap.php
+END
+TableMap.php
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel/map/TableMap.php
+END
+ColumnMap.php
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel/map/ColumnMap.php
+END
+RelationMap.php
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel/map/RelationMap.php
+END

@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/generator
+END
+sfPropelFormFilterGenerator.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 158
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/generator/sfPropelFormFilterGenerator.class.php
+END
+sfPropelGenerator.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/generator/sfPropelGenerator.class.php
+END
+sfPropelFormGenerator.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/generator/sfPropelFormGenerator.class.php
+END

@@ -1,0 +1,125 @@
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/filters
+END
+XincludeFilter.php
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/filters/XincludeFilter.php
+END
+BaseParamFilterReader.php
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/filters/BaseParamFilterReader.php
+END
+ReplaceRegexp.php
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/filters/ReplaceRegexp.php
+END
+LineContains.php
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/filters/LineContains.php
+END
+PrefixLines.php
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/filters/PrefixLines.php
+END
+ChainableReader.php
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/filters/ChainableReader.php
+END
+ExpandProperties.php
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/filters/ExpandProperties.php
+END
+TailFilter.php
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/filters/TailFilter.php
+END
+ReplaceTokens.php
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/filters/ReplaceTokens.php
+END
+XsltFilter.php
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/filters/XsltFilter.php
+END
+StripLineBreaks.php
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/filters/StripLineBreaks.php
+END
+LineContainsRegexp.php
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/filters/LineContainsRegexp.php
+END
+TranslateGettext.php
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/filters/TranslateGettext.php
+END
+BaseFilterReader.php
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/filters/BaseFilterReader.php
+END
+HeadFilter.php
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/filters/HeadFilter.php
+END
+TabToSpaces.php
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/filters/TabToSpaces.php
+END
+StripWhitespace.php
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/filters/StripWhitespace.php
+END
+StripPhpComments.php
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/filters/StripPhpComments.php
+END
+StripLineComments.php
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/filters/StripLineComments.php
+END
+TidyFilter.php
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/phing/filters/TidyFilter.php
+END

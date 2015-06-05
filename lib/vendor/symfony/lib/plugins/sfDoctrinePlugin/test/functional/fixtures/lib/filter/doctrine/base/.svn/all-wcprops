@@ -1,0 +1,119 @@
+K 25
+svn:wc:ra_dav:version-url
+V 156
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/filter/doctrine/base
+END
+BaseAuthorInheritanceFormFilter.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 198
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/filter/doctrine/base/BaseAuthorInheritanceFormFilter.class.php
+END
+BaseCamelCaseFormFilter.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 190
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/filter/doctrine/base/BaseCamelCaseFormFilter.class.php
+END
+BaseUserFormFilter.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 185
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/filter/doctrine/base/BaseUserFormFilter.class.php
+END
+BaseDefaultValueTestFormFilter.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 197
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/filter/doctrine/base/BaseDefaultValueTestFormFilter.class.php
+END
+BaseArticleFormFilter.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 188
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/filter/doctrine/base/BaseArticleFormFilter.class.php
+END
+BaseSubscriptionFormFilter.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 193
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/filter/doctrine/base/BaseSubscriptionFormFilter.class.php
+END
+BaseBlogArticleFormFilter.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 192
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/filter/doctrine/base/BaseBlogArticleFormFilter.class.php
+END
+BasePermissionFormFilter.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 191
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/filter/doctrine/base/BasePermissionFormFilter.class.php
+END
+BaseAttachmentFormFilter.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 191
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/filter/doctrine/base/BaseAttachmentFormFilter.class.php
+END
+BaseResourceTypeFormFilter.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 193
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/filter/doctrine/base/BaseResourceTypeFormFilter.class.php
+END
+BaseGroupFormFilter.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 186
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/filter/doctrine/base/BaseGroupFormFilter.class.php
+END
+BaseFormGeneratorTest2FormFilter.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 199
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/filter/doctrine/base/BaseFormGeneratorTest2FormFilter.class.php
+END
+BaseAuthorInheritanceConcreteFormFilter.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 206
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/filter/doctrine/base/BaseAuthorInheritanceConcreteFormFilter.class.php
+END
+BaseProfileFormFilter.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 188
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/filter/doctrine/base/BaseProfileFormFilter.class.php
+END
+BaseAuthorFormFilter.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 187
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/filter/doctrine/base/BaseAuthorFormFilter.class.php
+END
+BaseArticleTranslationFormFilter.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 199
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/filter/doctrine/base/BaseArticleTranslationFormFilter.class.php
+END
+BaseBlogAuthorFormFilter.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 191
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/filter/doctrine/base/BaseBlogAuthorFormFilter.class.php
+END
+BaseBlogArticleTranslationFormFilter.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 203
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/filter/doctrine/base/BaseBlogArticleTranslationFormFilter.class.php
+END
+BaseUniqueTestFormFilter.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 191
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/filter/doctrine/base/BaseUniqueTestFormFilter.class.php
+END

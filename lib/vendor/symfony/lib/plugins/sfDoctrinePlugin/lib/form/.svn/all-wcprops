@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/form
+END
+sfFormDoctrine.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/form/sfFormDoctrine.class.php
+END
+sfFormFilterDoctrine.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/form/sfFormFilterDoctrine.class.php
+END

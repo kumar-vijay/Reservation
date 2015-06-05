@@ -1,0 +1,27 @@
+default:
+  layout: layout
+  stylesheets: [layout.css,reset.css,stylesheet.css]
+  javascripts: [jquery-1.9.1.js, jquery.validate.js,custom-jquery.js,jquery-ui-1.10.3.custom.js]
+
+PolicySuccess:
+  layout: layout
+  stylesheets: [jquery-ui-1.10.3.custom.css]
+  
+PolicyListSuccess:
+  layout: layout
+  stylesheets: [jquery-ui-1.10.3.custom.css]
+  javascripts: [policymoduleList.js]
+  
+CreatePolicyNumberSuccess:
+  layout: layout
+  stylesheets: [jquery-ui-1.10.3.custom.css]
+  javascripts: [policymodule.js]
+  
+EditPolicyNumberSuccess:
+  layout: layout
+  stylesheets: [jquery-ui-1.10.3.custom.css]
+  javascripts: [editpolicymodule.js]
+  
+ViewPolicyNumberSuccess:
+  layout: layout
+  stylesheets: [jquery-ui-1.10.3.custom.css]

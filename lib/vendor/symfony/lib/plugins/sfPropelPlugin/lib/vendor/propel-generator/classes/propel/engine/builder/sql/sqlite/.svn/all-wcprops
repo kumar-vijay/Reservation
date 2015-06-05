@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 173
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/lib/vendor/propel-generator/classes/propel/engine/builder/sql/sqlite
+END
+SqliteDDLBuilder.php
+K 25
+svn:wc:ra_dav:version-url
+V 194
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/lib/vendor/propel-generator/classes/propel/engine/builder/sql/sqlite/SqliteDDLBuilder.php
+END
+SqliteDataSQLBuilder.php
+K 25
+svn:wc:ra_dav:version-url
+V 198
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/lib/vendor/propel-generator/classes/propel/engine/builder/sql/sqlite/SqliteDataSQLBuilder.php
+END

@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/data/generator/sfDoctrineModule/default/parts
+END
+newAction.php
+K 25
+svn:wc:ra_dav:version-url
+V 166
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/data/generator/sfDoctrineModule/default/parts/newAction.php
+END
+showAction.php
+K 25
+svn:wc:ra_dav:version-url
+V 167
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/data/generator/sfDoctrineModule/default/parts/showAction.php
+END
+deleteAction.php
+K 25
+svn:wc:ra_dav:version-url
+V 169
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/data/generator/sfDoctrineModule/default/parts/deleteAction.php
+END
+processFormAction.php
+K 25
+svn:wc:ra_dav:version-url
+V 174
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/data/generator/sfDoctrineModule/default/parts/processFormAction.php
+END
+updateAction.php
+K 25
+svn:wc:ra_dav:version-url
+V 169
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/data/generator/sfDoctrineModule/default/parts/updateAction.php
+END
+createAction.php
+K 25
+svn:wc:ra_dav:version-url
+V 169
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/data/generator/sfDoctrineModule/default/parts/createAction.php
+END
+editAction.php
+K 25
+svn:wc:ra_dav:version-url
+V 167
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/data/generator/sfDoctrineModule/default/parts/editAction.php
+END
+indexAction.php
+K 25
+svn:wc:ra_dav:version-url
+V 168
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/data/generator/sfDoctrineModule/default/parts/indexAction.php
+END

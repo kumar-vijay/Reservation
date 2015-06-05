@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel-generator/lib/behavior/nestedset
+END
+NestedSetBehaviorPeerBuilderModifier.php
+K 25
+svn:wc:ra_dav:version-url
+V 198
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel-generator/lib/behavior/nestedset/NestedSetBehaviorPeerBuilderModifier.php
+END
+NestedSetBehaviorQueryBuilderModifier.php
+K 25
+svn:wc:ra_dav:version-url
+V 199
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel-generator/lib/behavior/nestedset/NestedSetBehaviorQueryBuilderModifier.php
+END
+NestedSetBehaviorObjectBuilderModifier.php
+K 25
+svn:wc:ra_dav:version-url
+V 200
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel-generator/lib/behavior/nestedset/NestedSetBehaviorObjectBuilderModifier.php
+END
+NestedSetBehavior.php
+K 25
+svn:wc:ra_dav:version-url
+V 179
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel-generator/lib/behavior/nestedset/NestedSetBehavior.php
+END

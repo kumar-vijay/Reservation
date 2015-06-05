@@ -1,0 +1,155 @@
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/task
+END
+sfDoctrineGenerateMigrationsDbTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 160
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/task/sfDoctrineGenerateMigrationsDbTask.class.php
+END
+sfDoctrineDataDumpTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/task/sfDoctrineDataDumpTask.class.php
+END
+sfDoctrineBuildTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/task/sfDoctrineBuildTask.class.php
+END
+sfDoctrineGenerateModuleTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/task/sfDoctrineGenerateModuleTask.class.php
+END
+sfDoctrineGenerateAdminTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/task/sfDoctrineGenerateAdminTask.class.php
+END
+sfDoctrineGenerateMigrationTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/task/sfDoctrineGenerateMigrationTask.class.php
+END
+sfDoctrineBuildDbTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/task/sfDoctrineBuildDbTask.class.php
+END
+sfDoctrineDeleteModelFilesTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 156
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/task/sfDoctrineDeleteModelFilesTask.class.php
+END
+sfDoctrineConfigureDatabaseTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/task/sfDoctrineConfigureDatabaseTask.class.php
+END
+sfDoctrineBuildFormsTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/task/sfDoctrineBuildFormsTask.class.php
+END
+sfDoctrineDataLoadTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/task/sfDoctrineDataLoadTask.class.php
+END
+sfDoctrineDropDbTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/task/sfDoctrineDropDbTask.class.php
+END
+sfDoctrineBaseTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/task/sfDoctrineBaseTask.class.php
+END
+sfDoctrineCreateModelTablesTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/task/sfDoctrineCreateModelTablesTask.class.php
+END
+sfDoctrineBuildSqlTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/task/sfDoctrineBuildSqlTask.class.php
+END
+sfDoctrineDqlTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/task/sfDoctrineDqlTask.class.php
+END
+sfDoctrineBuildSchemaTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/task/sfDoctrineBuildSchemaTask.class.php
+END
+sfDoctrineBuildModelTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/task/sfDoctrineBuildModelTask.class.php
+END
+sfDoctrineGenerateMigrationsDiffTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 162
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/task/sfDoctrineGenerateMigrationsDiffTask.class.php
+END
+sfDoctrineInsertSqlTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/task/sfDoctrineInsertSqlTask.class.php
+END
+sfDoctrineCleanModelFilesTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/task/sfDoctrineCleanModelFilesTask.class.php
+END
+sfDoctrineGenerateModuleForRouteTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 162
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/task/sfDoctrineGenerateModuleForRouteTask.class.php
+END
+sfDoctrineBuildFiltersTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/task/sfDoctrineBuildFiltersTask.class.php
+END
+sfDoctrineMigrateTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/task/sfDoctrineMigrateTask.class.php
+END
+sfDoctrineGenerateMigrationsModelsTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 164
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/task/sfDoctrineGenerateMigrationsModelsTask.class.php
+END

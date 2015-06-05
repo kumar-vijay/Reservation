@@ -1,0 +1,393 @@
+$(document).ready(function(e) {
+
+    $('#insured_name_dnb').blur(function(ev) {
+        $(this).val($.trim($(this).val()));
+    });
+
+    $('#reinsured_company').blur(function(ev) {
+        $(this).val($.trim($(this).val()));
+    });
+
+    $('#borker_contact_peson_number').blur(function() {
+        $(this).val($.trim($(this).val()));
+    });
+
+    $('#edittotalinsuredvalue').blur(function() {
+        $('#edittotalinsuredvalue').formatCurrency();
+    });
+
+    $('#gross_premium').blur(function() {
+        $('#gross_premium').formatCurrency();
+    });
+
+    $('#limit').blur(function() {
+        $('#limit').formatCurrency();
+    });
+
+    $('#attachment_point').blur(function() {
+        $('#attachment_point').formatCurrency();
+    });
+
+    $('#effective_date').datepicker({
+        minDate: 0,
+        //maxDate: "+364D",
+        dateFormat: 'mm/dd/yy',
+        onClose: function(selectedDate) {
+            if (selectedDate) {
+                var today = new Date();
+                var currentDateArr = selectedDate.split('/');
+                var alertDate = new Date();
+                alertDate.setDate(today.getDate() + 120);
+                var maxDate = new Date(currentDateArr[2], currentDateArr[0] - 1, currentDateArr[1]);
+                if (maxDate > alertDate) {
+                    var didConfirm = confirm("The effective date for this submission is more than 120 days in advance.Are you sure you want to reserve the submission?");
+                    if (didConfirm == true) {
+                        $('#dateAlert').addClass('display-none');
+                    } else {
+                        $('#dateAlert').removeClass('display-none');
+                        $('#effective_date').val("");
+                        $('#expiration_date').val("");
+                        return false;
+                    }
+                } else {
+                    $('#dateAlert').addClass('display-none');
+                }
+                var maxYear = maxDate.getFullYear() + 1;
+                maxDate.setFullYear(maxYear);
+                maxDate.setDate(maxDate.getDate());
+                $('#expiration_date').datepicker();
+                $('#expiration_date').datepicker('option', 'minDate', selectedDate);
+                $("#expiration_date").val(('0' + (maxDate.getMonth() + 1)).slice(-2) + "/" + ('0' + maxDate.getDate()).slice(-2) + "/" + maxDate.getFullYear());
+            }
+        }
+    });
+
+    var ed = $('#effective_date').val();
+    $('#expiration_date').datepicker({
+        minDate: ed,
+        showTime: true,
+        dateFormat: 'mm/dd/yy',
+        onSelect: function() {
+            $(this).valid();
+        }
+    });
+
+    $('#processdate').datepicker({
+        minDate: 0,
+        showTime: true,
+        dateFormat: 'mm/dd/yy',
+        onSelect: function() {
+            $(this).valid();
+        }
+    });
+
+    $('#db_number').focus(function(ev) {
+        if ($(this).val() == 'Not Available') {
+            $(this).val('');
+        }
+    });
+    $('#db_number').blur(function(ev) {
+        if ($(this).val() == '') {
+            $(this).val('Not Available');
+            $(this).removeClass('error');
+            $('label[for=db_number]').css('display', 'none');
+        }
+    });
+
+    if ($('input[name="insured_name_status"]:checked') == 'Y') {
+        $('#insured_name_dnb').prop('disabled', false);
+    } else if ($('input[name="insured_name_status"]:checked') == 'N') {
+        $('#insured_name_dnb').prop('disabled', true);
+        $('#insured_name_dnb').val("");
+    }
+
+    $('.insurednamestatus').on('click', function() {
+        if ($(this).val() == 'Y') {
+            $('#insured_name_dnb').prop('disabled', false);
+        } else {
+            $('#insured_name_dnb').prop('disabled', true);
+            $('#insured_name_dnb').val("");
+        }
+    });
+
+    if ($('#primary_status').val() == '9') {
+        $('#processdate').prop('disabled', false);
+        $('[class*="statusDetails"]').prop('disabled', false);
+    } else {
+        $('#processdate').prop('disabled', true);
+        $('[class*="statusDetails"]').prop('disabled', true);
+    }
+
+    if ($('#primary_status').val() == '4') {
+        $('#reason_code').prop('disabled', false);
+    } else {
+        $('#reason_code').prop('disabled', true);
+    }
+
+    if ($('#primary_status').val() == '7' || $('#primary_status').val() == '8') {
+        $('[class*="statusDetails"]').prop('disabled', false);
+        $('#reason_code').prop('disabled', false);
+    } else {
+        $('[class*="statusDetails"]').prop('disabled', true);
+        $('#reason_code').prop('disabled', true);
+    }
+
+    $('#primary_status').change(function() {
+        var primaryStatus = $('#primary_status').val();
+        if (primaryStatus == 4) {
+            $('#reason_code').prop('disabled', false);
+            $('[class*="statusDetails"]').prop('disabled', true);
+        } else if (primaryStatus == 7 || primaryStatus == 8) {
+            $('[class*="statusDetails"]').prop('disabled', false);
+            $('#reason_code').prop('disabled', false);
+            $('#processdate').prop('disabled', true);
+        } else if (primaryStatus == 9) {
+            $('#processdate').prop('disabled', false);
+            $('[class*="statusDetails"]').prop('disabled', false);
+            $('#reason_code').prop('disabled', true);
+        } else if (primaryStatus == 5 || primaryStatus == 3) {
+            $('[class*="statusDetails"]').prop('disabled', false);
+            $('#reason_code').prop('disabled', true);
+            $('#processdate').prop('disabled', true);
+        } else {
+            $('[class*="statusDetails"]').prop('disabled', true);
+            $('#reason_code').prop('disabled', true);
+            $('#processdate').prop('disabled', true);
+        }
+    });
+
+    if ($('#productline').val() == 'Property') {
+        $('#edittotalinsuredvalue').prop('disabled', false);
+        $('#total_insured_value_select').prop('disabled', false);
+        $('#yesTrue').prop('disabled', false);
+    } else {
+        $('#edittotalinsuredvalue').prop('disabled', true);
+        $('#total_insured_value_select').prop('disabled', true);
+        $('#yesTrue').prop('disabled', true);
+    }
+
+    if ($('#productline').val() == 'Property' && $('#productlinesubtype').val() == '3' || $('#productline').val() == 'Casualty' && $('#productlinesubtype').val() == '11' && $('#sectionCode').val() == '616' || $('#productline').val() == 'Casualty' && $('#productlinesubtype').val() == '11' && $('#sectionCode').val() == '617' || $('#productline').val() == 'Casualty' && $('#productlinesubtype').val() == '11' && $('#sectionCode').val() == '618' || $('#productline').val() == 'Casualty' && $('#productlinesubtype').val() == '11' && $('#sectionCode').val() == '619' || $('#productline').val() == 'Casualty' && $('#productlinesubtype').val() == '11' && $('#sectionCode').val() == '620') {
+        $('[class*="project"]').prop('disabled', false);
+    } else {
+        $('[class*="project"]').prop('disabled', true);
+    }
+
+
+    $('[id="productlinesubtype"]').on('change', function() {
+        if ($('#productline').val() == 'Property') {
+            $('#edittotalinsuredvalue').prop('disabled', false);
+            $('#total_insured_value_select').prop('disabled', false);
+            $('#yesTrue').prop('disabled', false);
+        } else {
+            $('#edittotalinsuredvalue').prop('disabled', true);
+            $('#total_insured_value_select').prop('disabled', false);
+            $('#yesTrue').prop('disabled', false);
+
+        }
+        if ($('#productline').val() == 'Property' && $('#productlinesubtype').val() == '3') {
+            $('[class*="project"]').prop('disabled', false);
+        } else {
+            $('[class*="project"]').prop('disabled', true);
+        }
+    });
+
+    $('[id="underwriter_id"]').on('change', function() {
+        $('[class*="project"]').prop('disabled', true);
+    });
+
+    $('[id="sectionCode"]').on('change', function() {
+        if ($('#productline').val() == 'Casualty' && $('#productlinesubtype').val() == '11' && $('#sectionCode').val() == '616' || $('#productline').val() == 'Casualty' && $('#productlinesubtype').val() == '11' && $('#sectionCode').val() == '617' || $('#productline').val() == 'Casualty' && $('#productlinesubtype').val() == '11' && $('#sectionCode').val() == '618' || $('#productline').val() == 'Casualty' && $('#productlinesubtype').val() == '11' && $('#sectionCode').val() == '619' || $('#productline').val() == 'Casualty' && $('#productlinesubtype').val() == '11' && $('#sectionCode').val() == '620') {
+            $('[class*="project"]').prop('disabled', false);
+        }
+    });
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    $('#editSubmissionFormCancel').click(function() {
+        $(location).attr('href', '/submission/index');
+    });
+
+    $('#editSubmissionFormSubmit').click(function() {
+        if ($('#editSubmissionForm').valid()) {
+            return true;
+        }
+    });
+
+    $.validator.addMethod("checkName", function(value, element, params) {
+        var x = value;
+        if (x == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    });
+    $.validator.addMethod(
+            "regex",
+            function(value, element, regexp) {
+                var re = new RegExp(regexp);
+                return this.optional(element) || re.test(value);
+            },
+            "Please check your input."
+            );
+    $('#editSubmissionForm').validate({
+        rules: {
+            submissiontype: {required: true, checkName: $('#submissiontype').val()},
+            underwriter_id: {required: true, checkName: $('#underwriter_id').val()},
+            productlinesubtype: {required: true, checkName: $('#productlinesubtype').val()},
+            sectionCode: {required: true, checkName: $('#sectionCode').val()},
+            profitCode: {required: true, checkName: $('#profitCode').val()},
+            primary_status: {required: true, checkName: $('#primary_status').val()},
+            effective_date: {required: true},
+            expiration_date: {required: true},
+            editcabcompanies: {required: true},
+            editinsuredname: {required: true, maxlength: 100, minlength: 3},
+            insured_name_dnb: {required: function() {
+                    if ($('#insured_name_yes').val() == 'Y')
+                        return true;
+                    else
+                        return false;
+                }, maxlength: 50},
+            cab_companies: {required: true, checkName: $('#cab_companies').val()},
+            brokerCode: {required: true, checkName: $('#brokerCode').val()},
+            brokerCountryCode: {required: true, checkName: $('#brokerCountryCode').val()},
+            brokerStateCode: {required: true, checkName: $('#brokerStateCode').val()},
+            brokerCityCode: {required: true, checkName: $('#brokerCityCode').val()},
+            broker_contact_person_email: {email: true},
+            borker_contact_peson_number: {regex: '^([0-9]{10})$'},
+            edittotalinsuredvalue: {required: true},
+            total_insured_value_select: {required: true, checkName: $('#total_insured_value_select').val()},
+            reason_code: {required: true, checkName: $('#reason_code').val()},
+            processdate: {required: true},
+            gross_premium_text: {required: true},
+            gross_premium_select: {required: true, checkName: $('#gross_premium_select').val()}
+        },
+        messages: {
+            newrenewal: '<br />Please select a valid value',
+            editunderwriter: '<br />Please select a valid underwriter name',
+            editproductlinesubtype: '<br />Please select a valid product line subtype',
+            editsection: '<br />Please select a valid section',
+            editprofitcode: '<br />Please select a valid profit code  ',
+            editprimarystatus: '<br />Please select a valid Current Status',
+            effectiveDate: '<br />Please enter a valid effective date',
+            expityDate: '<br />Please enter a valid expiry date',
+            editinsuredname: {required: '<br />Please enter valid insured name', minlength: '<br />Please enter atleast first 3 characters'},
+            dbaName: '<br />Please enter valid DB Name',
+            cab_companies: '<br />Please select a valid CAB Companies',
+            brokerCode: '<br />Please select a valid Broker Name',
+            brokerCountryCode: '<br />Please select a valid Broker country',
+            brokerStateCode: '<br />Please select a valid Broker state',
+            brokerCityCode: '<br />Please select a valid Broker city',
+            broker_contact_person: '<br />Please enter a valid name',
+            broker_contact_person_email: '<br />Please enter a valid email id',
+            borker_contact_peson_number: {required: '<br /> Please enter a valid number', regex: '<br /> Please enter a valid number'},
+            edittotalinsuredvalue: '<br />Please enter a valid Total Insured Value',
+            total_insured_value_select: '<br />Please select a valid Total Insured Value',
+            reason_code: '<br />Please select a valid Reason Code',
+            processdate: '<br />Please enter a valid Process Date',
+            gross_premium_text: '<br />Please enter a valid Gross Premium',
+            gross_premium_select: '<br />Please select a valid Gross Premium',
+            received_date_by_berkshire: '<br />Please select a valid Date',
+            received_date_by_india: '<br />Please enter a valid Date'
+        },
+        highlight: function(element) {
+            $(element).addClass('error');
+        },
+        unhighlight: function(element) {
+            $(element).removeClass('error');
+        }
+    });
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function brokerDateHandler1() {
+        var attr = $('#byBerkSi').attr('disabled');
+        if (typeof attr !== 'undefined' && attr !== false) {
+            $('#byBerkSi').val("");
+            $('#byBerkSi').removeAttr('required');
+            $('#byBerkSi').removeClass('error');
+            $('#byBerkSi').next('.error').hide();
+            $('#byBerkSi').prop("disabled", false);
+        } else {
+            $('#byBerkSi').prop("disabled", true);
+        }
+        $("#yesBroker").one("click", brokerDateHandler2);
+    }
+    function brokerDateHandler2() {
+        var attr = $('#byBerkSi').attr('disabled');
+        if (typeof attr !== 'undefined' && attr !== false) {
+            $('#byBerkSi').attr('required', true);
+            $('#byBerkSi').prop("disabled", false);
+        } else {
+            $('#byBerkSi').prop("disabled", true);
+        }
+        $("#yesBroker").one("click", brokerDateHandler1);
+    }
+    $("#yesBroker").one("click", brokerDateHandler1);
+    if ($('#byBerkSi').val() !== "") {
+        $('#byBerkSi').prop("disabled", false);
+    }
+
+    function indiaDateHandler1() {
+        var attr = $('#byIndia').attr('disabled');
+        if (typeof attr !== 'undefined' && attr !== false) {
+            $('#byIndia').val("");
+            $('#byIndia').removeAttr('required');
+            $('#byIndia').removeClass('error');
+            $('#byIndia').next('.error').hide();
+            $('#byIndia').prop("disabled", false);
+        } else {
+            $('#byIndia').prop("disabled", true);
+        }
+        $("#yesIndia").one("click", indiaDateHandler2);
+    }
+    function indiaDateHandler2() {
+        var attr = $('#byIndia').attr('disabled');
+        if (typeof attr !== 'undefined' && attr !== false) {
+            $('#byIndia').attr('required', true);
+            $('#byIndia').prop("disabled", false);
+        } else {
+            $('#byIndia').prop("disabled", true);
+        }
+        $("#yesIndia").one("click", indiaDateHandler1);
+    }
+    $("#yesIndia").one("click", indiaDateHandler1);
+    if ($('#byIndia').val() !== "") {
+        $('#byIndia').prop("disabled", false);
+    }
+
+    if ($("#total_insured_value_select").val() !== "0") {
+        $("#total_insured_values").toggleClass('dp-block');
+        $("#total_insured").toggleClass('dp-none');
+    }
+    $("#yesTrue").on("click", function() {
+        $("#total_insured_values").toggleClass('dp-block');
+        $("#total_insured").toggleClass('dp-none');
+    });
+
+    if ($("#gross_premium_select").val() !== "0") {
+        $("#gross_premium_values").toggleClass('dp-block');
+        $("#gross_premium_value").toggleClass('dp-none');
+    }
+    $("#yesGross").on("click", function() {
+        $("#gross_premium_values").toggleClass('dp-block');
+        $("#gross_premium_value").toggleClass('dp-none');
+    });
+
+    if ($("#limit_select").val() !== "0") {
+        $("#limit_values").toggleClass('dp-block');
+        $("#limit_value").toggleClass('dp-none');
+    }
+    $("#yesLimit").on("click", function() {
+        $("#limit_values").toggleClass('dp-block');
+        $("#limit_value").toggleClass('dp-none');
+    });
+
+    if ($("#attachment_point_select").val() !== "0") {
+        $("#attachment_values").toggleClass('dp-block');
+        $("#attachment_value").toggleClass('dp-none');
+    }
+    $("#yesAttachment").on("click", function() {
+        $("#attachment_values").toggleClass('dp-block');
+        $("#attachment_value").toggleClass('dp-none');
+    });
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+});

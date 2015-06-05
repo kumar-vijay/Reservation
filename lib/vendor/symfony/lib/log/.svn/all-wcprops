@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/log
+END
+sfNoLogger.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/log/sfNoLogger.class.php
+END
+sfFileLogger.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/log/sfFileLogger.class.php
+END
+sfLogger.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/log/sfLogger.class.php
+END
+sfLoggerInterface.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/log/sfLoggerInterface.class.php
+END
+sfLoggerWrapper.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/log/sfLoggerWrapper.class.php
+END
+sfConsoleLogger.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/log/sfConsoleLogger.class.php
+END
+sfWebDebugLogger.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/log/sfWebDebugLogger.class.php
+END
+sfAggregateLogger.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/log/sfAggregateLogger.class.php
+END
+sfVarLogger.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/log/sfVarLogger.class.php
+END
+sfStreamLogger.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/log/sfStreamLogger.class.php
+END

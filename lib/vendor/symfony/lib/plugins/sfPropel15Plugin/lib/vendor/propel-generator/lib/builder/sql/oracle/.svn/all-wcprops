@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel-generator/lib/builder/sql/oracle
+END
+OracleDDLBuilder.php
+K 25
+svn:wc:ra_dav:version-url
+V 178
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel-generator/lib/builder/sql/oracle/OracleDDLBuilder.php
+END
+OracleDataSQLBuilder.php
+K 25
+svn:wc:ra_dav:version-url
+V 182
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel-generator/lib/builder/sql/oracle/OracleDataSQLBuilder.php
+END

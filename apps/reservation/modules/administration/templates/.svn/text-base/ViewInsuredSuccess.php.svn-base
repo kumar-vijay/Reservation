@@ -1,0 +1,46 @@
+<div class="container"> 
+    <ul id="breadcrumb">
+        <li class="selected-3"><a href="/">Home</a></li>
+        <li class="selected-2"><a href="/admin/manageadmin">Admin</a></li>
+        <li class="selected-1"><a href="/admin/insured">Manage Insured Details</a></li>
+        <li class="selected">View Insured Details</li>
+    </ul>
+</div>
+<div class="clear"></div>
+
+<div class="container">
+    <div class="white-bg black-border border-radius-10">
+        <h1 class="section-header border-radius-10">Insured Details
+            <div class="arrow"></div>
+        </h1>
+        <div class="content view" style="display: block;">
+            <form method="POST" action="" name="insuredEditForm" id="insuredEditForm">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="12%">Insured Name</td>
+                        <td width="22%"><?php echo $induredInfo->InsuredName; ?></td>
+                        <td width="12%">Address Line 1</td>
+                        <td width="22%"><?php echo $induredInfo->AddressLine1; ?></td>
+                        <td width="12%">Country</td>
+                        <td width="22%"><?php echo $induredInfo->Country; ?></td> 
+                    </tr>
+                    <tr>
+                        <td>State</td>
+                        <td><?php echo $induredInfo->State; ?></td> 
+                        <td>City</td>
+                        <td><?php echo $induredInfo->City; ?></td> 
+                        <td>Zipcode</td>
+                        <td>
+                            <?php echo $induredInfo->Zip; ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" align="center">
+                            <input type="reset" value="Back" onclick="location.href = '<?php echo url_for('@insured_list') ?>';" class="button ML10" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>

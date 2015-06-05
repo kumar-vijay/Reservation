@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/config/skeleton/config
+END
+propel.ini
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/config/skeleton/config/propel.ini
+END
+schema.yml
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/config/skeleton/config/schema.yml
+END
+databases.yml
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/config/skeleton/config/databases.yml
+END

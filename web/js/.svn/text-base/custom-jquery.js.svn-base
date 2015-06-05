@@ -1,0 +1,91 @@
+$(document).ready(function(e) {
+    $('h1.section-header').on('click', function() {
+        if ($(this).children('div').hasClass('arrow')) {
+            $(this).find('.arrow').toggleClass('colapse');
+            $(this).siblings('.content').slideToggle();
+        }
+    });
+
+    $(document).bind('click', function(e) {
+        if (!$(e.target).is('#login-menu span, #login-menu .arrow')) {
+            $('#sub-menu').slideUp('fast');
+        }
+    });
+    $('#login-menu span, #login-menu .arrow').click(function() {
+        $('#sub-menu').slideToggle('fast');
+    });
+
+    if ($('h1.section-header').children('div').hasClass('arrow')) {
+        $('h1.section-header').css('cursor', 'pointer');
+    }
+
+    $('#content').click(function() {
+        $('#sub-menu').slideUp();
+    });
+
+    $('#nav li').mouseover(function() {
+        $(this).addClass('hover').find('ul').show();
+    });
+
+    $('#nav li').mouseout(function() {
+        $(this).removeClass('hover').find('ul').hide();
+    });
+
+    $('#nav li ul').mouseover(function() {
+        $(this).show().parent().addClass('hover');
+    });
+
+    $('#nav li ul').mouseout(function() {
+        $(this).hide().parent().removeClass('hover');
+    });
+    
+    
+    $('#resetInsuredValue').click(function() {
+        window.location = "/admin/insured";
+    });
+
+    var logout = function() {
+        $('.associate-name').on('click', function(e) {
+            $('.associate-name ul').removeClass('display-none');
+            e.stopPropagation();
+            $(document).one('click', function(ev) {
+                $('.associate-name ul').addClass('display-none');
+            });
+        });
+    }
+    try {
+        logout();
+    } catch (e) {
+    }
+
+    $('#qcsubmit').click(function() {
+        if ($('#qcSubmitForm').valid()) {
+            return true;
+        }
+    });
+
+    $('#qcSubmitForm').validate({
+        rules: {
+            qcstatus: {required: true}
+        },
+        messages: {
+            qcstatus: '<br />Please select QC Status'
+        },
+        highlight: function(element) {
+            $(element).addClass('error');
+        },
+        unhighlight: function(element) {
+            $(element).removeClass('error');
+        }
+    });
+
+});
+
+
+var createOption = function(data) {
+    var selectBox = '<option value="0">--Select--</option>';
+    for (var i = 0; i < data.length; i += 1) {
+        selectBox += '<option value="' + data[i].code + '" class="' + data[i].cat + '">' + data[i].name + '</option>';
+    }
+    return selectBox;
+};

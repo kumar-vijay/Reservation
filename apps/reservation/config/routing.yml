@@ -1,0 +1,271 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/10-Routing
+
+# default rules
+homepage:
+  url:   /
+  param: { module: user, action: signIn }
+
+user_home:
+  url: /user/home
+  param: { module: user, action: index}
+  
+sign_out:
+  url:   /signOut
+  param: { module: user, action: signOut }  
+  
+manage_admin:
+  url: /admin/manageadmin
+  param: { module: administration, action: admin}
+  
+groups_list:
+  url: /admin/groups
+  param: { module: administration, action: groups}
+  
+add_group:
+  url: /admin/addgroup
+  param: { module: administration, action: addGroup}  
+  
+edit_group:
+  url: /admin/editgroup
+  param: { module: administration, action: editGroup}  
+  
+view_group:
+  url: /admin/viewgroup
+  param: { module: administration, action: viewGroup} 
+  
+users_list:
+  url: /admin/users
+  param: { module: administration, action: users}
+  
+add_user:
+  url: /admin/adduser
+  param: { module: administration, action: addUser}  
+  
+edit_user:
+  url: /admin/edituser
+  param: { module: administration, action: editUser}
+  
+view_user:
+  url: /admin/viewuser
+  param: { module: administration, action: viewUser}
+  
+insuredlist:
+  url: /admin/insuredList
+  param: { module: administration, action: InsuredList}
+  
+editSubmission:
+  url: submission/edit
+  param: { module: submission, action: editSubmission} 
+
+viewSubmission:
+  url: submission/view
+  param: { module: submission, action: viewSubmission}
+  
+amendmentSubmission:
+  url: submission/amendment
+  param: { module: submission, action: endersomentSubmission}
+  
+editamendmentSubmission:
+  url: submission/editamendment
+  param: { module: submission, action: editEndorsementSubmission}
+  
+editamendmentReversalChild:
+  url: submission/editreversalchild
+  param: { module: submission, action: editEndorsementReversalChild}
+  
+viewamendmentSubmission:
+  url: submission/viewamendment
+  param: { module: submission, action: viewEndersomentSubmission}
+  
+qcviewamendmentSubmission:
+  url: submission/qcviewamendment
+  param: { module: submission, action: qcViewEndersomentSubmission}
+  
+insured_list:
+  url: /admin/insured
+  param: { module: administration, action: Insured}
+  
+add_insured:
+  url: /admin/addinsured
+  param: { module: administration, action: AddInsured}
+ 
+edit_insured:
+  url: /admin/editinsured
+  param: { module: administration, action: EditInsured}
+
+view_insured:
+  url: /admin/viewinsured
+  param: { module: administration, action: ViewInsured}
+  
+clone_insured:
+  url: /admin/cloneinsured
+  param: { module: administration, action: CloneInsured}
+  
+submissionHistory:
+  url: submission/history
+  param: { module: submission, action: submissionHistory} 
+  
+viewHistory:
+  url: submission/viewHistory
+  param: { module: submission, action: viewHistory} 
+  
+downloadSubmission:
+  url: submission/download
+  param: { module: submission, action: downloadSubmission}
+  
+manage_master:
+  url: /admin/masterDataManagement
+  param: { module: administration, action: MasterDataManagement}
+  
+broker_list:
+  url: /admin/broker
+  param: { module: administration, action: Broker}
+  
+add_broker:
+  url: /admin/addbroker
+  param: { module: administration, action: AddBroker}
+  
+edit_broker:
+  url: /admin/editbroker
+  param: { module: administration, action: EditBroker}
+  
+view_broker:
+  url: /admin/viewbroker
+  param: { module: administration, action: ViewBroker}
+  
+contactperson_list:
+  url: /admin/contactperson
+  param: { module: administration, action: ContactPerson}
+  
+add_contactperson:
+  url: /admin/addcontactperson
+  param: { module: administration, action: AddContactPerson} 
+  
+edit_contactperson:
+  url: /admin/editcontactperson
+  param: { module: administration, action: EditContactPerson} 
+  
+view_contactperson:
+  url: /admin/viewcontactperson
+  param: { module: administration, action: ViewContactPerson} 
+  
+reference_list:
+  url: /admin/renewalreference
+  param: { module: administration, action: RenewalReference}
+  
+aad_reference:
+  url: /admin/addrenewalreference
+  param: { module: administration, action: AddRenewalReference}
+  
+edit_reference:
+  url: /admin/editrenewalreference
+  param: { module: administration, action: EditRenewalReference}
+  
+view_reference:
+  url: /admin/viewrenewalreference
+  param: { module: administration, action: ViewRenewalReference}
+  
+underwriter_list:
+  url: /admin/underwriter
+  param: { module: administration, action: Underwriter}
+ 
+add_underwriter:
+  url: /admin/addunderwriter
+  param: { module: administration, action: AddUnderwriter}
+  
+edit_underwriter:
+  url: /admin/editunderwriter
+  param: { module: administration, action: EditUnderwriter}
+  
+view_underwriter:
+  url: /admin/viewunderwriter
+  param: { module: administration, action: ViewUnderwriter}
+  
+country_list:
+  url: /admin/country
+  param: { module: administration, action: Country}
+  
+add_country:
+  url: /admin/addcountry
+  param: { module: administration, action: AddCountry}
+  
+edit_country:
+  url: /admin/editcountry
+  param: { module: administration, action: EditCountry}
+  
+view_country:
+  url: /admin/viewcountry
+  param: { module: administration, action: ViewCountry}
+  
+state_list:
+  url: /admin/state
+  param: { module: administration, action: State}
+  
+add_state:
+  url: /admin/addstate
+  param: { module: administration, action: AddState}
+  
+edit_state:
+  url: /admin/editstate
+  param: { module: administration, action: EditState}
+  
+view_state:
+  url: /admin/viewstate
+  param: { module: administration, action: ViewState}
+  
+city_list:
+  url: /admin/city
+  param: { module: administration, action: City}
+  
+add_city:
+  url: /admin/addcity
+  param: { module: administration, action: AddCity}
+  
+edit_city:
+  url: /admin/editcity
+  param: { module: administration, action: EditCity}
+  
+view_city:
+  url: /admin/viewcity
+  param: { module: administration, action: ViewCity}
+  
+  
+policy_management:
+  url: /policy/Policy
+  param: { module: policy, action: Policy}
+
+policy_list:
+  url: /policy/PolicyList
+  param: { module: policy, action: PolicyList}
+  
+create_policy_number:
+  url: /policy/CreatePolicyNumber
+  param: { module: policy, action: CreatePolicyNumber}
+  
+edit_policy_number:
+  url: /policy/EditPolicyNumber
+  param: { module: policy, action: EditPolicyNumber}
+  
+view_policy_number:
+  url: /policy/ViewPolicyNumber
+  param: { module: policy, action: ViewPolicyNumber}
+  
+view_policy_history:
+  url: /policy/ViewPolicyHistory
+  param: { module: policy, action: ViewPolicyHistory}
+ 
+policy_history:
+  url: /policy/PolicyHistory
+  param: { module: policy, action: PolicyHistory}
+  
+  
+
+# generic rules
+# please, remove them by adding more specific rules
+default_index:
+  url:   /:module
+  param: { module: user, action: index }
+
+default:
+  url:   /:module/:action/*

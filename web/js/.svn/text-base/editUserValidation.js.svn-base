@@ -1,0 +1,407 @@
+$(document).ready(function() {
+    $('#insuredname').blur(function() {
+        $(this).val($.trim($(this).val()));
+    });
+    
+    $('#insuredaddress').blur(function() {
+        $(this).val($.trim($(this).val()));
+    });
+    
+    $('#insuredcountry').blur(function() {
+        $(this).val($.trim($(this).val()));
+    });
+    
+    $('#insuredstate').blur(function() {
+        $(this).val($.trim($(this).val()));
+    });
+    
+    $('#insuredcity').blur(function() {
+        $(this).val($.trim($(this).val()));
+    });
+    
+    $('#insuredzipcode').blur(function() {
+        $(this).val($.trim($(this).val()));
+    });
+    
+    $('#editinsuredname').blur(function() {
+        $(this).val($.trim($(this).val()));
+    });
+    
+    $('#editinsuredaddress').blur(function() {
+        $(this).val($.trim($(this).val()));
+    });
+    
+    $('#editinsuredcountry').blur(function() {
+        $(this).val($.trim($(this).val()));
+    });
+    
+    $('#editinsuredstate').blur(function() {
+        $(this).val($.trim($(this).val()));
+    });
+    
+    $('#editinsuredcity').blur(function() {
+        $(this).val($.trim($(this).val()));
+    });
+    
+    $('#editinsuredzipcode').blur(function() {
+        $(this).val($.trim($(this).val()));
+    });
+    
+    $('#firstname').blur(function() {
+        $(this).val($.trim($(this).val()));
+    });
+    
+    $('#lastname').blur(function() {
+        $(this).val($.trim($(this).val()));
+    });
+    
+    $('#email').blur(function() {
+        $(this).val($.trim($(this).val()));
+    });
+    
+    $.validator.addMethod("alpha", function(value, element) {
+        return this.optional(element) || value == value.match(/^[a-zA-Z]+$/);
+    }, "Only Characters Allowed.");
+
+    $("#editUserForm").validate({
+        rules: {
+            firstname: {
+                required: true,
+                alpha: true
+            },
+            email: {
+                required: true,
+                email: true
+            }
+        },
+        errorElement: 'div',
+        wrapper: 'div',
+        errorPlacement: function(error, element) {
+            error.insertAfter(element); // default function
+        },
+        // Specify the validation error messages
+        messages: {
+            firstname: {
+                required: "Please enter first name",
+                alpha: "First name should only have alphabets"
+            },
+            email: {
+                required: "Please enter email",
+                email: "Please enter email in correct format"
+            },
+            agree: "Please accept our policy"
+        }
+    });
+
+    $('#insuredSubmit').click(function() {
+        if ($('#insuredAddForm').valid()) {
+            return true;
+        }
+    });
+
+    $.validator.addMethod("checkName", function(value, element, params) {
+        var x = value;
+        if (x == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    });
+    $.validator.addMethod("regex1", function(value, element) {
+        return this.optional(element) || /^([0-9]{2,5}||[0-9,-]{2,10})$/.test(value);
+    }, "Please enter valid us zip code");
+
+    $.validator.addMethod("regex2", function(value, element) {
+        return this.optional(element) || /^([0-9A-Za-z,-]{2,10})$/.test(value);
+    }, "Please enter valid zip code");
+
+    $('#insuredcountry').blur(function() {
+        var val = $('#insuredcountry').val();
+        if (val == '001 - USA') {
+            $('#insuredAddForm').removeData('validator').validate({
+                rules: {
+                    insuredname: {required: true},
+                    insuredaddress: {required: true},
+                    insuredcountry: {required: true},
+                    insuredstate: {required: true},
+                    insuredcity: {required: true},
+                    insuredzipcode: {regex1: true}
+                },
+                messages: {
+                    insuredname: '<br />Please enter a valid Insured name',
+                    insuredaddress: '<br />Please enter a valid Addressline1',
+                    insuredcountry: {required: '<br />Please enter a valid country', checkName: '<br />Please enter a valid country'},
+                    insuredstate: {required: '<br />Please enter a valid state', checkName: '<br />Please enter a valid state'},
+                    insuredcity: {required: '<br />Please enter a valid city', checkName: '<br />Please enter a valid city'},
+                }
+            });
+        } else {
+            $('#insuredAddForm').removeData('validator').validate({
+                rules: {
+                    insuredname: {required: true},
+                    insuredaddress: {required: true},
+                    insuredcountry: {required: true},
+                    insuredstate: {required: true},
+                    insuredcity: {required: true},
+                    insuredzipcode: {regex2: true}
+                },
+                messages: {
+                    insuredname: '<br />Please enter a valid Insured name',
+                    insuredaddress: '<br />Please enter a valid Addressline1',
+                    insuredcountry: {required: '<br />Please enter a valid country', checkName: '<br />Please enter a valid country'},
+                    insuredstate: {required: '<br />Please enter a valid state', checkName: '<br />Please enter a valid state'},
+                    insuredcity: {required: '<br />Please enter a valid city', checkName: '<br />Please enter a valid city'},
+                }
+            });
+        }
+    });
+
+    $('#insuredAddForm').removeData('validator').validate({
+        rules: {
+            insuredname: {required: true},
+            insuredaddress: {required: true},
+            insuredcountry: {required: true},
+            insuredstate: {required: true},
+            insuredcity: {required: true}
+        },
+        messages: {
+            insuredname: '<br />Please enter a valid Insured name',
+            insuredaddress: '<br />Please enter a valid Addressline1',
+            insuredcountry: {required: '<br />Please enter a valid country'},
+            insuredstate: {required: '<br />Please enter a valid state'},
+            insuredcity: {required: '<br />Please enter a valid city'}
+        },
+        highlight: function(element) {
+            $(element).addClass('error');
+        },
+        unhighlight: function(element) {
+            $(element).removeClass('error');
+        }
+    });
+
+    $('#insuredAddForm').each(function() {
+        this.reset();
+    });
+
+    $('#editFormSubmit').click(function() {
+        if ($('#insuredEditForm').valid()) {
+            return true;
+        }
+    });
+
+    $('#editinsuredcountry').blur(function() {
+        var val = $('#editinsuredcountry').val();
+        if (val == '001 - USA') {
+            $('#insuredEditForm').removeData('validator').validate({
+                rules: {
+                    editinsuredname: {required: true},
+                    editinsuredaddress: {required: true},
+                    editinsuredcountry: {required: true},
+                    editinsuredstate: {required: true},
+                    editinsuredcity: {required: true},
+                    editinsuredzipcode: {regex1: true}
+                },
+                messages: {
+                    editinsuredname: '<br />Please enter a valid Insured name',
+                    editinsuredaddress: '<br />Please enter a valid Addressline1',
+                    editinsuredcountry: {required: '<br />Please enter a valid country'},
+                    editinsuredstate: {required: '<br />Please enter a valid state'},
+                    editinsuredcity: {required: '<br />Please enter a valid city'}
+                }
+            });
+        } else {
+            $('#insuredEditForm').removeData('validator').validate({
+                rules: {
+                    editinsuredname: {required: true},
+                    editinsuredaddress: {required: true},
+                    editinsuredcountry: {required: true},
+                    editinsuredstate: {required: true},
+                    editinsuredcity: {required: true},
+                    editinsuredzipcode: {regex2: true}
+                },
+                messages: {
+                    editinsuredname: '<br />Please enter a valid Insured name',
+                    editinsuredaddress: '<br />Please enter a valid Addressline1',
+                    editinsuredcountry: {required: '<br />Please enter a valid country'},
+                    editinsuredstate: {required: '<br />Please enter a valid state'},
+                    editinsuredcity: {required: '<br />Please enter a valid city'},
+                }
+            });
+        }
+    });
+
+    $('#insuredEditForm').removeData('validator').validate({
+        rules: {
+            editinsuredname: {required: true},
+            editinsuredaddress: {required: true},
+            editinsuredcountry: {required: true, checkName: $('#editinsuredcountry').val()},
+            editinsuredstate: {required: true, checkName: $('#editinsuredstate').val()},
+            editinsuredcity: {required: true, checkName: $('#editinsuredcity').val()},
+            editinsuredzipcode: {regex: '^([0-9])$'}
+        },
+        messages: {
+            editinsuredname: '<br />Please enter a valid Insured name',
+            editinsuredaddress: '<br />Please enter a valid Addressline1',
+            editinsuredcountry: {required: '<br />Please enter a valid country'},
+            editinsuredstate: {required: '<br />Please enter a valid state'},
+            editinsuredcity: {required: '<br />Please enter a valid city'},
+            editinsuredzipcode: {regex: '<br />Please enter a valid zip code'}
+        },
+        highlight: function(element) {
+            $(element).addClass('error');
+        },
+        unhighlight: function(element) {
+            $(element).removeClass('error');
+        }
+    });
+    
+    $('#insuredEditForm ').each(function() {
+        this.reset();
+    });
+
+    $('#insuredcountry').change(function(ev) {
+        var val = $(this).val();
+        $('#insuredstate').html('<option value="0">--Select--</option>');
+        $('#insuredcity').html('<option value="0">--Select--</option>');
+        if (val == '0') {
+            return false;
+        }
+        var dataObj = {
+            'header': {
+                'requestName': 'getState'
+            },
+            'body': {
+                'data': val
+            }
+        };
+        $.ajax('/administration/getState', {
+            'dataType': 'json',
+            'data': JSON.stringify(dataObj),
+            'type': 'post',
+            'success': function(data, status, xhr) {
+                var options = createSelectBoxState(data);
+                if (data.length) {
+                    $('#insuredstate').html(options);
+                } else {
+                    $('#insuredstate').html('<option value="NA">Not Available</option>');
+                    $('#insuredcity').html('<option value="NA">Not Available</option>');
+                }
+            }
+        });
+    });
+
+    var createSelectBoxState = function(data) {
+        var selectBox = '<option value="0">--Select--</option>';
+        for (var i = 0; i < data.length; i += 1) {
+            selectBox += '<option value="' + data[i].StateName + '">' + data[i].StateName + '</option>';
+        }
+        return selectBox;
+    };
+
+    $('#insuredstate').change(function(ev) {
+        var val = $(this).val();
+        if (val == '0') {
+            $('#insuredcity').html('<option value="0">--Select--</option>');
+            return false;
+        }
+        var dataObj = {
+            'header': {
+                'requestName': 'getCity'
+            },
+            'body': {
+                'data': val
+            }};
+        $.ajax('/administration/getCity', {
+            'dataType': 'json',
+            'data': JSON.stringify(dataObj),
+            'type': 'post',
+            'success': function(data, status, xhr) {
+                var options = createSelectBoxCity(data);
+                if (data.length) {
+                    $('#insuredcity').html(options);
+                } else {
+                    $('#insuredcity').html('<option value="NA">Not Available</option>');
+                }
+            }
+        });
+    });
+
+    var createSelectBoxCity = function(data) {
+        var selectBox = '<option value="0">--Select--</option>';
+        for (var i = 0; i < data.length; i += 1) {
+            selectBox += '<option value="' + data[i].City + '">' + data[i].City + '</option>';
+        }
+        return selectBox;
+    };
+
+    $('#editinsuredcountry').change(function(ev) {
+        var val = $(this).val();
+        $('#editinsuredstate').html('<option value="0">--Select--</option>');
+        $('#editinsuredcity').html('<option value="0">--Select--</option>');
+        if (val == '') {
+            return false;
+        }
+        var dataObj = {
+            'header': {
+                'requestName': 'getState'
+            },
+            'body': {
+                'data': val
+            }
+        };
+        $.ajax('/administration/getState', {
+            'dataType': 'json',
+            'data': JSON.stringify(dataObj),
+            'type': 'post',
+            'success': function(data, status, xhr) {
+                if (data.length) {
+                    var options = createSelectBoxState(data);
+                    $('#editinsuredstate').html(options);
+                    if ($('#editinsuredstateHidden').length) {
+                        var selectedState = $('#editinsuredstateHidden').val();
+                        $('#editinsuredstate').val(selectedState);
+                        $('#editinsuredstate').trigger('change');
+                        $('#editinsuredstateHidden').remove();
+                    }
+                } else {
+                    $('#editinsuredstate').html('<option value="NA">Not Available</option>');
+                    $('#editinsuredcity').html('<option value="NA">Not Available</option>');
+                }
+            }
+        });
+    }).trigger('change');
+
+    $('#editinsuredstate').change(function(ev) {    
+        var val = $(this).val();
+        $('#editinsuredcity').html('<option value="0">--Select--</option>');
+        if (val == '0') {
+            return false;
+        }
+        var dataObj = {
+            'header': {
+                'requestName': 'getCity'
+            },
+            'body': {
+                'data': val
+            }
+        };
+        $.ajax('/submission/getCity', {
+            'dataType': 'json',
+            'data': JSON.stringify(dataObj),
+            'type': 'post',
+            'success': function(data, status, xhr) {
+                if (data.length) {
+                    var options = createSelectBoxCity(data);
+                    $('#editinsuredcity').html(options);
+                    if ($('#editinsuredcityHidden').length) {
+                        var selectedState = $('#editinsuredcityHidden').val();
+                        $('#editinsuredcity').val(selectedState);
+                        $('#editinsuredcityHidden').remove();
+                    }
+                } else {
+                    $('#editinsuredcity').html('<option value="NA">Not Available</option>');
+                }
+            }
+        });
+    });
+});

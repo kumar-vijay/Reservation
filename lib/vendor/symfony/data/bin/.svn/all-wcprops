@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/data/bin
+END
+changelog.php
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/data/bin/changelog.php
+END
+sandbox_installer.php
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/data/bin/sandbox_installer.php
+END
+symfony
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/data/bin/symfony
+END
+release.php
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/data/bin/release.php
+END
+symfony.bat
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/data/bin/symfony.bat
+END
+check_configuration.php
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/data/bin/check_configuration.php
+END
+create_sandbox.sh
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/data/bin/create_sandbox.sh
+END

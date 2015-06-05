@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/behavior
+END
+SfPropelBehaviorI18nTranslation.php
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/behavior/SfPropelBehaviorI18nTranslation.php
+END
+SfPropelBehaviorI18n.php
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/behavior/SfPropelBehaviorI18n.php
+END
+SfPropelBehaviorSymfony.php
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/behavior/SfPropelBehaviorSymfony.php
+END
+SfPropelBehaviorSymfonyBehaviors.php
+K 25
+svn:wc:ra_dav:version-url
+V 156
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/behavior/SfPropelBehaviorSymfonyBehaviors.php
+END
+SfPropelBehaviorTimestampable.php
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/behavior/SfPropelBehaviorTimestampable.php
+END
+SfPropelBehaviorBase.php
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/behavior/SfPropelBehaviorBase.php
+END

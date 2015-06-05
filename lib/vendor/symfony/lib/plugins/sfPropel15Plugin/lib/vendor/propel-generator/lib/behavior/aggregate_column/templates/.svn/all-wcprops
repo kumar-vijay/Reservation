@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 174
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel-generator/lib/behavior/aggregate_column/templates
+END
+objectCompute.php
+K 25
+svn:wc:ra_dav:version-url
+V 192
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel-generator/lib/behavior/aggregate_column/templates/objectCompute.php
+END
+queryFindRelated.php
+K 25
+svn:wc:ra_dav:version-url
+V 195
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel-generator/lib/behavior/aggregate_column/templates/queryFindRelated.php
+END
+objectUpdate.php
+K 25
+svn:wc:ra_dav:version-url
+V 191
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel-generator/lib/behavior/aggregate_column/templates/objectUpdate.php
+END
+queryUpdateRelated.php
+K 25
+svn:wc:ra_dav:version-url
+V 197
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel-generator/lib/behavior/aggregate_column/templates/queryUpdateRelated.php
+END
+objectUpdateRelated.php
+K 25
+svn:wc:ra_dav:version-url
+V 198
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel-generator/lib/behavior/aggregate_column/templates/objectUpdateRelated.php
+END

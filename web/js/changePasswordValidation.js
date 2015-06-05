@@ -1,0 +1,36 @@
+$(document).ready(function() {
+    $('input').placeholder();
+    $("#userchangepassword").validate({
+        rules: {
+            oldpassword: {
+                required: true,
+                minlength: 6
+            },
+            newpassword: {
+                required: true,
+                minlength: 6
+            },
+            repeatnewpassword: {// compound rule 
+                required: true,
+                minlength: 6,
+                equalTo: "#newpassword"
+            }
+        },
+        messages:
+                {
+                    oldpassword: {
+                        required: "Please enter existing password",
+                        minlength: "Please enter at least 6 character long valid password"
+                    },
+                    newpassword: {
+                       required: "Please enter new password",
+                       minlength: "Please enter at least 6 character long valid password"
+                    },
+                    repeatnewpassword: {
+                       required: "Please enter new password for confirmation",
+                       minlength: "Please enter at least 6 character long valid password",
+                       equalTo: "Please enter same password as entered in ‘new password’"
+                    }
+                }
+    });
+});

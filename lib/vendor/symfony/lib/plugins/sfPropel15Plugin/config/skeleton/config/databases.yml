@@ -1,0 +1,33 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/07-Databases
+
+dev:
+  propel:
+    param:
+      classname:  MssqlDebugPDO
+      debug:
+        realmemoryusage: true
+        details:
+          time:       { enabled: true }
+          slow:       { enabled: true, threshold: 0.1 }
+          mem:        { enabled: true }
+          mempeak:    { enabled: true }
+          memdelta:   { enabled: true }
+
+test:
+  propel:
+    param:
+      classname:  MssqlDebugPDO
+
+all:
+  propel:
+    class:        sfPropelDatabase
+    param:
+      phptype:   mssql
+      classname:  MssqlDebugPDO
+      dsn:        dblib:host=192.168.28.21;dbname=reservation
+      username:   sa
+      password:   xceedance@123
+      encoding:   utf8
+      persistent: true
+      pooling:    true

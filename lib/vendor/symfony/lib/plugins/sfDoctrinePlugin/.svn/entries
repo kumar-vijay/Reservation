@@ -1,0 +1,80 @@
+10
+
+dir
+65
+http://svn.bil.com/reservation/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin
+http://svn.bil.com/reservation
+
+
+
+2013-12-03T06:16:34.784112Z
+4
+sumit.pachouri
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+721f21b2-5006-11e3-9cba-e33837192d26
+
+i18n
+dir
+
+test
+dir
+
+LICENSE
+file
+
+
+
+
+2013-12-03T06:27:26.273462Z
+80471cf84254400024258aca8bbce630
+2013-12-03T06:16:34.784112Z
+4
+sumit.pachouri
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1064
+
+config
+dir
+
+lib
+dir
+
+data
+dir
+
+web
+dir
+

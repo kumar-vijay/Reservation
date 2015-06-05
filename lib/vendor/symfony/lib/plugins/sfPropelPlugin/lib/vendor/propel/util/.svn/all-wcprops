@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/lib/vendor/propel/util
+END
+DebugPDOStatement.php
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/lib/vendor/propel/util/DebugPDOStatement.php
+END
+PropelDateTime.php
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/lib/vendor/propel/util/PropelDateTime.php
+END
+Join.php
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/lib/vendor/propel/util/Join.php
+END
+PropelPager.php
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/lib/vendor/propel/util/PropelPager.php
+END
+NodePeer.php
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/lib/vendor/propel/util/NodePeer.php
+END
+Criteria.php
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/lib/vendor/propel/util/Criteria.php
+END
+PropelConfigurationIterator.php
+K 25
+svn:wc:ra_dav:version-url
+V 159
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/lib/vendor/propel/util/PropelConfigurationIterator.php
+END
+PropelColumnTypes.php
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/lib/vendor/propel/util/PropelColumnTypes.php
+END
+PropelPDO.php
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/lib/vendor/propel/util/PropelPDO.php
+END
+BasePeer.php
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/lib/vendor/propel/util/BasePeer.php
+END
+DebugPDO.php
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/lib/vendor/propel/util/DebugPDO.php
+END
+PropelConfiguration.php
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/lib/vendor/propel/util/PropelConfiguration.php
+END

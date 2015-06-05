@@ -1,0 +1,49 @@
+<div id="content" class="view">
+    <div class="container"> 
+        <ul id="breadcrumb">
+            <li class="selected-3"><a href="/">Home</a></li>
+            <li class="selected-2"><a href="/submission/Submission">Submission</a></li>
+            <li class="selected-1"><a href="/submission/List">Submission Listing</a></li>
+            <li class="selected">History</li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+    <div class="container"> <a href="/submission/Submission"> <img src="/images/back.jpg" alt="back" class="fright" /> </a>
+        <div class="clear"></div>
+    </div>
+    <div class="container">
+        <ul class="tabbed-menu">
+            <li><a href="/submission/edit?submission=<?php echo $submissionId; ?>">Submission Details</a></li>
+            <li class="active"><a href="/submission/history?submission=<?php echo $submissionId; ?>">Submission History</a></li>
+        </ul>   
+        <div class="dates">
+            <em>Created Date: <strong><?php if(!empty($dataResult[0]['CreatedOn'])){ echo date("Y-m-d", strtotime($dataResult[0]['CreatedOn']));} else { echo "";} ?></strong></em>
+            <em>Updated Date: <strong><?php if(!empty($dataResult[0]['ModifiedOn'])){ echo date("Y-m-d", strtotime($dataResult[0]['ModifiedOn'])); } else { echo "";} ?></strong></em>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <?php foreach ($result as $value) { ?>
+        <div class="container">
+            <div class="white-bg black-border border-radius-10">
+                <h1 class="section-header border-radius-10">Updated By <?php echo $user['FIRSTNAME'].' '.$user['LASTNAME']  ?> <em class="dateTime">Date & Time: <strong><?php if($value['ModifiedOn'] != '') { echo date("Y-m-d", strtotime($value['ModifiedOn']));}else{echo '';} ?></strong></em><div class="arrow"></div></h1>
+                <div class="content" style="display: block;">
+                    <table cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <td width="20%">&nbsp;</td>
+                            <td width="30%">Old Value</td>
+                            <td width="30%">New Value</td>
+                            <td width="20%">Remarks</td>
+                        </tr>
+                        <tr>
+                            <td width="20%" height="35"><?php echo $value['Field']; ?></td>
+                            <td width="30%"><?php echo $value['OldValue']; ?></td>
+                            <td width="30%"><?php echo $value['NewValue']; ?></td>
+                            <td width="20%"><?php echo $value['Remarks']; ?></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
+  

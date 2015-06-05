@@ -1,0 +1,11 @@
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/vendor/doctrine/Doctrine/Locking/Manager
+END
+Pessimistic.php
+K 25
+svn:wc:ra_dav:version-url
+V 167
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/vendor/doctrine/Doctrine/Locking/Manager/Pessimistic.php
+END

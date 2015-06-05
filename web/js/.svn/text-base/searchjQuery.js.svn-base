@@ -1,0 +1,420 @@
+/* 
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+$(document).ready(function() {
+    var createJSON = {
+        'submission': function() {
+            var inputData = {};
+            $('#submissionFrm input[type=text] , #submissionFrm select').each(function(index, node) {
+                inputData[$(node).attr('id')] = $(node).val();
+            });
+            inputData = JSON.stringify(inputData);
+            return inputData;
+        }
+    };
+
+    $(".from").datepicker({
+        onClose: function(selectedDate) {
+            $(".to").datepicker("option", "minDate", selectedDate);
+        },
+        onSelect: function() {
+            $(".from").valid();
+        }
+    });
+
+    $(".to").datepicker({
+        onClose: function(selectedDate) {
+            $(".from").datepicker("option", "maxDate", selectedDate);
+        },
+        onSelect: function() {
+            $(".to").valid();
+        }
+    });
+    
+    $("#submissionFrm").validate({
+        rules: {
+            SubmissionFromDate: {
+                required: {
+                    depends: function(element) {
+                        var status = false;
+                        if ($("#SubmissionToDate").val()) {
+                            var status = true;
+                        }
+                        return status;
+                    }
+                }
+            },
+            SubmissionToDate: {
+                required: {
+                    depends: function(element) {
+                        var status = false;
+                        if ($("#SubmissionFromDate").val()) {
+                            var status = true;
+                        }
+                        return status;
+                    }
+                }
+            },
+            EffectiveFromDate: {
+                required: {
+                    depends: function(element) {
+                        var status = false;
+                        if ($("#EffectiveToDate").val()) {
+                            var status = true;
+                        }
+                        return status;
+                    }
+                }
+            },
+            EffectiveToDate: {
+                required: {
+                    depends: function(element) {
+                        var status = false;
+                        if ($("#EffectiveFromDate").val()) {
+                            var status = true;
+                        }
+                        return status;
+                    }
+                }
+            },
+            ExpirationFromDate: {
+                required: {
+                    depends: function(element) {
+                        var status = false;
+                        if ($("#ExpirationToDate").val()) {
+                            var status = true;
+                        }
+                        return status;
+                    }
+                }
+            },
+            ExpirationToDate: {
+                required: {
+                    depends: function(element) {
+                        var status = false;
+                        if ($("#ExpirationFromDate").val()) {
+                            var status = true;
+                        }
+                        return status;
+                    }
+                }
+            },
+            ProcessFromDate: {
+                required: {
+                    depends: function(element) {
+                        var status = false;
+                        if ($("#ProcessToDate").val()) {
+                            var status = true;
+                        }
+                        return status;
+                    }
+                }
+            },
+            ProcessToDate: {
+                required: {
+                    depends: function(element) {
+                        var status = false;
+                        if ($("#ProcessFromDate").val()) {
+                            var status = true;
+                        }
+                        return status;
+                    }
+                }
+            },
+            EditFromDate: {
+                required: {
+                    depends: function(element) {
+                        var status = false;
+                        if ($("#EditToDate").val()) {
+                            var status = true;
+                        }
+                        return status;
+                    }
+                }
+            },
+            EditToDate: {
+                required: {
+                    depends: function(element) {
+                        var status = false;
+                        if ($("#EditFromDate").val()) {
+                            var status = true;
+                        }
+                        return status;
+                    }
+                }
+            }
+        },
+        errorElement: 'div',
+        wrapper: 'div',
+        errorPlacement: function(error, element) {
+            error.insertAfter(element);
+        },
+        messages: {
+            SubmissionFromDate: {
+                required: "Please enter create date (From Date)"
+            },
+            SubmissionToDate: {
+                required: "Please enter create date (To Date)"
+            },
+            EffectiveFromDate: {
+                required: "Please enter create date (From Date)"
+            },
+            EffectiveToDate: {
+                required: "Please enter create date (To Date)"
+            },
+            ExpirationFromDate: {
+                required: "Please enter create date (From Date)"
+            },
+            ExpirationToDate: {
+                required: "Please enter create date (To Date)"
+            },
+            ProcessFromDate: {
+                required: "Please enter create date (From Date)"
+            },
+            ProcessToDate: {
+                required: "Please enter create date (To Date)"
+            },
+            EditFromDate: {
+                required: "Please enter create date (From Date)"
+            },
+            EditToDate: {
+                required: "Please enter create date (To Date)"
+            }
+        }
+    });
+ /////////////////////////////////////////////////////////////qc filter validation//////////////////////////
+     $("#qcSubmissionFrm").validate({
+        rules: {
+            SubmissionFromDate: {
+                required: {
+                    depends: function(element) {
+                        var status = false;
+                        if ($("#SubmissionToDate").val()) {
+                            var status = true;
+                        }
+                        return status;
+                    }
+                }
+            },
+            SubmissionToDate: {
+                required: {
+                    depends: function(element) {
+                        var status = false;
+                        if ($("#SubmissionFromDate").val()) {
+                            var status = true;
+                        }
+                        return status;
+                    }
+                }
+            },
+            EffectiveFromDate: {
+                required: {
+                    depends: function(element) {
+                        var status = false;
+                        if ($("#EffectiveToDate").val()) {
+                            var status = true;
+                        }
+                        return status;
+                    }
+                }
+            },
+            EffectiveToDate: {
+                required: {
+                    depends: function(element) {
+                        var status = false;
+                        if ($("#EffectiveFromDate").val()) {
+                            var status = true;
+                        }
+                        return status;
+                    }
+                }
+            },
+            ExpirationFromDate: {
+                required: {
+                    depends: function(element) {
+                        var status = false;
+                        if ($("#ExpirationToDate").val()) {
+                            var status = true;
+                        }
+                        return status;
+                    }
+                }
+            },
+            ExpirationToDate: {
+                required: {
+                    depends: function(element) {
+                        var status = false;
+                        if ($("#ExpirationFromDate").val()) {
+                            var status = true;
+                        }
+                        return status;
+                    }
+                }
+            },
+            ProcessFromDate: {
+                required: {
+                    depends: function(element) {
+                        var status = false;
+                        if ($("#ProcessToDate").val()) {
+                            var status = true;
+                        }
+                        return status;
+                    }
+                }
+            },
+            ProcessToDate: {
+                required: {
+                    depends: function(element) {
+                        var status = false;
+                        if ($("#ProcessFromDate").val()) {
+                            var status = true;
+                        }
+                        return status;
+                    }
+                }
+            },
+            EditFromDate: {
+                required: {
+                    depends: function(element) {
+                        var status = false;
+                        if ($("#EditToDate").val()) {
+                            var status = true;
+                        }
+                        return status;
+                    }
+                }
+            },
+            EditToDate: {
+                required: {
+                    depends: function(element) {
+                        var status = false;
+                        if ($("#EditFromDate").val()) {
+                            var status = true;
+                        }
+                        return status;
+                    }
+                }
+            }
+        },
+        errorElement: 'div',
+        wrapper: 'div',
+        errorPlacement: function(error, element) {
+            error.insertAfter(element);
+        },
+        messages: {
+            SubmissionFromDate: {
+                required: "Please enter create date (From Date)"
+            },
+            SubmissionToDate: {
+                required: "Please enter create date (To Date)"
+            },
+            EffectiveFromDate: {
+                required: "Please enter create date (From Date)"
+            },
+            EffectiveToDate: {
+                required: "Please enter create date (To Date)"
+            },
+            ExpirationFromDate: {
+                required: "Please enter create date (From Date)"
+            },
+            ExpirationToDate: {
+                required: "Please enter create date (To Date)"
+            },
+            ProcessFromDate: {
+                required: "Please enter create date (From Date)"
+            },
+            ProcessToDate: {
+                required: "Please enter create date (To Date)"
+            },
+            EditFromDate: {
+                required: "Please enter create date (From Date)"
+            },
+            EditToDate: {
+                required: "Please enter create date (To Date)"
+            }
+        }
+    });
+    /////////////////////////////
+    $('a, input[type=button]').mouseup(function(e) {
+        if (!$(e.currentTarget).hasClass('pagination-link') && !$(e.currentTarget).hasClass('export')) {
+            del_cookie('filterState');
+        }
+    });
+
+//    $(".sort").tablesorter({
+//        headers: {
+//            0: {
+//                sorter: false
+//            }
+//        }
+//    });
+
+    var $table = $('#submission-list-wrapper table'),
+            plusIcon = $table.find('.plus-icon'),
+            ine = $table.find('.insured-name-expand'),
+            ple = $table.find('.product-line-expand'),
+            cse = $table.find('.current-status-expand'),
+            ede = $table.find('.effective-date-expand'),
+            bne = $table.find('.broker-name-expand'),
+            gpe = $table.find('.gross-premium-expand'),
+            pne = $table.find('.project-name-expand'),
+            rdbie = $table.find('.received-date-by-india-expand'),
+            allFields = ine.add(ple).add(cse).add(ede).add(bne).add(gpe).add(pne).add(rdbie);
+
+    $('.expandAll').click(function() {
+        allFields.removeClass('hidden');
+        plusIcon.addClass('expand');
+    });
+    $('.collapseAll').click(function() {
+        allFields.addClass('hidden');
+        plusIcon.removeClass('expand');
+    });
+
+
+    $('span.plus-icon').click(function() {
+        var $this = $(this),
+                $th = $this.parent(),
+                thisText = $th.text().trim();
+        $this.toggleClass('expand');
+
+        switch (thisText) {
+            case "Insured Name":
+                ine.toggleClass('hidden');
+                break;
+            case "Product Line":
+                ple.toggleClass('hidden');
+                break;
+            case "Current Status":
+                cse.toggleClass('hidden');
+                break;
+            case "Effective Date":
+                ede.toggleClass('hidden');
+                break;
+            case "Broker Name":
+                bne.toggleClass('hidden');
+                break;
+            case "Gross Premium":
+                gpe.toggleClass('hidden');
+                break;
+            case "Project Name":
+                pne.toggleClass('hidden');
+                break;
+            case "Date of Receiving -By India From Berk SI":
+                rdbie.toggleClass('hidden');
+                break;
+            case "Address Line 1":
+                $('.insured-address-expand').toggleClass('hidden');
+                break;
+        }
+    });
+    
+    $('#resetValue').click(function() {
+        window.location = "/submission/List";
+    });
+    
+    $('#reserQcValue').click(function() {
+        window.location = "/submission/QCList";
+    });
+    
+});

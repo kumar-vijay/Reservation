@@ -1,0 +1,170 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/08-Security
+
+all:
+  is_secure: true
+
+forgotPassword: 
+  is_secure: false
+
+List:
+  credentials: [[VIEW_SUBMISSION,VIEW_EDIT_SUBMISSION]]
+
+CreateSubmission:
+  credentials: [VIEW_EDIT_SUBMISSION]
+
+EditSubmission:
+  credentials: [VIEW_EDIT_SUBMISSION]
+  
+viewSubmission:
+  credentials: [[VIEW_SUBMISSION,VIEW_EDIT_SUBMISSION]]
+
+ExportFile:
+  credentials: [EXPORT_SUBMISSION]
+
+users:
+  credentials: [[VIEW_USER_LIST,VIEW_EDIT_USER]]
+
+addUser:
+  credentials: [VIEW_EDIT_USER]    
+
+editUser:
+  credentials: [VIEW_EDIT_USER]
+  
+viewUser:
+  credentials: [[VIEW_USER_LIST,VIEW_EDIT_USER]]
+
+groups:
+  credentials: [[VIEW_GROUP_LIST,VIEW_EDIT_GROUP]]
+
+addgroup:
+  credentials: [VIEW_EDIT_GROUP]
+
+editGroup:
+  credentials: [VIEW_EDIT_GROUP] 
+
+viewgroup:
+  credentials: [[VIEW_GROUP_LIST,VIEW_EDIT_GROUP]]
+  
+QCList:
+  credentials: [VIEW_QCSUBMISSION]
+  
+QCAmendmentList:
+  credentials: [QC_AMENDMENT_LIST]
+  
+Insured:
+  credentials: [[VIEW_INSURED_LIST,VIEW_EDIT_INSURED]]
+  
+AddInsured:
+  credentials: [VIEW_EDIT_INSURED]
+  
+EditInsured:
+  credentials: [VIEW_EDIT_INSURED]
+  
+ViewInsured:
+  credentials: [[VIEW_INSURED_LIST,VIEW_EDIT_INSURED]]
+  
+Broker:
+  credentials: [[VIEW_BROKER_LIST,VIEW_EDIT_BROKER]]
+  
+AddBroker:
+  credentials: [VIEW_EDIT_BROKER]
+  
+EditBroker:
+  credentials: [VIEW_EDIT_BROKER]
+  
+ViewBroker:
+  credentials: [[VIEW_BROKER_LIST,VIEW_EDIT_BROKER]]
+  
+ContactPerson:
+  credentials: [[VIEW_CONTACTPERSON_LIST,VIEW__EDIT_CONTACTPERSON]]
+  
+AddContactPerson:
+  credentials: [VIEW__EDIT_CONTACTPERSON]
+  
+EditContactPerson:
+  credentials: [VIEW__EDIT_CONTACTPERSON]
+  
+ViewContactPerson:
+  credentials: [[VIEW_CONTACTPERSON_LIST,VIEW__EDIT_CONTACTPERSON]]
+  
+ExportQCFile:
+  credentials: [EXPORT_SUBMISSION]
+  
+RenewalReference:
+  credentials: [[VIEW_RENEWAL_REFERENCE_LIST,VIEW_EDIT_RENEWAL_REFERENCE]]
+ 
+AddRenewalReference:
+  credentials: [VIEW_EDIT_RENEWAL_REFERENCE]
+  
+EditRenewalReference:
+  credentials: [VIEW_EDIT_RENEWAL_REFERENCE]
+  
+ViewRenewalReference:
+  credentials: [[VIEW_RENEWAL_REFERENCE_LIST,VIEW_EDIT_RENEWAL_REFERENCE]]
+  
+Underwriter:
+  credentials: [[VIEW_UNDERWRITER_LIST,VIEW_EDIT_UNDERWRITER]]
+  
+AddUnderwriter:
+  credentials: [VIEW_EDIT_UNDERWRITER]
+  
+EditUnderwriter:
+  credentials: [VIEW_EDIT_UNDERWRITER]
+  
+ViewUnderwriter:
+  credentials: [[VIEW_UNDERWRITER_LIST,VIEW_EDIT_UNDERWRITER]]
+  
+Country:
+  credentials: [[VIEW_COUNTRY_LIST,VIEW_EDIT_COUNTRY]]
+  
+AddCountry:
+  credentials: [VIEW_EDIT_COUNTRY]
+  
+EditCountry:
+  credentials: [VIEW_EDIT_COUNTRY]
+  
+ViewCountry:
+  credentials: [[VIEW_COUNTRY_LIST,VIEW_EDIT_COUNTRY]]
+  
+State:
+  credentials:  [[VIEW_STATE_LIST,VIEW_EDIT_STATE]]
+  
+AddState:
+  credentials: [VIEW_EDIT_STATE]
+  
+EditState:
+  credentials: [VIEW_EDIT_STATE]
+  
+ViewState:
+  credentials: [[VIEW_STATE_LIST,VIEW_EDIT_STATE]]
+  
+City:
+  credentials:  [[VIEW_CITY_LIST,VIEW_EDIT_CITY]]
+  
+AddCity:
+  credentials: [VIEW_EDIT_CITY]
+  
+EditCity:
+  credentials: [VIEW_EDIT_CITY]
+  
+ViewCity:
+  credentials: [[VIEW_CITY_LIST,VIEW_EDIT_CITY]]
+    
+PolicyList:
+  credentials:  [[VIEW_POLICY_BLOCK_LIST,VIEW_EDIT_POLICY_BLOCK]]
+  
+CreatePolicyNumber:
+  credentials: [VIEW_EDIT_POLICY_BLOCK]
+  
+EditPolicyNumber:
+  credentials: [VIEW_EDIT_POLICY_BLOCK]
+  
+ViewPolicyNumber:
+  credentials: [[VIEW_POLICY_BLOCK_LIST,VIEW_EDIT_POLICY_BLOCK]]
+  
+ViewPolicyHistory:
+  credentials: [[VIEW_POLICY_BLOCK_LIST,VIEW_EDIT_POLICY_BLOCK]]
+  
+PolicyHistory:
+  credentials: [[VIEW_POLICY_BLOCK_LIST,VIEW_EDIT_POLICY_BLOCK]]

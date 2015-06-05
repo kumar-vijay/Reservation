@@ -1,0 +1,205 @@
+<?php
+
+class InsuredFunctions {
+
+    private $_con = NULL;
+
+    public function __construct() {
+        $this->_con = Propel::getConnection();
+    }
+
+    public function getCountryName() {
+        $con = Propel::getConnection();
+        $query = "SELECT * FROM Country order by InsuredCountry;";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    public function insuredList($input) {
+        $criteria = new Criteria();
+        $isFilterChoosen = false;
+
+        if ($input['insuredName'] != '') {
+            $filterCriteria = $criteria->add(InsuredsearchPeer::INSUREDNAME, $input['insuredName'] . '%', Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['insuredaddress'] != '') {
+            $filterCriteria = $criteria->add(InsuredsearchPeer::ADDRESS, trim($input['insuredaddress']).'%', Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['insuredCountry'] != '') {
+            $filterCriteria = $criteria->add(InsuredsearchPeer::INSUREDCOUNTRY, trim($input['insuredCountry']).'%', Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['insuredCity'] != '') {
+            $filterCriteria = $criteria->add(InsuredsearchPeer::INSUREDCITY, trim($input['insuredCity']).'%', Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['insuredState'] != '') {
+            $filterCriteria = $criteria->add(InsuredsearchPeer::INSUREDSTATE, trim($input['insuredState']).'%', Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($isFilterChoosen) {
+            $criteria->add($filterCriteria);
+        }
+
+        $criteria->addDescendingOrderByColumn(InsuredsearchPeer::ID);
+        return $criteria;
+    }
+
+    public function CreateInsured(array $data) {
+        $errFlag = false;
+        $error = array();
+
+        if (empty($data)) {
+            $errFlag = true;
+            $response['msg'][] = 'You did not fill the form correctly';
+            $response['success'] = false;
+        } else {
+            $errFlag = false;
+            if ($data['insuredId'] == '' && !isset($data['insuredId'])) {
+                if (self::isInsuredNameExists(strtolower(trim($data['insuredName'])))) {
+                    $errFlag = true;
+                    $response['msg'][] = 'Insured name already registered';
+                    $response['success'] = false;
+                }
+            }
+
+            if ($errFlag == false) {
+
+                if ($data['insuredId'] != NULL) {
+                    try {
+                        $con = Propel::getConnection();
+                        $Recorderquery = "UPDATE DataRecorderMetaData SET ModifiedBy = '" . $data['userId'] . "', ModifiedOn = GetDate() WHERE Id = '" . $data['recorderId'] . "'";
+                        $updateRecorderData = $con->prepare($Recorderquery);
+                        $updateRecorderData->execute();
+
+                        $insuredQuery = "UPDATE Insured SET InsuredName = '" . $data['editinsuredname'] . "', City = '".$data['editinsuredcity']."', State = '".$data['editinsuredstate']."', Zip = '".$data['editinsuredzipcode']."', Country = '".$data['editinsuredcountry']."', AddressLine1 = '".$data['editinsuredaddress']."' WHERE Id = '" . $data['insuredId'] . "'";
+                        $updateInsuredData = $con->prepare($insuredQuery);
+                        $updateInsuredData->execute();
+                    } catch (Exception $e) {
+                        $errFlag = true;
+                        $response['msg'][] = "Exception error at updating insured:" . $e->getMessage();
+                        $response['success'] = false;
+                    }
+                } else {
+                    $con = Propel::getConnection();
+                    try {
+                        $dataRecorderQuery = "INSERT INTO DataRecorderMetaData 
+                             (CreatedBy,CreatedOn) 
+                             VALUES 
+                             ('" . $data['userId'] . "', GetDate())";
+                        $insertData = $con->prepare($dataRecorderQuery);
+                        if ($insertData->execute()) {
+                            $STH1 = $con->query("SELECT CAST(COALESCE(SCOPE_IDENTITY(), @@IDENTITY) AS int)");
+                            $STH1->execute();
+                            $resultData = $STH1->fetch();
+                            $dataRecorderId = $resultData[0];
+                        } else {
+                            throw new PropelException();
+                        }
+                        if(!empty($data['insuredname'])){
+                            $data['insuredname'] = $data['insuredname'];
+                        }else {
+                            $data['insuredname'] = null;
+                        }
+                        if(!empty($data['insuredcity'])){
+                            $data['insuredcity'] = $data['insuredcity'];
+                        }else {
+                            $data['insuredcity'] = null;
+                        }
+                        if(!empty($data['insuredstate'])){
+                            $data['insuredstate'] = $data['insuredstate'];
+                        }else {
+                            $data['insuredstate'] = null;
+                        }
+                        if(!empty($data['insuredcountry'])){
+                            $data['insuredcountry'] = $data['insuredcountry'];
+                        }else {
+                            $data['insuredcountry'] = null;
+                        }
+                        if(!empty($data['insuredaddress'])){
+                            $data['insuredaddress'] = $data['insuredaddress'];
+                        }else {
+                            $data['insuredaddress'] = null;
+                        }
+                        $insuredQuery = "INSERT INTO Insured 
+                             (InsuredName, DataRecorderMetaDataId, City, State, Zip, Country, AddressLine1) 
+                             VALUES 
+                             ('" . $data['insuredname'] . "', '" . $dataRecorderId . "', '".$data['insuredcity']."','".$data['insuredstate']."','".$data['insuredzipcode']."', '".$data['insuredcountry']."','".$data['insuredaddress']."')";
+                        $insertInsured = $con->prepare($insuredQuery);
+                        $insertInsured->execute();
+                    } catch (Exception $e) {
+                        $errFlag = true;
+                        $response['msg'][] = "Exception error at creating insured:" . $e->getMessage() . 'At line number' . __LINE__;
+                        $response['success'] = false;
+                    }
+                }
+            }
+        }
+        if ($errFlag == false) {
+            $response['msg'] = 'Saved Successfully';
+            $response['success'] = true;
+            return $response;
+        } else {
+            return $response;
+        }
+    }
+
+    public static function isInsuredNameExists($insuredName) {
+        $con = Propel::getConnection();
+        $criteria = new Criteria();
+        $criteria->add(GroupsPeer::GROUP_NAME, strtolower($insuredName), Criteria::EQUAL);
+        if (GroupPeer::doCount($criteria) > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function GetInsuredInfo($insuredId) {
+        $con = Propel::getConnection();
+        $stmt = $con->query("SELECT I.* FROM Insured as I WHERE I.Id = $insuredId");
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $result[0];
+    }
+    
+    public static function getPostContent() {
+        return trim(file_get_contents("php://input"));
+    }
+    
+    public function getStateName($countryId) {
+
+        if (empty($countryId)) {
+            $where = "Where 1=1";
+        } else if (is_numeric($countryId)) {
+            $where = "Where CountryId = '" . $countryId . "'";
+        }
+        $con = Propel::getConnection();
+        $query = "SELECT * FROM State " . $where . " order by StateName;";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    
+    public function getCityName($stateId = 0) {
+        $con = Propel::getConnection();
+        if ($stateId == 0) {
+            $query = "SELECT * FROM City order by City";
+        } else {
+            $query = "SELECT * FROM CITY WHERE StateId = '$stateId'order by City";
+        }
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+}
+
+?>

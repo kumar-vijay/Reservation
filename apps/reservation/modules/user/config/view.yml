@@ -1,0 +1,23 @@
+default:  
+  layout: layout
+  stylesheets: [layout.css,reset.css,stylesheet.css]
+  javascripts: [jquery.js,jquery.placeholder.js,custom-jquery.js]
+
+
+signInSuccess:
+  metas:
+  title: Login - Berkshire SI Insurance
+  description:  Please login to continue
+  javascripts:  [jquery.validate.js,changePasswordValidation.js,signInValidation.js]
+  
+forgotPasswordSuccess:
+  metas:
+  title: Forgot Password - Berkshire SI Insurance
+  description:  Forgot Password
+  javascripts: [jquery.validate.js,forgotPasswordValidation.js]
+
+changePasswordSuccess:
+  metas:
+  title: Change Password - Berkshire SI Insurance
+  description:  Change Password
+  javascripts: [jquery.validate.js,changePasswordValidation.js]

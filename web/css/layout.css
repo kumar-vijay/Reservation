@@ -1,0 +1,57 @@
+/* CSS Document */
+
+/* ==== Main Layout ==== */
+#container, .gray-header, #content, #footer {width:100%;}
+
+.container {
+    padding: 15px 30px;
+}
+#header .associate-name span.down-arrow {width:11px; height:7px;}
+#header .associate-name ul li {width:100px;}
+#footer .green-stripe {height:34px;}
+.btn-container {height:55px;}
+.btn-container .buttons a {height:30px;}
+.lead-search select {height:22px; width:100px;}
+.lead-search input[type=submit] {height:23px;}
+.lead-search input[type=text] {height:17px; padding:2;width:150px;}
+
+/* ==== Secondary Layout ==== */
+.text-field-cell, .text-field-cell input[type=password], .text-field-cell input[type=text] {width:110px;}
+.text-field-cell input[type=text], .text-field-cell input[type=password] {height:18px;}
+.text-field-cell {width: 167px;}
+.error {clear:both;display: inline;}
+.login-error, .forgot-password {width:100%;}
+.btn-login {width:90px;height:28px;}
+.welcome-box {width:300px;}
+.password-changed {width:286px;height:29px;}
+#lead-details .left-box-wrapper {width:100%;}
+#lead-details .middle-box {width:500px;}
+#lead-details .middle-box-inside {width:90%;min-height:472px;}
+.middle-box-inside .headings {width:90px;}
+.middle-box-inside .buttons {height:30px;}
+#lead-details .right-box {width:25%;min-height:496px;}
+.vertical-arrow {width:11px;height:13px;}
+.horizontal-arrow {width:13px;height:12px;}
+.text-field-style-1 {width:65px;}
+.select-style-1 {width:75px;}
+.lead-table-edit thead tr th:first-child, .lead-table-edit tbody tr th:first-child {width:30%;}
+.lead-table-edit thead tr td:last-child, .lead-table-edit tbody tr td:last-child {width:70%;}
+/*Tabs*/
+.tabs-container {height:35px;}
+/*Tabs Ends*/
+
+/* ==== Miscellaneous ==== */
+.width-100per {width:100%;}
+.width-25per {width:25%;}
+.width-49per {width:49%;}
+.width-73per {width:73%;}
+.height-165 {height:165px !important;}
+.height-250 {height:250px !important;}
+.height-65 {height:65px;}
+.height-25 {height:25px;}
+
+.width-55 {width:55px ;}
+.width-80 {width:80px !important;}
+.width-130 {width:130px !important;}
+.width-180 {width:180px !important;}
+.width-200 {width:200px !important;}

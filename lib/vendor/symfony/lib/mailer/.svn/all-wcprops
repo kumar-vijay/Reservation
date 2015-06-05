@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/mailer
+END
+sfMailer.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/mailer/sfMailer.class.php
+END
+sfMailerMessageLoggerPlugin.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/mailer/sfMailerMessageLoggerPlugin.class.php
+END

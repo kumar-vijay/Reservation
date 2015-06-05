@@ -1,0 +1,173 @@
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/widget
+END
+sfWidgetForm.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/widget/sfWidgetForm.class.php
+END
+sfWidgetFormSelect.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/widget/sfWidgetFormSelect.class.php
+END
+sfWidgetFormSchemaFormatterList.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/widget/sfWidgetFormSchemaFormatterList.class.php
+END
+sfWidgetFormInputPassword.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/widget/sfWidgetFormInputPassword.class.php
+END
+sfWidgetFormFilterDate.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/widget/sfWidgetFormFilterDate.class.php
+END
+sfWidgetFormSchemaFormatter.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/widget/sfWidgetFormSchemaFormatter.class.php
+END
+sfWidgetFormChoiceBase.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/widget/sfWidgetFormChoiceBase.class.php
+END
+sfWidgetFormSelectCheckbox.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/widget/sfWidgetFormSelectCheckbox.class.php
+END
+sfWidgetFormSchemaForEach.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/widget/sfWidgetFormSchemaForEach.class.php
+END
+sfWidgetFormInputFileEditable.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/widget/sfWidgetFormInputFileEditable.class.php
+END
+sfWidgetFormDateRange.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/widget/sfWidgetFormDateRange.class.php
+END
+sfWidgetFormChoice.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/widget/sfWidgetFormChoice.class.php
+END
+sfWidget.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/widget/sfWidget.class.php
+END
+sfWidgetFormDateTime.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/widget/sfWidgetFormDateTime.class.php
+END
+sfWidgetFormSchemaFormatterTable.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/widget/sfWidgetFormSchemaFormatterTable.class.php
+END
+sfWidgetFormSelectRadio.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/widget/sfWidgetFormSelectRadio.class.php
+END
+sfWidgetFormTime.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/widget/sfWidgetFormTime.class.php
+END
+sfWidgetFormInputFile.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/widget/sfWidgetFormInputFile.class.php
+END
+sfWidgetFormInput.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/widget/sfWidgetFormInput.class.php
+END
+sfWidgetFormSchema.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/widget/sfWidgetFormSchema.class.php
+END
+sfWidgetFormSchemaDecorator.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/widget/sfWidgetFormSchemaDecorator.class.php
+END
+sfWidgetFormInputText.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/widget/sfWidgetFormInputText.class.php
+END
+sfWidgetFormSelectMany.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/widget/sfWidgetFormSelectMany.class.php
+END
+sfWidgetFormFilterInput.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/widget/sfWidgetFormFilterInput.class.php
+END
+sfWidgetFormInputCheckbox.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/widget/sfWidgetFormInputCheckbox.class.php
+END
+sfWidgetFormInputHidden.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/widget/sfWidgetFormInputHidden.class.php
+END
+sfWidgetFormDate.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/widget/sfWidgetFormDate.class.php
+END
+sfWidgetFormTextarea.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/widget/sfWidgetFormTextarea.class.php
+END

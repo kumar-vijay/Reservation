@@ -1,0 +1,17 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/11-App
+# default values
+all:
+  is_secure: true
+  
+  uploaddir : <?php echo $_SERVER['DOCUMENT_ROOT'] ."/../data/reservation/"; ?>
+
+  underwritergroupid: 1  
+  paginationlimit : 10
+  pagination_groups: 10
+  pagination_users: 10
+  pagination_insured: 10
+  mail: 
+    from: sumit.pachouri@xceedance.com
+
+ 

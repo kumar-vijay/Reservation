@@ -1,0 +1,1 @@
+<div class="footer"> <span>&copy; Copyrights <?php echo date("Y"); ?> - Berkshire Hathaway Specialty Insurance</span></div>

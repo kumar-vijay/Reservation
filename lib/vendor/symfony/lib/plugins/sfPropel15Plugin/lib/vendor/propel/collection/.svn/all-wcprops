@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel/collection
+END
+PropelOnDemandCollection.php
+K 25
+svn:wc:ra_dav:version-url
+V 164
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel/collection/PropelOnDemandCollection.php
+END
+PropelObjectCollection.php
+K 25
+svn:wc:ra_dav:version-url
+V 162
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel/collection/PropelObjectCollection.php
+END
+PropelArrayCollection.php
+K 25
+svn:wc:ra_dav:version-url
+V 161
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel/collection/PropelArrayCollection.php
+END
+PropelCollection.php
+K 25
+svn:wc:ra_dav:version-url
+V 156
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel/collection/PropelCollection.php
+END
+PropelOnDemandIterator.php
+K 25
+svn:wc:ra_dav:version-url
+V 162
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/vendor/propel/collection/PropelOnDemandIterator.php
+END

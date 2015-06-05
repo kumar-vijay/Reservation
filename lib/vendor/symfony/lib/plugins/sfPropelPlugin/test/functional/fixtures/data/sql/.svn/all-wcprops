@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/test/functional/fixtures/data/sql
+END
+sqldb.map
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/test/functional/fixtures/data/sql/sqldb.map
+END
+lib.model.schema.sql
+K 25
+svn:wc:ra_dav:version-url
+V 159
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/test/functional/fixtures/data/sql/lib.model.schema.sql
+END

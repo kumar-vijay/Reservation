@@ -1,0 +1,14 @@
+<div id="content">
+    <div class="container"> 
+        <ul id="breadcrumb">
+            <li class="selected-1"><a href="/">Home</a></li>
+            <li class="selected">Admin</li>
+        </ul>
+    </div>
+    <div class="clear"></div>
+    <div class="l-page">
+        <a href="/admin/groups">Manage Groups</a>
+        <a href="/admin/users">Manage User</a>
+        <a href="/admin/insured">Manage Insured Details</a>
+    </div>
+</div>

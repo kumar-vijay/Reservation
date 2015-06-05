@@ -1,0 +1,250 @@
+<?php
+
+class ViewSubmissionDetails {
+
+    public function __construct() {
+        $this->connection = Propel::getConnection();
+    }
+
+    public function ViewSubmissionDetail($submissionId) {
+        $connection = $this->connection;
+        $submissionQuery = "SELECT * FROM  Submission WHERE Id = '" . $submissionId . "'";
+        $submissionStatement = $connection->prepare($submissionQuery);
+        $submissionStatement->execute();
+        $submissionDetail = $submissionStatement->fetchAll(PDO::FETCH_ASSOC);
+        
+        $obj = new SubmissionDetails();
+        $brokerCode = substr($submissionDetail[0]['BrokerCode'], 0, 5);
+        $brokerDetails = $obj->getBroker($brokerCode);
+        $brokerAddress = $this->GetBrokerAddress($submissionDetail[0]['BrokerWiseCityId']);
+        $underwriteName = $obj->getUnderWriterName($submissionDetail[0]['UnderwriterId']);
+        $newRenewDetails = $this->getLookUpdata($submissionDetail[0]['NewRenewalLookupId']);
+        $cabCompanies = $this->getLookUpdata($submissionDetail[0]['CABCompaniesLookupId']);
+        $lobDetails = $this->getLobName($submissionDetail[0]['LobId']);
+        $lobSubDetails = $this->getLobSubTypeName($submissionDetail[0]['LobSubTypeId']);
+        $sectionDetails = $this->getSection($submissionDetail[0]['SectionId']);
+        $profitDetails = $this->getprofit($submissionDetail[0]['ProfitCodeId']);
+        $status = $this->getStatus($submissionDetail[0]['CurrentStatusId']);
+        $insuredDetails = $obj->getInsuredDetails($submissionDetail[0]['InsuredId']);
+        $addressDetails = $this->GetAddressDetails($submissionDetail[0]['AlternativeAddressId']);
+        $statusDetandentDetails = $this->GetStatusDependentDetails($submissionDetail[0]['StatusDependentDetailsId']);
+        $businessDependentDetails = $this->GetBusinessDepantDetails($submissionDetail[0]['BusinessDependentDetailId']);
+        $recorderData = $this->getRecorderData($submissionDetail[0]['DataRecorderMetaDataId']);
+        $branchDetails = $this->getBranchName($submissionDetail[0]['BranchId']);
+        
+        $finalArray = array();
+        $finalArray['SUBMISSION_TYPE'] = $newRenewDetails[0]['LookupName'];
+        $finalArray['UNDERWRITER_NAME'] = $underwriteName[0]->Name;
+        $finalArray['PRODUCT_LINE'] = $lobDetails[0]['LOBName'];
+        $finalArray['SUBMISSION_SUB_TYPE'] = $lobSubDetails[0]['ProductLineSubType'];
+        $finalArray['SECTION_CODE'] = $sectionDetails[0]['SectionCode'];
+        $finalArray['PROFIT_CODE'] = $profitDetails[0]['ProfitCodeName'];
+        $finalArray['CREATION_DATE'] = $recorderData[0]['CreatedOn'];
+        $finalArray['MODIFY_DATE'] = $recorderData[0]['ModifiedOn'];
+
+        $finalArray['PRIMARY_STATUS'] = $status[0]['StatusName'];
+        $finalArray['EFFECTIVE_DATE'] = $submissionDetail[0]['EffectiveDate'];
+        $finalArray['EXPIRATION_DATE'] = $submissionDetail[0]['ExpiryDate'];
+        $finalArray['INSURED_NAME'] = $insuredDetails['insuredName'];
+        $finalArray['INSURED_ADDRESS'] = $insuredDetails['address'];
+        $finalArray['INSURED_COUNTRY'] = $insuredDetails['country'];
+        $finalArray['INSURED_STATE'] = $insuredDetails['state'];
+        $finalArray['INSURED_CITY'] = $insuredDetails['city'];
+        $finalArray['INSURED_ZIPCODE'] = $insuredDetails['zipcode'];
+        $finalArray['DB_NUMBER'] = $submissionDetail[0]['DBNumber'];
+        $finalArray['CAB_COMPANIES'] = $cabCompanies[0]['LookupName'];
+        $finalArray['REINSURED_COMPANY'] = $submissionDetail[0]['ReinsuredCompany'];
+        $finalArray['SUBMISSION_IDENTIFIER'] = $this->getSubmissionIdentifier($submissionDetail[0]['SubmissionIdentifier']);
+        $finalArray['DBA_NAME'] = $submissionDetail[0]['DbaName'];
+        $finalArray['MAILING_ADDRESS'] = $addressDetails[0]['AddressLine1'];
+        $finalArray['MAILING_COUNTRY'] = $addressDetails[0]['InsuredCountry'];
+        $finalArray['MAILING_STATE'] = $addressDetails[0]['FullCode'];
+        $finalArray['MAILING_CITY'] = $addressDetails[0]['CityFullCode'];
+        $finalArray['MAILING_ZIPCODE'] = $addressDetails[0]['Zip'];
+
+        $finalArray['PROJECT_NAME'] = $businessDependentDetails['businessDetails'][0]['ProjectName'];
+        $finalArray['GENERAL_CONTRACTOR_NAME'] = $businessDependentDetails['businessDetails'][0]['ProjectGeneralContractorName'];
+        $finalArray['PROJECT_OWNER_NAME'] = $businessDependentDetails['businessDetails'][0]['ProjectOwnerName'];
+        $finalArray['PROJECT_COUNTRY_NAME'] = $businessDependentDetails['businessDetails'][0]['ProjectCountry'];
+        $finalArray['PROJECT_STATE_NAME'] = $businessDependentDetails['businessDetails'][0]['ProjectState'];
+        $finalArray['PROJECT_CITY_NAME'] = $businessDependentDetails['businessDetails'][0]['ProjectCity'];
+        $finalArray['PROJECT_STREET'] = $businessDependentDetails['businessDetails'][0]['ProjectAddress'];
+        $finalArray['BID_SITATION'] = $businessDependentDetails['bidsituation'][0]['Alias'];
+        $finalArray['TOTAL_INSURED_VALUE'] = $submissionDetail[0]['TotalInsuredValue'];
+
+        $finalArray['REASON_CODE'] = $obj->getReasonCodeById($statusDetandentDetails[0]['ReasonCodeId']);
+        $finalArray['PROCESS_DATE'] = $statusDetandentDetails[0]['ProcessDate'];
+        $finalArray['LIMIT'] = $statusDetandentDetails[0]['Limit'];
+        $finalArray['ATTACHMENT_POINT'] = $statusDetandentDetails[0]['AttachmentPoint'];
+        $finalArray['GROSS_PREMIUM'] = $statusDetandentDetails[0]['GrossPremium'];
+
+        $finalArray['BROKER_NAME'] = $brokerDetails[0]['name'];
+        $finalArray['BROKER_TYPE'] = $brokerDetails[0]['cat'];
+        $finalArray['BROKER_COUNTRY'] = $brokerAddress[0]['InsuredCountry'];
+        $finalArray['BROKER_STATE'] = $brokerAddress[0]['FullCode'];
+        $finalArray['BROKER_CITY'] = $brokerAddress[0]['CityFullCode'];
+        $finalArray['BROKER_CONTACT_PERSON'] = $submissionDetail[0]['BrokerContactPerson'];
+        $finalArray['BROKER_CONTACT_PERSON_EMAIL'] = $submissionDetail[0]['BrokerContactPersonEmail'];
+        $finalArray['BROKER_CONTACT_PERSON_NUMBER'] = $submissionDetail[0]['BrokerContactPersonNumber'];
+        $finalArray['BROKER_CODE'] = $submissionDetail[0]['BrokerCode'];
+        $finalArray['BERK_FROM_BROKER'] = $submissionDetail[0]['BerkSIDateFromBroker'];
+        $finalArray['BERKSI_BY_INDIA'] = $submissionDetail[0]['BerkSiDateFromIndia'];
+        $finalArray['BRANCH'] = $branchDetails[0]['Branch'];
+        return $finalArray;
+    }
+
+    public function GetAddressDetails($submissionId) {
+        $connection = $this->connection;
+        $addressQuery = "SELECT A.*, C.CityFullCode, S.FullCode, Co.InsuredCountry FROM  Address as A LEFT JOIN City as C ON A.CityId = C.Id LEFT JOIN State As S On C.StateId = S.Id LEFT JOIN Country as Co on S.CountryId = Co.Id WHERE A.Id = '" . $submissionId . "'";
+        $addressStatement = $connection->prepare($addressQuery);
+        $addressStatement->execute();
+        $addressDetail = $addressStatement->fetchAll(PDO::FETCH_ASSOC);
+        return $addressDetail;
+    }
+
+    public function GetStatusDependentDetails($submissionId) {
+        $connection = $this->connection;
+        $productQuery = "SELECT * FROM  StatusDependentDetails WHERE Id = '" . $submissionId . "'";
+        $productStatement = $connection->prepare($productQuery);
+        $productStatement->execute();
+        $productDetail = $productStatement->fetchAll(PDO::FETCH_ASSOC);
+        return $productDetail;
+    }
+
+    public function GetBusinessDepantDetails($submissionId) {
+        $connection = $this->connection;
+        $productQuery = "SELECT * FROM  BusinessDependentDetail WHERE Id = '" . $submissionId . "'";
+        $productStatement = $connection->prepare($productQuery);
+        $productStatement->execute();
+        $productDetail = $productStatement->fetchAll(PDO::FETCH_ASSOC);
+        $bidDetails = $this->getLookUpdata($productDetail[0]['BidSituationLookupId']);
+        $finalBusinessDetails = array();
+        $finalBusinessDetails['businessDetails'] = $productDetail;
+        $finalBusinessDetails['bidsituation'] = $bidDetails;
+        return $finalBusinessDetails;
+    }
+
+    public function getLookUpdata($lookupId) {
+        $con = Propel::getConnection();
+        $query = "SELECT * FROM Lookup WHERE Id = '" . $lookupId . "'";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    public function getLobName($lobId) {
+        $con = Propel::getConnection();
+        $query = "SELECT * FROM LOB WHERE Id = '" . $lobId . "'";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    public function getLobSubTypeName($lobSubId) {
+        $con = Propel::getConnection();
+        $query = "SELECT * FROM LOBSubType WHERE Id = '" . $lobSubId . "'";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    public function getSection($sectionId) {
+        $con = Propel::getConnection();
+        $query = "SELECT S.Id, SL.SectionCode from sectioncode S join SectionCodeLookup SL on S.SectionCodeLookupId = SL.Id WHERE S.Id = '" . $sectionId . "'";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    public function getprofit($profitId) {
+        $con = Propel::getConnection();
+        $query = "SELECT P.Id, PL.ProfitCodeName from ProfitCode P join ProfitCodeLookup PL on P.ProfitCodeLookupId = PL.Id WHERE P.Id = '".$profitId."'";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    public function getStatus($statusId) {
+        $con = Propel::getConnection();
+        $query = "SELECT * FROM  Status WHERE Id = '" . $statusId . "'";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    public function getRecorderData($recoderId) {
+        $con = Propel::getConnection();
+        $query = "SELECT * FROM  DataRecorderMetaData WHERE Id = '" . $recoderId . "'";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    public function GetBrokerAddress($brokeCityId) {
+        $con = Propel::getConnection();
+        $query = "SELECT DISTINCT Co.InsuredCountry,S.FullCode, C.CityFullCode FROM BrokerWiseCity as BW LEFT JOIN City as C ON BW.CityId = C.Id LEFT JOIN State as S ON C.StateId = S.Id LEFT JOIN Country as Co ON S.CountryId = Co.Id  WHERE BW.CityId = $brokeCityId ";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function UpdateSubmissionDetail($postValues, $submissionId, $userId) {
+        $newQcStatus = $postValues['qcstatus'];
+        $qcId = $this->GetLookUpId($newQcStatus);
+        $data = $this->GetQcStatus($submissionId);
+        $oldQcStatusId = $data[0]['QCStatus'];
+        $oldStatusData = $this->getLookUpdata($oldQcStatusId);
+        $oldQcStatus = $oldStatusData[0]['LookupName'];
+        $qcRemarks = $postValues['qcremarks'];
+
+        $con = Propel::getConnection();
+        $query = "UPDATE Submission SET QCStatus = '" . $qcId . "' WHERE Id = '" . $submissionId . "'";
+        $insert = $con->prepare($query);
+        if ($insert->execute()) {
+            $historyquery = "INSERT INTO SubmissionHistory 
+              (SubmissionId, Field, OldValue, NewValue, Remarks, ModifiedBy, ModifiedOn) 
+               VALUES 
+               ('" . $submissionId . "','QC Status','" . $oldQcStatus . "','" . $newQcStatus . "','" . $qcRemarks . "', '" . $userId . "', GETDATE())";
+
+            $insert = $con->prepare($historyquery);
+            $insert->execute();
+        } else {
+            return false;
+        }
+    }
+
+    public function GetLookUpId($lookUpName) {
+        $con = Propel::getConnection();
+        $query = "SELECT * FROM Lookup WHERE LookupName = '$lookUpName'";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result[0]['Id'];
+    }
+
+    public function GetQcStatus($submissionId) {
+        $con = Propel::getConnection();
+        $query = "SELECT QCStatus FROM Submission WHERE Id = '$submissionId'";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    
+    public function getBranchName($branchId) {
+        $con = Propel::getConnection();
+        $query = "SELECT * FROM Branch WHERE Id = '" . $branchId . "'";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+    
+    public function getSubmissionIdentifier($identifierId) {
+        $con = Propel::getConnection();
+        $query = "SELECT * FROM SubmissionTypeIndicator WHERE Id = '" . $identifierId . "'";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll();
+        return $result[0]['Name'];
+    }
+
+}
+
+?>

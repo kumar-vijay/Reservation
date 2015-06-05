@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 156
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/test/functional/fixtures/apps/backend_compat/config
+END
+routing.yml
+K 25
+svn:wc:ra_dav:version-url
+V 168
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/test/functional/fixtures/apps/backend_compat/config/routing.yml
+END
+security.yml
+K 25
+svn:wc:ra_dav:version-url
+V 169
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/test/functional/fixtures/apps/backend_compat/config/security.yml
+END
+filters.yml
+K 25
+svn:wc:ra_dav:version-url
+V 168
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/test/functional/fixtures/apps/backend_compat/config/filters.yml
+END
+view.yml
+K 25
+svn:wc:ra_dav:version-url
+V 165
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/test/functional/fixtures/apps/backend_compat/config/view.yml
+END
+backend_compatConfiguration.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 194
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/test/functional/fixtures/apps/backend_compat/config/backend_compatConfiguration.class.php
+END
+factories.yml
+K 25
+svn:wc:ra_dav:version-url
+V 170
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/test/functional/fixtures/apps/backend_compat/config/factories.yml
+END
+app.yml
+K 25
+svn:wc:ra_dav:version-url
+V 164
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/test/functional/fixtures/apps/backend_compat/config/app.yml
+END
+settings.yml
+K 25
+svn:wc:ra_dav:version-url
+V 169
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/test/functional/fixtures/apps/backend_compat/config/settings.yml
+END
+cache.yml
+K 25
+svn:wc:ra_dav:version-url
+V 166
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/test/functional/fixtures/apps/backend_compat/config/cache.yml
+END

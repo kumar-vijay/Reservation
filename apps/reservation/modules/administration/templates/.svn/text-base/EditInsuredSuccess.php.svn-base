@@ -1,0 +1,67 @@
+<div class="container"> 
+    <ul id="breadcrumb">
+        <li class="selected-3"><a href="/">Home</a></li>
+        <li class="selected-2"><a href="/admin/manageadmin">Admin</a></li>
+        <li class="selected-1"><a href="/admin/insured">Manage Insured Details</a></li>
+        <li class="selected">Edit Insured Details</li>
+    </ul>
+</div>
+<div class="clear"></div>
+
+<div class="container">
+    <div class="white-bg black-border border-radius-10">
+        <h1 class="section-header border-radius-10">Insured Details
+            <div class="arrow"></div>
+        </h1>
+        <div class="content" style="display: block;">
+            <?php
+            if (isset($errorArr)) {
+                ?>
+                <div class="grouperror">
+                    <?php
+                    foreach ($errorArr as $err => $val) {
+                        echo "<li>$val</li>";
+                    }
+                    ?></div>
+                <?php
+            }
+            ?>
+            <form method="POST" action="" name="insuredEditForm" id="insuredEditForm">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="12%">Insured Name</td>
+                        <td width="22%"><input type="text" name="editinsuredname" id="editinsuredname" class="txtbox-small" value="<?php echo $induredInfo->InsuredName; ?>" /></td>
+                        <td width="12%">Address Line 1</td>
+                        <td width="22%"><input type="text" name="editinsuredaddress" id="editinsuredaddress" class="txtbox-small" value="<?php echo $induredInfo->AddressLine1; ?>" maxlength="70" /></td>
+                        <td width="12%">Country</td>
+                        <td width="22%">
+                            <input type="text" name="editinsuredcountry" id="editinsuredcountry" class="listbox-small" value="<?php echo $induredInfo->Country; ?>" maxlength="30" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>State</td>
+                        <td> 
+                            <input type="text" name="editinsuredstate" id="editinsuredstate" class="listbox-small" value="<?php echo $induredInfo->State; ?>" maxlength="30" />
+                        </td>
+                        <td>City</td>
+                        <td> 
+                            <input type="text" name="editinsuredcity" id="editinsuredcity" class="listbox-small" value="<?php echo $induredInfo->City; ?>" maxlength="30" />
+                        </td>
+                        <td>Zipcode</td>
+                        <td>
+                            <input type="text" name="editinsuredzipcode" id="editinsuredzipcode" class="txtbox-small" value="<?php echo trim($induredInfo->Zip); ?>" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" align="center">
+                            <input type="submit" value="Submit" class="button" id="editFormSubmit" />
+                            <input type="hidden" name="insuredId" value="<?php echo $induredInfo->Id; ?>" />
+                            <input type="hidden" name="recorderId" value="<?php echo $induredInfo->DataRecorderMetaDataId; ?>" />
+                            <input type="reset" value="Back" onclick="location.href = '<?php echo url_for('@insured_list') ?>';" class="button ML10" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>

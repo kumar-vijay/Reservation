@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/task/generator/skeleton/app/app/config
+END
+app.yml
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/task/generator/skeleton/app/app/config/app.yml
+END
+settings.yml
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/task/generator/skeleton/app/app/config/settings.yml
+END
+cache.yml
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/task/generator/skeleton/app/app/config/cache.yml
+END
+ApplicationConfiguration.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/task/generator/skeleton/app/app/config/ApplicationConfiguration.class.php
+END
+routing.yml
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/task/generator/skeleton/app/app/config/routing.yml
+END
+security.yml
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/task/generator/skeleton/app/app/config/security.yml
+END
+filters.yml
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/task/generator/skeleton/app/app/config/filters.yml
+END
+view.yml
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/task/generator/skeleton/app/app/config/view.yml
+END
+factories.yml
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/task/generator/skeleton/app/app/config/factories.yml
+END

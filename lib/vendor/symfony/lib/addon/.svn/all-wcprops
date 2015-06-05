@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/addon
+END
+sfData.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/addon/sfData.class.php
+END
+sfPager.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/addon/sfPager.class.php
+END

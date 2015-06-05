@@ -1,0 +1,131 @@
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/task
+END
+sfPropelBuildSqlTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/task/sfPropelBuildSqlTask.class.php
+END
+sfPropelBuildSchemaTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/task/sfPropelBuildSchemaTask.class.php
+END
+sfPropelBuildModelTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/task/sfPropelBuildModelTask.class.php
+END
+sfPropelInsertSqlTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/task/sfPropelInsertSqlTask.class.php
+END
+sfPropelSchemaToXmlTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/task/sfPropelSchemaToXmlTask.class.php
+END
+sfPropelSchemaToYmlTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/task/sfPropelSchemaToYmlTask.class.php
+END
+sfPropelGenerateModuleForRouteTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 160
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/task/sfPropelGenerateModuleForRouteTask.class.php
+END
+sfPropelBuildFiltersTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/task/sfPropelBuildFiltersTask.class.php
+END
+sfPropelBuildAllTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/task/sfPropelBuildAllTask.class.php
+END
+sfPropelBuildAllLoadTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/task/sfPropelBuildAllLoadTask.class.php
+END
+sfPropelGraphvizTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/task/sfPropelGraphvizTask.class.php
+END
+sfPropelDataDumpTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/task/sfPropelDataDumpTask.class.php
+END
+sfPropelBuildTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/task/sfPropelBuildTask.class.php
+END
+sfPhing.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/task/sfPhing.class.php
+END
+sfPropelGenerateModuleTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/task/sfPropelGenerateModuleTask.class.php
+END
+sfPhingListener.php
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/task/sfPhingListener.php
+END
+sfPropelGenerateAdminTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/task/sfPropelGenerateAdminTask.class.php
+END
+sfPropelConfigureDatabaseTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/task/sfPropelConfigureDatabaseTask.class.php
+END
+sfPropelBuildFormsTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/task/sfPropelBuildFormsTask.class.php
+END
+sfPropelDataLoadTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/task/sfPropelDataLoadTask.class.php
+END
+sfPropelBaseTask.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropel15Plugin/lib/task/sfPropelBaseTask.class.php
+END

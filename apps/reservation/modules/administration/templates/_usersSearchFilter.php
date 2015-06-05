@@ -1,0 +1,36 @@
+<!--Filter Section-->
+<div class="content">
+    <form method="POST" action="" name="userSearchForm" id="userSearchForm">	
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="12%">First Name</td>
+                <td width="22%">
+                    <input type="text" name="userName" id="userName" maxlength="30" />
+                </td>
+                <td>&nbsp;</td>
+                <td width="12%">User Status</td>
+                <td width="22%">
+                    <select name="userStatus" id="userStatus" class="listbox-small">
+                        <option value="1" selected>All</option>
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Create Date</td>
+                <td colspan="4">
+                    <input type="text" class="width69 from" placeholder="From date" id="fromDate" name="fromDate" />
+                    <input type="text" class="width69 to" placeholder="To date" id="toDate" name="toDate" />
+                </td>
+            </tr>
+            <tr>
+                <td height="35" colspan="5" align="center">
+                    <input type="submit" value="Search" class="btn btn-blue" />
+                    <input type="reset" value="Clear" class="btn btn-cyan" id="resetUserValue" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<!--Filter Section-->

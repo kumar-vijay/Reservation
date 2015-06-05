@@ -1,0 +1,70 @@
+default:  
+  layout: layout
+  stylesheets: [layout.css,reset.css,stylesheet.css]
+  #javascripts: [jquery.js,custom-jquery.js,calendar.js]
+  javascripts: [jquery.js,custom-jquery.js]
+
+usersSuccess:  
+  stylesheets: [jquery-ui-1.10.3.custom.css]
+  javascripts: [jquery.js,custom-jquery.js,jquery-ui-1.10.3.custom.js,userListing-js.js,jquery.validate.js]  
+  metas:
+    title: List of Users presents in the system
+    description: List of Users presents in the system
+  
+groupsSuccess:
+  stylesheets: [jquery-ui-1.10.3.custom.css]
+  javascripts: [jquery.js,custom-jquery.js,jquery-ui-1.10.3.custom.js,reservation-js.js,jquery.validate.js]  
+  metas:
+    title: List of groups presents in the system
+    description: List of groups presents in the system
+  
+addGroupSuccess:
+  javascripts: [jquery.js,custom-jquery.js,jquery-ui-1.10.3.custom.js,reservation-js.js,jquery.validate.js]
+  metas:
+    title: Add new group in the system
+    description: Add new group in the system
+    
+editGroupSuccess:
+  javascripts: [jquery.js,custom-jquery.js,jquery-ui-1.10.3.custom.js,reservation-js.js,jquery.validate.js]
+  metas:
+    title: Edit existing group in the system
+    description: Edit existing group in the system   
+    
+viewGroupSuccess:
+  javascripts: [jquery.js,custom-jquery.js,jquery-ui-1.10.3.custom.js,reservation-js.js,jquery.validate.js]
+  metas:
+    title: view existing group in the system
+    description: view existing group in the system 
+
+addUserSuccess:
+  metas:
+  javascripts: [jquery.validate.js,addUserValidation.js]
+  
+editUserSuccess:
+  metas:
+  javascripts: [editUserValidation.js,jquery.validate.js]
+  
+viewUserSuccess:
+  metas:
+  javascripts: [editUserValidation.js,jquery.validate.js]
+
+adminSuccess:
+  metas:
+  
+InsuredSuccess:
+  metas:
+  javascripts: [editUserValidation.js,jquery.validate.js]
+  
+AddInsuredSuccess:
+  metas:
+  javascripts: [jquery.validate.js,editUserValidation.js]
+  
+EditInsuredSuccess:
+  metas:
+  javascripts: [jquery.validate.js,editUserValidation.js]
+  
+ViewInsuredSuccess:
+  metas:
+  javascripts: [editUserValidation.js,jquery.validate.js]
+
+

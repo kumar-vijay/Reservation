@@ -1,0 +1,702 @@
+$(document).ready(function(e) {
+    $('#countrycode').change(function(ev) {
+        var country = $(this).val();
+        var val = $('#brokercode').val();
+        $('#brokerCodegenerate').val("");
+        $('#statecode').html('<option value="0">--Select--</option>');
+        $('#citycode').html('<option value="0">--Select--</option>');
+        if (val == '' || country == '') {
+            $('#statecode').html('<option value="0">--Select--</option>');
+            $('#citycode').html('<option value="0">--Select--</option>');
+            return false;
+        }
+        if (country === '6') {
+            $('#statecode').html('<option value="72">(Unknown)-000</option>');
+            $('#citycode').html('<option value="778">(Unknown)-0000</option>');
+            $('#brokerCodegenerate').val('Unknown');
+            $('#branch_office').val('Not Available');
+        } else {
+            var dataObj = {
+                'header': {
+                    'requestName': 'getBrokerState'
+                },
+                'body': {
+                    'countryId': country,
+                    'BrokerCode': val
+                }
+            };
+            $.ajax('/submission/getBrokerState', {
+                'dataType': 'json',
+                'data': JSON.stringify(dataObj),
+                'type': 'post',
+                'success': function(data, status, xhr) {
+                    var options;
+                    if (data.length) {
+                        if ($('#brokercode option:selected').hasClass('R')) {
+                            options = createSelectBoxStateWithClass(data);
+                        } else {
+                            options = createSelectBoxStateBroker(data);
+                        }
+                    } else {
+                        options = ('<option selected="selected" value="NA">Not Applicable</option>');
+                        $('#citycode').html('<option selected="selected" value="NA">Not Applicable</option>');
+                        if ($('#brokercode option:selected').hasClass('R')) {
+                            if ($('#product_line').val() == 'Property') {
+                                $('#branchcode').html('<strong>Not Applicable</strong>');
+                                $('#branchcode1').val('NA');
+                            }
+                        }
+                    }
+                    $('#statecode').html(options);
+                    generateBrokerCode();
+                }
+            });
+        }
+    });
+
+    $('#statecode').change(function(ev) {
+        var state = $(this).val();
+        var val = $('#brokercode').val();
+        $('#brokerCodegenerate').val("");
+        $('#citycode').html('<option value="0">--Select--</option>');
+        if (val == '0' || state == '0') {
+            $('#citycode').html('<option value="0">--Select--</option>');
+            return false;
+        }
+
+        if ($('#statecode').val() === '72') {
+            $('#citycode').html('<option value="778">(Unknown)-0000</option>');
+            $('#brokerCodegenerate').val('Unknown');
+        } else {
+            var dataObj = {
+                'header': {'requestName': 'getBrokerCity'
+                },
+                'body': {
+                    'stateId': state,
+                    'BrokerCode': val
+                }
+            };
+            $.ajax('/submission/getBrokerCity', {
+                'dataType': 'json',
+                'data': JSON.stringify(dataObj),
+                'type': 'post',
+                'success': function(data, status, xhr) {
+                    var options;
+                    options = createSelectBoxBrokerCity(data);
+                    if (data.length) {
+                        $('#citycode').html(options);
+                    } else {
+                        $('#citycode').html('<option selected="selected" value="NA">Not Applicable</option>');
+                    }
+                    generateBrokerCode();
+                }
+            });
+        }
+        if ($('#brokercode option:selected').hasClass('R') && $(this).val() != '0') {
+            if ($(this).val() != '72' && $('#product_line').val() == 'Property' && ($('#underwriter').val() != '43' && $('#underwriter').val() != '35')) {
+                getBrokerBranchOffice()
+            } else if ($(this).val() != '72' && $('#product_line').val() == 'Casualty' && $('#underwriter').val() == '2') {
+                getBrokerBranchOffice()
+            } else if ($(this).val() == '72') {
+                $('#branch_office').val('Not Available');
+                $('#branchcode1').val('Not Available');
+            }
+        }
+    });
+
+    $('#citycode').change(function(e) {
+        $('#brokerCodegenerate').val("");
+        generateBrokerCode();
+    });
+
+    $('#brokercode').change(function(ev) {
+        var val = $(this).val();
+        $('#brokerCodegenerate').val("");
+        if (($('#underwriter').val() == '43' || $('#underwriter').val() == '35') && $('#product_line').val() == 'Property') {
+           $('#branch_office').val("");
+        }
+        $('#countrycode').html('<option value="0">--Select--</option>');
+        $('#statecode').html('<option value="0">--Select--</option>');
+        $('#citycode').html('<option value="0">--Select--</option>');
+
+        if ($('option:selected', this).hasClass('W')) {
+            if ($('#product_line').val() == 'Property' && ($('#underwriter').val() != '43' && $('#underwriter').val() != '35')) {
+                $('#branch_office').val('001 Boston');
+                $('#branchcode1').val('001 Boston');
+            } else if ($('#underwriter').val() == '2') {
+                $('#branch_office').val('001 Boston');
+                $('#branchcode1').val('001 Boston');
+            }
+            generateBrokerCode();
+        } else if ($('option:selected', this).hasClass('R')) {
+            if ($('#statecode').val() != '0' && $('#product_line').val() == 'Property' && ($('#underwriter').val() != '43' && $('#underwriter').val() != '35')) {
+                getBrokerBranchOffice();
+            }
+            generateBrokerCode();
+        }
+        /////////////For Broker Type/////////////////
+        if (val) {
+            if (val == '-1' || val == '-2') {
+                $('#isWholesaler').val('Unknown');
+                $('#branch_office').val('Not Available');
+            } else {
+                var dataObj = {
+                    'header': {
+                        'requestName': 'getBrokerSubType'
+                    },
+                    'body': {
+                        'data': val
+                    }
+                };
+                $.ajax('/submission/getBrokerSubType', {
+                    'dataType': 'json',
+                    'data': JSON.stringify(dataObj),
+                    'type': 'post',
+                    'success': function(data, status, xhr) {
+                        if (data.length) {
+                            var brokertype = '';
+                            if (data[0]['cat'] == 'R') {
+                                brokertype = 'Retailer';
+                            } else if (data[0]['cat'] == 'W') {
+                                brokertype = 'Wholesaler';
+                            }
+                            $('#isWholesaler').val(brokertype);
+                            $('#brokerId').val(data[0]['Id']);
+                        }
+                    }
+                });
+            }
+        } else {
+            return false;
+        }
+
+        /////////////For Broker Country/////////////////
+        if (val) {
+            if (val == '-1' || val == '-2') {
+                $('#countrycode').html('<option value="6">Unknown</option>');
+                $('#statecode').html('<option value="72">(Unknown)-000</option>');
+                $('#citycode').html('<option value="778">(Unknown)-0000</option>');
+                $('#brokerCodegenerate').val('Unknown');
+            } else {
+                var dataObj = {
+                    'header': {
+                        'requestName': 'getBrokerCountry'
+                    },
+                    'body': {
+                        'data': val
+                    }
+                };
+                $.ajax('/submission/getBrokerCountry', {
+                    'dataType': 'json',
+                    'data': JSON.stringify(dataObj),
+                    'type': 'post',
+                    'success': function(data, status, xhr) {
+                        var countryList = createBrokerCountryOption(data);
+                        $('#countrycode').html(countryList);
+                    }
+                });
+            }
+        } else {
+            return false;
+        }
+
+    });
+
+    var generateBrokerCode = function() {
+        if ($('#brokercode').val() !== '0' && $('#countrycode').val() !== '0' && $('#statecode').val() !== '0' && $('#citycode').val() !== '0') {
+            var code = $('#brokercode option:selected').val() + '-' + $('#countrycode option:selected').text().slice(0, 3) + '-' + $('#statecode option:selected').text().slice(-3) + '-' + $('#citycode option:selected').text().slice(-4);
+            $('#brokerCodegenerate').val(code);
+            $('#brokerCodeGen1').val(code);
+        }
+    };
+
+    var getBrokerBranchOffice = function() {
+        var stateID = $('#statecode option:selected').attr('class');
+        var BrokerType = $('#isWholesaler').val();
+        var dataObj1 = {
+            'header': {
+                'requestName': 'getBrokerBranchOfficeName'
+            },
+            'body': {
+                'data': {
+                    'stateId': stateID,
+                    'Brokertype': BrokerType
+                }
+            }
+        };
+        $.ajax('/submission/getBrokerBranchOfficeName', {
+            'dataType': 'json',
+            'data': JSON.stringify(dataObj1),
+            'type': 'post',
+            'success': function(data, status, xhr) {
+                $('#branch_office').val(data[0].Retailer);
+                $('#branchcode1').val(data[0].Retailer);
+            }
+        });
+    };
+
+    $('#projectcountry').change(function(ev) {
+        var val = $(this).val();
+        $('#projectstate').html('<option value="0">--Select--</option>');
+        $('#projectcity').html('<option value="0">--Select--</option>');
+        if (val == '0') {
+            return false;
+        }
+        var dataObj = {
+            'header': {
+                'requestName': 'getState'
+            },
+            'body': {
+                'data': val
+            }
+        };
+        $.ajax('/submission/getState', {
+            'dataType': 'json',
+            'data': JSON.stringify(dataObj),
+            'type': 'post',
+            'success': function(data, status, xhr) {
+                var options = createSelectBoxState(data);
+                if (data.length) {
+                    $('#projectstate').html(options);
+                } else {
+                    $('#projectstate').html('<option value="NA">Not Applicable</option>');
+                    $('#projectcity').html('<option value="NA">Not Applicable</option>');
+                }
+            }
+        });
+    });
+
+    $('#projectstate').change(function(ev) {
+        var val = $(this).val();
+        if (val == '0') {
+            $('#projectcity').html('<option value="0">--Select--</option>');
+            return false;
+        }
+        var dataObj = {
+            'header': {
+                'requestName': 'getCity'
+            },
+            'body': {
+                'data': val
+            }};
+        $.ajax('/submission/getCity', {
+            'dataType': 'json',
+            'data': JSON.stringify(dataObj),
+            'type': 'post',
+            'success': function(data, status, xhr) {
+                var options = createSelectBoxCity(data);
+                if (data.length) {
+                    $('#projectcity').html(options);
+                } else {
+                    $('#projectcity').html('<option value="NA">NA</option>');
+                }
+            }
+        });
+    });
+
+    $('#newcountry').change(function(ev) {
+        var val = $(this).val();
+        $('#newstate').html('<option value="0">--Select--</option>');
+        $('#newcity').html('<option value="0">--Select--</option>');
+        if (val == '0') {
+            return false;
+        }
+        var dataObj = {
+            'header': {
+                'requestName': 'getState'
+            },
+            'body': {
+                'data': val
+            }
+        };
+        $.ajax('/submission/getState', {
+            'dataType': 'json',
+            'data': JSON.stringify(dataObj),
+            'type': 'post',
+            'success': function(data, status, xhr) {
+                var options = createSelectBoxState(data);
+                if (data.length) {
+                    $('#newstate').html(options);
+                } else {
+                    $('#newstate').html('<option value="NA">Not Applicable</option>');
+                    $('#newcity').html('<option value="NA">Not Applicable</option>');
+                }
+            }
+        });
+    });
+
+    $('#newstate').change(function(ev) {
+        var val = $(this).val();
+        $('#newcity').html('<option value="0">--Select--</option>');
+        if (val == '0') {
+            return false;
+        }
+        var dataObj = {
+            'header': {
+                'requestName': 'getCity'
+            },
+            'body': {
+                'data': val
+            }};
+        $.ajax('/submission/getCity', {
+            'dataType': 'json',
+            'data': JSON.stringify(dataObj),
+            'type': 'post',
+            'success': function(data, status, xhr) {
+                var options = createSelectBoxCity(data);
+                if (data.length) {
+                    $('#newcity').html(options);
+                } else {
+                    $('#newcity').html('<option value="NA">Not Applicable</option>');
+                }
+            }});
+    });
+
+    $('#underwriter').change(function(ev) {
+        var underwriterID = $('#underwriter').val();
+        if (underwriterID == '43') {
+            $('#branch_office').val('002-New York');
+            $('#branchcode1').val('002-New York');
+        } else if (underwriterID == '35') {
+            $('#branch_office').val('003-Chicago');
+            $('#branchcode1').val('003-Chicago');
+        }
+        $('#product_line_subtype').html('<option>--Select--</option>');
+        $('#section').html('<option>--Select--</option>');
+        $('#profitcode').html('<option>--Select--</option>');
+        if (underwriterID) {
+            var dataObj = {
+                'header': {
+                    'requestName': 'getSubmissionTypeDataDetails'
+                },
+                'body': {
+                    'data': underwriterID
+                }
+            };
+            $.ajax('/submission/getSubmissionTypeDataDetails', {
+                'dataType': 'json',
+                'data': JSON.stringify(dataObj),
+                'type': 'post',
+                'success': function(data, status, xhr) {
+                    if (data.error) {
+                        $('#product_line_subtype').html('<option value="434">Not Applicable</option>');
+                    } else {
+                        var pl = data.lobDetail[0].LOBName;
+                        $('#product_line').val(data.lobDetail[0].LOBName);
+                        $('#productLinePrefix').val(data.lobDetail[0].Prefix);
+                        $('#product_line_subtype').html('<option>--Select--</option>');
+                        var productlinesubtypeList = createProductLineSubTypeOption(data.lobsubtypeDetail);
+                        $('#product_line_subtype').html(productlinesubtypeList);
+                        if (pl == 'Property' || !underwriterID) {
+                            return false;
+                        } else if (underwriterID != '2') {
+                            var dataObj = {
+                                'header': {
+                                    'requestName': 'getUnderWritersBranchOffice'
+                                },
+                                'body': {
+                                    'data': underwriterID
+                                }
+                            };
+                            $.ajax('/submission/getUnderWritersBranchOffice', {
+                                'dataType': 'json',
+                                'data': JSON.stringify(dataObj),
+                                'type': 'post',
+                                'success': function(data, status, xhr) {
+                                    $('#branch_office').val(data[0].Branch);
+                                    $('#branchcode1').val(data[0].Branch);
+                                }
+                            });
+                        }
+                    }
+                }
+            });
+        } else {
+            return false;
+        }
+    });
+
+    var createProductLineSubTypeOption = function(data) {
+        var selectBox = '<option value="0">--Select--</option>';
+        for (var i = 0; i < data.length; i += 1) {
+            selectBox += '<option value="' + data[i].Id + '">' + data[i].ProductLineSubType + '</option>';
+        }
+        return selectBox;
+    };
+
+    $('#product_line_subtype').change(function(ev) {
+        $('#section').html('<option>--Select--</option>');
+        $('#profitcode').html('<option>--Select--</option>');
+        var productLineType = $('#product_line').val();
+        var productLineSubTypeID = $('#product_line_subtype').val();
+        if ((productLineSubTypeID == '21') || (productLineSubTypeID == '22') || (productLineSubTypeID == '23') || (productLineSubTypeID == '24') || (productLineSubTypeID == '25') || (productLineSubTypeID == '434')) {
+            $('#section').html('<option value="30">Not Available</option>');
+            $('#profitcode').html('<option value="601">Not Available</option>');
+            return false;
+        } else if ((productLineSubTypeID == '0')) {
+            $('#section').html('<option>--Select--</option>');
+            $('#profitcode').html('<option>--Select--</option>');
+        } else {
+            var dataObj = {
+                'header': {
+                    'requestName': 'getSectionCodeDetails'
+                },
+                'body': {
+                    'data': {
+                        'productLineId': productLineType,
+                        'subTypeId': productLineSubTypeID
+                    }
+                }
+            };
+            $.ajax('/submission/getSectionCodeDetails', {
+                'dataType': 'json',
+                'data': JSON.stringify(dataObj),
+                'type': 'post',
+                'success': function(data, status, xhr) {
+                    if (data.error) {
+                        $('#section').html('<option value="102">Not Applicable</option>');
+                        var dataObj = {
+                            'header': {
+                                'requestName': 'getProfitCodeDetailsBySubType'
+                            },
+                            'body': {
+                                'data': productLineSubTypeID
+                            }};
+                        $.ajax('/submission/getProfitCodeDetailsBySubType', {
+                            'dataType': 'json',
+                            'data': JSON.stringify(dataObj),
+                            'type': 'post',
+                            'success': function(data, status, xhr) {
+                                if (data.error) {
+                                    $('#profitcode').html('<option value="602">Not Applicable</option>');
+                                } else {
+                                    $('#profitcode').html('<option>--Select--</option>');
+                                    var profitCodeList = createProfitCodeOption(data);
+                                    $('#profitcode').html(profitCodeList);
+                                }
+                            }
+                        });
+                    } else {
+                        $('#section').html('<option>--Select--</option>');
+                        var sectionCodeList = createSectionCodeOption(data);
+                        $('#section').html(sectionCodeList);
+                    }
+                }
+            });
+        }
+    });
+
+    var createSectionCodeOption = function(data) {
+        var selectBox = '<option value="0">--Select--</option>';
+        for (var i = 0; i < data.length; i += 1) {
+            selectBox += '<option value="' + data[i].Id + '">' + data[i].SectionCode + '</option>';
+        }
+        return selectBox;
+    };
+
+    $('#section').change(function(ev) {
+        $('#profitcode').html('<option>--Select--</option>');
+        var productLineType = $('#product_line').val();
+        var productLineSubTypeID = $('#product_line_subtype').val();
+        var sectionCodeID = $('#section').val();
+        if (!sectionCodeID) {
+            return false;
+        }
+        var dataObj = {
+            'header': {
+                'requestName': 'getProfitCodeDetails'
+            },
+            'body': {
+                'data': {
+                    'TypeID': productLineType,
+                    'subTypeID': productLineSubTypeID,
+                    'sectionCodeID': sectionCodeID
+                }
+            }
+        };
+        $.ajax('/submission/getProfitCodeDetails', {
+            'dataType': 'json',
+            'data': JSON.stringify(dataObj),
+            'type': 'post',
+            'success': function(data, status, xhr) {
+                if (data.error) {
+                    $('#profitcode').html('<option value="602">Not Applicable</option>');
+                } else {
+                    $('#profitcode').html('<option>--Select--</option>');
+                    var profitCodeList = createProfitCodeOption(data);
+                    $('#profitcode').html(profitCodeList);
+                }
+            }
+        });
+    });
+
+    var createProfitCodeOption = function(data) {
+        var selectBox = '<option value="0">--Select--</option>';
+        for (var i = 0; i < data.length; i += 1) {
+            selectBox += '<option value="' + data[i].Id + '">' + data[i].ProfitCodeName + '</option>';
+        }
+        return selectBox;
+    };
+
+    $('#dbnumber').val('Not Available');
+    $('#dbnumber').focus(function(ev) {
+        if ($(this).val() == 'Not Available') {
+            $(this).val('');
+        }
+    });
+
+    $('#dbnumber').blur(function(ev) {
+        if ($(this).val() == '') {
+            $(this).val('Not Available');
+            $(this).removeClass('error');
+            $('label[for=dbnumber]').css('display', 'none');
+        }
+    });
+
+    $('#byBerkSi').datetimepicker({'dateFormat': 'mm/dd/yy'});
+    $('#byIndia').datepicker({'dateFormat': 'mm/dd/yy',
+        onSelect: function() {
+            $(this).valid();
+        }
+    });
+
+    var createBrokerCountryOption = function(data) {
+        var selectBox = '<option value="">--Select--</option>';
+        for (var i = 0; i < data.length; i += 1) {
+            selectBox += '<option value="' + data[i].Id + '">' + data[i].InsuredCountry + '</option>';
+        }
+        return selectBox;
+    };
+
+    var createSelectBox = function(data) {
+        var selectBox = '<option value="0">--Select--</option>';
+        for (var i = 0; i < data.length; i += 1) {
+            selectBox += '<option value="' + data[i].VAL + '">' + data[i].TEXT + '</option>';
+        }
+        return selectBox;
+    };
+    var createSelectBoxState = function(data) {
+        var selectBox = '<option value="0">--Select--</option>';
+        for (var i = 0; i < data.length; i += 1) {
+            selectBox += '<option value="' + data[i].Id + '">' + data[i].StateName + '</option>';
+        }
+        return selectBox;
+    };
+
+    var createSelectBoxStateBroker = function(data) {
+        var selectBox = '<option value="0">--Select--</option>';
+        for (var i = 0; i < data.length; i += 1) {
+            selectBox += '<option value="' + data[i].Id + '">' + data[i].FullCode + '</option>';
+        }
+        return selectBox;
+    };
+
+    var createSelectBoxStateWithClass = function(data) {
+        var selectBox = '<option value="0">--Select--</option>';
+        for (var i = 0; i < data.length; i += 1) {
+            selectBox += '<option value="' + data[i].Id + '" class="' + data[i].StateCode + '">' + data[i].FullCode + '</option>';
+        }
+        return selectBox;
+    };
+    var createSelectBoxCity = function(data) {
+        var selectBox = '<option value="0">--Select--</option>';
+        for (var i = 0; i < data.length; i += 1) {
+            selectBox += '<option value="' + data[i].Id + '">' + data[i].City + '</option>';
+        }
+        return selectBox;
+    };
+
+    var createSelectBoxBrokerCity = function(data) {
+        var selectBox = '<option value="0">--Select--</option>';
+        for (var i = 0; i < data.length; i += 1) {
+            selectBox += '<option value="' + data[i].Id + '">' + data[i].CityFullCode + '</option>';
+        }
+        return selectBox;
+    };
+
+    var createSelectBoxBrokersubtype = function(data) {
+        var selectBox = '<option value="0">--Select--</option>';
+        for (var i = 0; i < data.length; i += 1) {
+            selectBox += '<option value="' + data[i].SUBTYPE_OF_BROKER + '" selected>' + data[i].SUBTYPE_OF_BROKER + '</option>';
+        }
+        return selectBox;
+    };
+
+
+    $('#insured_name_submit').click(function(ev) {
+        var inputString = $('#insuredName').val();
+        if (inputString.length <= 2) {
+            $('.modal-container').removeClass('dp-block');
+            $('body').removeClass('body-locked');
+            $('#insuredName').valid();
+        } else {
+            $.ajax({
+                url: "/submission/GetInsuredName",
+                data: 'queryString=' + inputString,
+                success: function(msg) {
+                    if (msg.length > 0 && msg != '<tr><td>No Record found</td></tr>') {
+                        $('.insuredTable').find('tbody').html(msg);
+                        $('#insuredsubmit').removeClass('dp-none');
+                    } else if (msg == '<tr><td>No Record found</td></tr>') {
+                        $('.insuredTable').find('tbody').html(msg);
+                        $('#insuredsubmit').addClass('dp-none');
+
+                    }
+                }
+            });
+        }
+    });
+
+    $('#insuredsubmit').on('click', function(ev) {
+        $('body').toggleClass('body-locked');
+        $('.modal-container').toggleClass('dp-block');
+        var inputString = $('.insuredTable').find('input:checked').val();
+        if (inputString > 0) {
+            $.ajax({
+                url: "/submission/GetInsuredDetails",
+                data: 'queryString=' + inputString,
+                success: function(msg) {
+                    msg = jQuery.parseJSON(msg);
+                    $('#insuredId').val(msg.insuredId);
+                    $('#insuredName').val(msg.insuredName);
+                    $('#insured_address').val(msg.address);
+                    $('#insured_country').val(msg.country);
+                    $('#insured_state').val(msg.state);
+                    $('#insured_city').val(msg.city);
+                    $('#insured_zipcode').val(msg.zipcode);
+                }
+            });
+
+        } else {
+            $('body').toggleClass('body-locked');
+            $('.modal-container').toggleClass('dp-block');
+            alert('Please select an  insured name');
+        }
+    });
+
+    $('#insuredName').keyup(function(ev) {
+        $('#insured_address').val("");
+        $('#insured_country').val("");
+        $('#insured_state').val("");
+        $('#insured_city').val("");
+        $('#insured_zipcode').val("");
+    });
+
+
+    $('#new_renewal').change(function(ev) {
+        var val = $(this).val();
+        $('#primarystatus').html('<option value="0">--Select--</option>');
+        if (val == '0') {
+            return false;
+        }
+        if (val == '3') {
+            $('#primarystatus').html('<option selected="selected" value="2">Working</option>');
+            $('#primarystatus').valid();
+        } else if (val == '4') {
+            $('#primarystatus').html('<option selected="selected" value="0">-Select-</option><option value="2">Working</option><option value="1">Preworking</option>');
+            $('#primarystatus').valid();
+        }
+    });
+
+});
+

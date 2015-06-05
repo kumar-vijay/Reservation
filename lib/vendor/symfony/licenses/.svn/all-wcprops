@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/licenses
+END
+LICENSE.ICU
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/licenses/LICENSE.ICU
+END
+LICENSE.prado
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/licenses/LICENSE.prado
+END
+LICENSE.lime
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/licenses/LICENSE.lime
+END
+LICENSE.swiftmailer
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/licenses/LICENSE.swiftmailer
+END

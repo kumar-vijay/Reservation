@@ -1,0 +1,102 @@
+<?php
+
+class UserFunctions {
+
+    private $_con = NULL;
+
+    public function __construct() {
+        $this->_con = Propel::getConnection();
+    }
+
+    public function groupList() {
+        $stmt = $this->_con->query("SELECT GROUP_ID,GROUP_NAME FROM GROUPS where STATUS='active'");
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+<<<<<<< .mine
+
+    public function getGroupName($currentUserGroupId){
+=======
+
+    public function getGroupName($currentUserGroupId) {
+>>>>>>> .r27
+        $stmt = $this->_con->query("SELECT GROUP_NAME FROM GROUPS where GROUP_ID = $currentUserGroupId");
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function userList(array $input) {
+        $criteria = new Criteria();
+        $isFilterChoosen = false;
+            
+        if ($input['userName'] != '') {
+            $filterCriteria = $criteria->add(UsersPeer::FIRSTNAME, $input['userName'] . '%', Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['userStatus'] != '') {
+            if ($input['userStatus'] != 1) {
+                $filterCriteria = $criteria->add(UsersPeer::USER_STATUS, trim($input['userStatus']), Criteria::EQUAL);
+                $isFilterChoosen = true;
+            }
+        } else {
+            if ($input['userStatus'] == 1) {
+                $criteria->add(UsersPeer::USER_STATUS, array('Active', 'Inactive'), Criteria::IN);
+            }
+        }
+        $isDateFilterChoosen = false;
+        if ($input['fromDate'] != '' && $input['toDate'] != '') {
+            $dateCriteria = $criteria->getNewCriterion(UsersPeer::CREATED_ON, date("Y-m-d H:i:s", strtotime($input['fromDate'])), Criteria::GREATER_EQUAL);
+            $endDateCriteria = $criteria->getNewCriterion(UsersPeer::CREATED_ON, date("Y-m-d H:i:s", strtotime($input['toDate'] . ' + 1 day')), Criteria::LESS_THAN);
+            $dateCriteria->addAnd($endDateCriteria);
+            $isDateFilterChoosen = true;
+        } else if ($input['fromDate'] != '') {
+            $isDateFilterChoosen = true;
+            $dateCriteria = $criteria->add(UsersPeer::CREATED_ON, date("Y-m-d H:i:s", strtotime($input['fromDate'])), Criteria::GREATER_EQUAL);
+        } else if ($input['toDate'] != '') {
+            $isDateFilterChoosen = true;
+            $dateCriteria = $criteria->add(UsersPeer::CREATED_ON, date("Y-m-d H:i:s", strtotime($input['toDate'] . ' + 1 day')), Criteria::LESS_THAN);
+        }
+
+        if ($isFilterChoosen) {
+            $criteria->add($filterCriteria);
+        }
+
+        if ($isDateFilterChoosen) {
+            $criteria->add($dateCriteria);
+        }
+
+        $criteria->addAscendingOrderByColumn(UsersPeer::FIRSTNAME);
+<<<<<<< .mine
+=======
+        //   echo $criteria->toString();
+        //    die;
+>>>>>>> .r27
+        return $criteria;
+    }
+
+    public function userSelectOption() {
+        $stmt = $this->_con->query("SELECT * FROM `USERS`");
+        return $result = $stmt->fetchAll();
+    }
+
+    public function createdByName($userId) {
+        $stmt = $this->_con->query("SELECT top 1 USER_ID,FIRSTNAME,LASTNAME FROM USERS WHERE USER_ID=$userId");
+        $result = $stmt->fetchAll();
+        return ($result['0']['FIRSTNAME'] . ' ' . $result['0']['LASTNAME']);
+    }
+
+    public function modifiedByName($userId) {
+        $stmt = $this->_con->query("SELECT top 1 USER_ID,FIRSTNAME,LASTNAME FROM USERS WHERE USER_ID=$userId");
+        $result = $stmt->fetchAll();
+        return ($result['0']['FIRSTNAME'] . ' ' . $result['0']['LASTNAME']);
+    }
+
+    public function userEditInfo($userId) {
+        $stmt = $this->_con->query("SELECT * FROM USERS where USER_ID=$userId");
+        $result = $stmt->fetchAll();
+        if (count($result) > 0)
+            return $result;
+        else
+            return false;
+    }
+
+}

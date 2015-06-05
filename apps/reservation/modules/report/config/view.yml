@@ -1,0 +1,43 @@
+default:
+  layout: layout
+  stylesheets: [layout.css,reset.css,stylesheet.css]
+  javascripts: [jquery-1.9.1.js, jquery.validate.js,custom-jquery.js,jquery-ui-1.10.3.custom.js]
+  
+accountSummarySuccess:
+  layout: layout
+  stylesheets: [jquery-ui-1.10.3.custom.css]
+  javascripts: [reportmodule.js]
+  
+monthlyReportSuccess:
+  layout: layout
+  stylesheets: [jquery-ui-1.10.3.custom.css]
+  javascripts: [reportmodule.js]
+  
+consolidatedBrokerReportSuccess:
+  layout: layout
+  stylesheets: [jquery-ui-1.10.3.custom.css]
+  javascripts: [reportmodule.js]
+
+underwriterPerformanceReportSuccess:
+  layout: layout
+  stylesheets: [jquery-ui-1.10.3.custom.css]
+  javascripts: [reportmodule.js]
+  
+individualBrokerReportSuccess:
+  layout: layout
+  stylesheets: [jquery-ui-1.10.3.custom.css]
+  javascripts: [reportmodule.js]
+  
+accountMultipleLinesSuccess:
+  layout: layout
+  stylesheets: [jquery-ui-1.10.3.custom.css]
+  javascripts: [reportmodule.js]
+  
+submissionSummaryExhibitReportSuccess:
+  layout: layout
+  stylesheets: [jquery-ui-1.10.3.custom.css]
+  javascripts: [reportmodule.js]
+
+
+  
+  

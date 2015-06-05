@@ -1,0 +1,17 @@
+<div id="content">
+    <div class="container"> 
+        <ul id="breadcrumb">
+            <li class="selected-1"><a href="/">Home</a></li>
+            <li class="selected">Submission</li>
+        </ul>
+    </div>
+    <div class="clear"></div>
+
+
+    <div class="l-page">
+        <a href="/submission/List">Submission Listing</a>
+        <a href="/submission/createSubmission">Create Submission</a>
+        <a href="/submission/QCList">QC-Queue</a>
+    </div>
+
+</div>

@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/test/functional/fixtures/lib/model/map
+END
+ArticleTableMap.php
+K 25
+svn:wc:ra_dav:version-url
+V 163
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/test/functional/fixtures/lib/model/map/ArticleTableMap.php
+END
+AuthorArticleTableMap.php
+K 25
+svn:wc:ra_dav:version-url
+V 169
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/test/functional/fixtures/lib/model/map/AuthorArticleTableMap.php
+END
+AttachmentTableMap.php
+K 25
+svn:wc:ra_dav:version-url
+V 166
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/test/functional/fixtures/lib/model/map/AttachmentTableMap.php
+END
+BookTableMap.php
+K 25
+svn:wc:ra_dav:version-url
+V 160
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/test/functional/fixtures/lib/model/map/BookTableMap.php
+END
+CategoryTableMap.php
+K 25
+svn:wc:ra_dav:version-url
+V 164
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/test/functional/fixtures/lib/model/map/CategoryTableMap.php
+END
+MovieI18nTableMap.php
+K 25
+svn:wc:ra_dav:version-url
+V 165
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/test/functional/fixtures/lib/model/map/MovieI18nTableMap.php
+END
+MovieTableMap.php
+K 25
+svn:wc:ra_dav:version-url
+V 161
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/test/functional/fixtures/lib/model/map/MovieTableMap.php
+END
+ProductI18nTableMap.php
+K 25
+svn:wc:ra_dav:version-url
+V 167
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/test/functional/fixtures/lib/model/map/ProductI18nTableMap.php
+END
+ProductTableMap.php
+K 25
+svn:wc:ra_dav:version-url
+V 163
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/test/functional/fixtures/lib/model/map/ProductTableMap.php
+END
+AuthorTableMap.php
+K 25
+svn:wc:ra_dav:version-url
+V 162
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfPropelPlugin/test/functional/fixtures/lib/model/map/AuthorTableMap.php
+END

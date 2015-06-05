@@ -1,0 +1,1602 @@
+<?php
+
+class SubmissionDetails {
+
+    private $_con = NULL;
+    private $_error = array();
+    private $_size = 10485760;
+
+    public function __construct() {
+        $this->_con = Propel::getConnection();
+    }
+
+    public function exportCSV($arrWhere) {
+        $where = "WHERE 1=1 ";
+        if ($arrWhere['SubmissionNo'])
+            $where .= "AND SV.SubmissionNumber LIKE '" . $arrWhere['SubmissionNo'] . "'";
+
+        if ($arrWhere['NewRenewal'])
+            $where .= "AND SV.NewRenewal LIKE '" . $arrWhere['NewRenewal'] . "'";
+
+        if ($arrWhere['InsuredName'])
+            $where .= "AND SV.InsuredName LIKE '%" . $arrWhere['InsuredName'] . "%' ";
+
+        if ($arrWhere['UnderwriterName']) {
+            $where .= "AND (SV.UnderWriterName LIKE '" . $arrWhere['UnderwriterName'] . "'
+                        OR SV.UnderWriterName LIKE '%" . $arrWhere['UnderwriterName'] . "%') ";
+        }
+
+        if ($arrWhere['Status'])
+            $where .= "AND SV.CurrentStatus LIKE '%" . $arrWhere['Status'] . "%' ";
+
+        if ($arrWhere['Branch'])
+            $where .= "AND SV.BranchOffice LIKE '%" . $arrWhere['Branch'] . "%' ";
+
+        if ($arrWhere['ReasonCode'])
+            $where .= "AND SV.ReasonCode LIKE '%" . $arrWhere['ReasonCode'] . "%' ";
+
+        if ($arrWhere['ProductLine'])
+            $where .= "AND SV.PropertyType LIKE '%" . $arrWhere['ProductLine'] . "%' ";
+
+        if ($arrWhere['ProductLineSubType'])
+            $where .= "AND SV.PropertyLineSubType LIKE '%" . $arrWhere['ProductLineSubType'] . "%' ";
+
+        if ($arrWhere['Section'])
+            $where .= "AND SV.SectionCode LIKE '%" . $arrWhere['Section'] . "%' ";
+
+        if ($arrWhere['ProfitCode'])
+            $where .= "AND SV.ProfitCode LIKE '%" . $arrWhere['ProfitCode'] . "%' ";
+
+        if ($arrWhere['BrokerName'])
+            $where .= "AND SV.BrokerName LIKE '%" . $arrWhere['BrokerName'] . "%' ";
+
+        if ($arrWhere['BrokerType'])
+            $where .= "AND SV.BrokerType LIKE '%" . $arrWhere['BrokerType'] . "%' ";
+
+        if ($arrWhere['BrokerCity'])
+            $where .= "AND SV.BrokerCity LIKE '%" . $arrWhere['BrokerCity'] . "%' ";
+
+        if ($arrWhere['CabCompanies'])
+            $where .= "AND SV.CabCompanies LIKE '%" . $arrWhere['CabCompanies'] . "%' ";
+
+        if ($arrWhere['QcStatus'])
+            $where .= "AND SV.QcStatus LIKE '%" . $arrWhere['QcStatus'] . "%' ";
+
+        if ($arrWhere['EffectiveFromDate'])
+            $where .= "AND SV.EffectiveDate >= '" . date("Y-m-d", strtotime($arrWhere['EffectiveFromDate'])) . "' ";
+
+        if ($arrWhere['EffectiveToDate'])
+            $where .= "AND EffectiveDate <= '" . date("Y-m-d", strtotime($arrWhere['EffectiveToDate'] . ' + 1 day')) . "' ";
+
+        if ($arrWhere['ExpirationFromDate'])
+            $where .= "AND SV.ExpiryDate >= '" . date("Y-m-d", strtotime($arrWhere['ExpirationFromDate'])) . "' ";
+
+        if ($arrWhere['ExpirationToDate'])
+            $where .= "AND ExpiryDate <= '" . date("Y-m-d", strtotime($arrWhere['ExpirationToDate'] . ' + 1 day')) . "' ";
+
+        if ($arrWhere['SubmissionFromDate'])
+            $where .= "AND SV.CreatedDate >= '" . date("Y-m-d H:i:s", strtotime($arrWhere['SubmissionFromDate'])) . "' ";
+
+        if ($arrWhere['SubmissionToDate'])
+            $where .= "AND SV.modifiedDate <= '" . date("Y-m-d H:i:s", strtotime($arrWhere['SubmissionToDate'] . ' + 1 day')) . "' ";
+
+        if ($arrWhere['ProcessFromDate'])
+            $where .= "AND SV.ProcessDate >= '" . date("Y-m-d H:i:s", strtotime($arrWhere['ProcessFromDate'])) . "' ";
+
+        if ($arrWhere['ProcessToDate'])
+            $where .= "AND SV.ProcessDate <= '" . date("Y-m-d H:i:s", strtotime($arrWhere['ProcessToDate'] . ' + 1 day')) . "' ";
+
+        $con = $this->_con;
+        $stmt = $con->query("SELECT COUNT(*) AS COUNT FROM Submission_Search;");
+        $count = $stmt->fetch(PDO::FETCH_OBJ);
+
+
+        $myArray['brokerEmail'] = <<<TEXT
+Broker Contact Person's Email
+TEXT;
+
+        $myArray['brokerNumber'] = <<<TEXT
+Broker Contact Person's Contact No.
+TEXT;
+
+        $myArray['insuredCountry'] = <<<TEXT
+Insured's Country
+TEXT;
+
+        $myArray['insuredState'] = <<<TEXT
+Insured's State/ Territory Code
+TEXT;
+
+        $myArray['insuredCity'] = <<<TEXT
+Insured's City
+TEXT;
+
+        $myArray['insuredZip'] = <<<TEXT
+Insured's Zip code
+TEXT;
+
+        if (!empty($count->COUNT)) {
+            $f = fopen('php://memory', 'w');
+            //$file = "Submission_Log_" . date('M-d-Y h:i:s') . ".csv";
+            $file = "export.csv";
+            $delimiter = ",";
+            $stmt = $con->query("SELECT SV.SubmissionId AS Id, SV.SubmissionNumber AS SubmissionNumber, SV.NewRenewal AS NewRenewal, SV.InsuredName AS InsuredName, SV.UnderWriterName AS Underwriter, SV.PropertyType AS ProductLine, SV.PropertyLineSubType AS ProductLineSubType, SV.SectionCode AS Section, SV.ProfitCode AS ProfitCode, SV.DbNumber AS DBNumber, SV.CurrentStatus AS CurrentStatus, SV.ProjectName AS ProjectName, SV.ProjectContractorName AS GeneralContractor, SV.ProjectOwnerName AS ProjectOwnerName, SV.ProjectCountry AS ProjectCountry, SV.ProjectState AS ProjectState, SV.ProjectCity AS ProjectCity, SV.ProjectAddressLine1 AS ProjectStreetAddress, SV.BidSituation AS BidSituation, SV.ReasonCode AS ReasonCode, SV.CabCompanies AS CabCompanies, SV.EffectiveDate AS EffectiveDate, SV.ExpiryDate AS ExpiryDate, SV.BrokerName AS BrokerName, SV.BrokerType AS BrokerType, SV.AlternativeAddress1 AS AlternativeAddress1, SV.BrokerContactPerson AS BrokerContactPerson, SV.BrokerContactPersonEmail AS BrokerContactPersonEmail, SV.BrokerContactPersonNumber AS BrokerContactPersonNumber, SV.BrokerCountry AS BrokerCountry, SV.BrokerState AS BrokerState, SV.BrokerCity AS BrokerCity, SV.BrokerCode AS BrokerCode, SV.BranchOffice AS BrancOffice, SV.StatusLimit AS Limit, SV.AttachmentPoint AS AttachmentPoint, SV.GrossPremium AS OriginalPremium, SV.TotalInsuredValue AS TotalInsuredValue, SV.ProcessDate AS ProcessDate, SV.ReinsuredCompany AS ReinsuredCompany, SV.DbaName AS DBAName, SV.InsuredCountry AS InsuredCountry, SV.InsuredState AS InsuredState, SV.InsuredCity AS InsuredCity, SV.InsuredAddress1 AS InsuredMailingAddress1, SV.InsuredZipCode AS InsuredZipcode, SV.DateOfRecievingByBroker AS ByBerksiFromBroker, SV.DateOfrecievingByIndia AS ByIndiaFromBerksi from Submission_Search AS SV
+                         " . $where . " order by AlternativeCity DESC ;");
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $heading = array('Work item /Submission no.', 'New/Renewal', 'Insured Name', 'Underwriter', 'Product Line', 'Product Line Subtype', 'Section', 'Profit Code', 'D&B Number', 'Current Status', 'Project Name', 'Name of General Contractor', 'Project Owner Name', 'Project Country', 'Project State', 'Project City', 'Project Street Address', 'Bid Situation', 'Reason Code', 'CAB Companies', 'Effective Date', 'Expiry Date', 'Broker Name', 'Type of Broker', 'Sub-type of Broker', 'Broker Contact Person', $myArray['brokerEmail'], $myArray['brokerNumber'], 'Broker Country', 'Broker State', 'Broker City', 'Broker Code', 'Branch Office', 'Limit', 'Attachment Point', 'Original Premium', 'Total Insured Value (TIV)', 'Process Date', 'Reinsurance Company', 'DBA Name', $myArray['insuredCountry'], $myArray['insuredState'], $myArray['insuredCity'], 'Insured Mailing Address line 1', $myArray['insuredZip'], 'By Berk SI FROM Broker', 'By India FROM Berk SI');
+            fputcsv($f, $heading, $delimiter);
+            foreach ($result as $value) {
+                unset($value['Id']);
+                if (!empty($value['TotalInsuredValue'])) {
+                    $value['TotalInsuredValue'] = "$" . number_format($value['TotalInsuredValue']);
+                } else if (!empty($value['AttachmentPoint'])) {
+                    $value['OriginalPremium'] = "$" . number_format($value['OriginalPremium']);
+                } else if (!empty($value['AttachmentPoint'])) {
+                    $value['AttachmentPoint'] = "$" . number_format($value['AttachmentPoint']);
+                } else if (!empty($value['Limit'])) {
+                    $value['Limit'] = "$" . number_format($value['Limit']);
+                }
+                if (!empty($value['ProcessDate'])) {
+                    $value['ProcessDate'] = date("M-d-y", strtotime($value['ProcessDate']));
+                } else {
+                    $value['ProcessDate'] = "";
+                }
+                if (!empty($value['EffectiveDate'])) {
+                    $value['EffectiveDate'] = date("M-d-y", strtotime($value['EffectiveDate']));
+                } else {
+                    $value['EffectiveDate'] = "";
+                }
+                if (!empty($value['ExpiryDate'])) {
+                    $value['ExpiryDate'] = date("M-d-y", strtotime($value['ExpiryDate']));
+                } else {
+                    $value['ExpiryDate'] = "";
+                }
+                if (!empty($value['ByBerksiFromBroker'])) {
+                    $value['ByBerksiFromBroker'] = date("M/d/y h:i:s", strtotime($value['ByBerksiFromBroker']));
+                } else {
+                    $value['ByBerksiFromBroker'] = "";
+                }
+                if (!empty($value['ByIndiaFromBerksi'])) {
+                    $value['ByIndiaFromBerksi'] = date("M-d-y", strtotime($value['ByIndiaFromBerksi']));
+                } else {
+                    $value['ByIndiaFromBerksi'] = "";
+                }
+                fputcsv($f, $value, $delimiter);
+            }
+            fseek($f, 0);
+            header('Content-Type: application/csv');
+            header('Content-Disposition: attachement; filename=' . basename($file));
+            header('Expires: 0');
+            header('Content-Length: ' . filesize($file));
+            fpassthru($f);
+        }
+    }
+
+    public function exportQCCSV($arrWhere) {
+        $where = "WHERE 1=1 ";
+
+        if ($arrWhere['SubmissionNo'])
+            $where .= "AND SV.SubmissionNumber LIKE '" . $arrWhere['SubmissionNo'] . "'";
+
+        if ($arrWhere['NewRenewal'])
+            $where .= "AND SV.NewRenewal LIKE '" . $arrWhere['NewRenewal'] . "'";
+
+        if ($arrWhere['InsuredName'])
+            $where .= "AND SV.InsuredName LIKE '%" . $arrWhere['InsuredName'] . "%' ";
+
+        if ($arrWhere['Underwriter']) {
+            $where .= "AND (SV.UnderWriterName LIKE '" . $arrWhere['Underwriter'] . "'
+                        OR SV.UnderWriterName LIKE '%" . $arrWhere['Underwriter'] . "%') ";
+        }
+
+        if ($arrWhere['Status'])
+            $where .= "AND SV.CurrentStatus LIKE '%" . $arrWhere['Status'] . "%' ";
+
+        if ($arrWhere['Branch'])
+            $where .= "AND SV.BranchOffice LIKE '%" . $arrWhere['Branch'] . "%' ";
+
+        if ($arrWhere['ReasonCode'])
+            $where .= "AND SV.ReasonCode LIKE '%" . $arrWhere['ReasonCode'] . "%' ";
+
+        if ($arrWhere['ProductLine'])
+            $where .= "AND SV.PropertyType LIKE '%" . $arrWhere['ProductLine'] . "%' ";
+
+        if ($arrWhere['ProductLineSubType'])
+            $where .= "AND SV.PropertyLineSubType LIKE '%" . $arrWhere['ProductLineSubType'] . "%' ";
+
+        if ($arrWhere['Section'])
+            $where .= "AND SV.SectionCode LIKE '%" . $arrWhere['Section'] . "%' ";
+
+        if ($arrWhere['ProfitCode'])
+            $where .= "AND SV.ProfitCode LIKE '%" . $arrWhere['ProfitCode'] . "%' ";
+
+        if ($arrWhere['BrokerName'])
+            $where .= "AND SV.BrokerName LIKE '%" . $arrWhere['BrokerName'] . "%' ";
+
+        if ($arrWhere['BrokerType'])
+            $where .= "AND SV.BrokerType LIKE '%" . $arrWhere['BrokerType'] . "%' ";
+
+        if ($arrWhere['BrokerCity'])
+            $where .= "AND SV.BrokerCity LIKE '%" . $arrWhere['BrokerCity'] . "%' ";
+
+        if ($arrWhere['CabCompanies'])
+            $where .= "AND SV.CabCompanies LIKE '%" . $arrWhere['CabCompanies'] . "%' ";
+
+        if ($arrWhere['QcStatus'])
+            $where .= "AND SV.QcStatus LIKE '%" . $arrWhere['QcStatus'] . "%' ";
+
+        if ($arrWhere['EffectiveFromDate'])
+            $where .= "AND SV.EffectiveDate >= '" . date("Y-m-d", strtotime($arrWhere['EffectiveFromDate'])) . "' ";
+
+        if ($arrWhere['EffectiveToDate'])
+            $where .= "AND EffectiveDate <= '" . date("Y-m-d", strtotime($arrWhere['EffectiveToDate'] . ' + 1 day')) . "' ";
+
+        if ($arrWhere['ExpirationFromDate'])
+            $where .= "AND SV.ExpiryDate >= '" . date("Y-m-d", strtotime($arrWhere['ExpirationFromDate'])) . "' ";
+
+        if ($arrWhere['ExpirationToDate'])
+            $where .= "AND ExpiryDate <= '" . date("Y-m-d", strtotime($arrWhere['ExpirationToDate'] . ' + 1 day')) . "' ";
+
+        if ($arrWhere['SubmissionFromDate'])
+            $where .= "AND SV.CreatedDate >= '" . date("Y-m-d H:i:s", strtotime($arrWhere['SubmissionFromDate'])) . "' ";
+
+        if ($arrWhere['SubmissionToDate'])
+            $where .= "AND SV.modifiedDate <= '" . date("Y-m-d H:i:s", strtotime($arrWhere['SubmissionToDate'] . ' + 1 day')) . "' ";
+
+        if ($arrWhere['ProcessFromDate'])
+            $where .= "AND SV.ProcessDate >= '" . date("Y-m-d H:i:s", strtotime($arrWhere['ProcessFromDate'])) . "' ";
+
+        if ($arrWhere['ProcessToDate'])
+            $where .= "AND SV.ProcessDate <= '" . date("Y-m-d H:i:s", strtotime($arrWhere['ProcessToDate'] . ' + 1 day')) . "' ";
+
+        $con = $this->_con;
+        $stmt = $con->query("SELECT COUNT(*) AS COUNT FROM Qc_Search;");
+        $count = $stmt->fetch(PDO::FETCH_OBJ);
+
+        $myArray['brokerEmail'] = <<<TEXT
+Broker Contact Person's Email
+TEXT;
+
+        $myArray['brokerNumber'] = <<<TEXT
+Broker Contact Person's Contact No.
+TEXT;
+
+        $myArray['insuredCountry'] = <<<TEXT
+Insured's Country
+TEXT;
+
+        $myArray['insuredState'] = <<<TEXT
+Insured's State/ Territory Code
+TEXT;
+
+        $myArray['insuredCity'] = <<<TEXT
+Insured's City
+TEXT;
+
+        $myArray['insuredZip'] = <<<TEXT
+Insured's Zip code
+TEXT;
+
+        if (!empty($count->COUNT)) {
+            $f = fopen('php://memory', 'w');
+            $file = "export.csv";
+            $delimiter = ",";
+            $stmt = $con->query("SELECT SV.SubmissionId AS Id, SV.SubmissionNumber AS SubmissionNumber, SV.NewRenewal AS NewRenewal, SV.InsuredName AS InsuredName, SV.UnderWriterName AS Underwriter, SV.PropertyType AS ProductLine, SV.PropertyLineSubType AS ProductLineSubType, SV.SectionCode AS Section, SV.ProfitCode AS ProfitCode, SV.DbNumber AS DBNumber, SV.CurrentStatus AS CurrentStatus, SV.ProjectName AS ProjectName, SV.ProjectContractorName AS GeneralContractor, SV.ProjectOwnerName AS ProjectOwnerName, SV.ProjectCountry AS ProjectCountry, SV.ProjectState AS ProjectState, SV.ProjectCity AS ProjectCity, SV.ProjectAddressLine1 AS ProjectStreetAddress, SV.BidSituation AS BidSituation, SV.ReasonCode AS ReasonCode, SV.CabCompanies AS CabCompanies, SV.EffectiveDate AS EffectiveDate, SV.ExpiryDate AS ExpiryDate, SV.BrokerName AS BrokerName, SV.BrokerType AS BrokerType, SV.AlternativeAddress1 AS AlternativeAddress1, SV.BrokerContactPerson AS BrokerContactPerson, SV.BrokerContactPersonEmail AS BrokerContactPersonEmail, SV.BrokerContactPersonNumber AS BrokerContactPersonNumber, SV.BrokerCountry AS BrokerCountry, SV.BrokerState AS BrokerState, SV.BrokerCity AS BrokerCity, SV.BrokerCode AS BrokerCode, SV.BranchOffice AS BrancOffice, SV.StatusLimit AS Limit, SV.AttachmentPoint AS AttachmentPoint, SV.GrossPremium AS OriginalPremium, SV.TotalInsuredValue AS TotalInsuredValue, SV.ProcessDate AS ProcessDate, SV.ReinsuredCompany AS ReinsuredCompany, SV.DbaName AS DBAName, SV.InsuredCountry AS InsuredCountry, SV.InsuredState AS InsuredState, SV.InsuredCity AS InsuredCity, SV.InsuredAddress1 AS InsuredMailingAddress1, SV.InsuredZipCode AS InsuredZipcode, SV.DateOfRecievingByBroker AS ByBerksiFromBroker, SV.DateOfrecievingByIndia AS ByIndiaFromBerksi from Qc_Search AS SV
+                         " . $where . " order by AlternativeCity DESC ;");
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $heading = array('Work item /Submission no.', 'New/Renewal', 'Insured Name', 'Underwriter', 'Product Line', 'Product Line Subtype', 'Section', 'Profit Code', 'D&B Number', 'Current Status', 'Project Name', 'Name of General Contractor', 'Project Owner Name', 'Project Country', 'Project State', 'Project City', 'Project Street Address', 'Bid Situation', 'Reason Code', 'CAB Companies', 'Effective Date', 'Expiry Date', 'Broker Name', 'Type of Broker', 'Sub-type of Broker', 'Broker Contact Person', $myArray['brokerEmail'], $myArray['brokerNumber'], 'Broker Country', 'Broker State', 'Broker City', 'Broker Code', 'Branch Office', 'Limit', 'Attachment Point', 'Original Premium', 'Total Insured Value (TIV)', 'Process Date', 'Reinsurance Company', 'DBA Name', $myArray['insuredCountry'], $myArray['insuredState'], $myArray['insuredCity'], 'Insured Mailing Address line 1', $myArray['insuredZip'], 'By Berk SI FROM Broker', 'By India FROM Berk SI');
+            fputcsv($f, $heading, $delimiter);
+            foreach ($result as $value) {
+                unset($value['Id']);
+                if (!empty($value['TotalInsuredValue'])) {
+                    $value['TotalInsuredValue'] = "$" . number_format($value['TotalInsuredValue']);
+                } else if (!empty($value['AttachmentPoint'])) {
+                    $value['OriginalPremium'] = "$" . number_format($value['OriginalPremium']);
+                } else if (!empty($value['AttachmentPoint'])) {
+                    $value['AttachmentPoint'] = "$" . number_format($value['AttachmentPoint']);
+                } else if (!empty($value['Limit'])) {
+                    $value['Limit'] = "$" . number_format($value['Limit']);
+                }
+                if (!empty($value['ProcessDate'])) {
+                    $value['ProcessDate'] = date("M-d-y", strtotime($value['ProcessDate']));
+                } else {
+                    $value['ProcessDate'] = "";
+                }
+                if (!empty($value['EffectiveDate'])) {
+                    $value['EffectiveDate'] = date("M-d-y", strtotime($value['EffectiveDate']));
+                } else {
+                    $value['EffectiveDate'] = "";
+                }
+                if (!empty($value['ExpiryDate'])) {
+                    $value['ExpiryDate'] = date("M-d-y", strtotime($value['ExpiryDate']));
+                } else {
+                    $value['ExpiryDate'] = "";
+                }
+                if (!empty($value['ByBerksiFromBroker'])) {
+                    $value['ByBerksiFromBroker'] = date("M/d/y h:i:s", strtotime($value['ByBerksiFromBroker']));
+                } else {
+                    $value['ByBerksiFromBroker'] = "";
+                }
+                if (!empty($value['ByIndiaFromBerksi'])) {
+                    $value['ByIndiaFromBerksi'] = date("M-d-y", strtotime($value['ByIndiaFromBerksi']));
+                } else {
+                    $value['ByIndiaFromBerksi'] = "";
+                }
+                fputcsv($f, $value, $delimiter);
+            }
+            fseek($f, 0);
+            header('Content-Type: application/csv');
+            header('Content-Disposition: attachement; filename=' . basename($file));
+            header('Expires: 0');
+            header('Content-Length: ' . filesize($file));
+            fpassthru($f);
+        }
+    }
+
+    public static function getBranchOffice() {
+        $con = Propel::getConnection();
+        $stmt = $con->query("SELECT * FROM Branch;");
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public static function getUnderWriterName($underwriterId) {
+        $con = Propel::getConnection();
+        if (empty($underwriterId)) {
+            $stmt = $con->query("SELECT * FROM Underwriter order by Name ;");
+        } else {
+            $stmt = $con->query("SELECT * FROM Underwriter WHERE Id = '" . $underwriterId . "' order by Name ;");
+        }
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public static function getProductLineSubTypeName($submissionType) {
+        $con = Propel::getConnection();
+        $stmt = $con->query("SELECT PRODUCT_ID, PRODUCT_NAME FROM  ProductLine WHERE SUBMISSION_TYPE = '" . $submissionType . "';");
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public static function getSearchCriteria($input, $column, $order) {
+
+        $criteria = new Criteria();
+        $isFilterChoosen = false;
+
+        if ($input['SubmissionNo'] != '') {
+            $filterCriteria = $criteria->add(SubmissionSearchPeer::SUBMISSIONNUMBER, trim($input['SubmissionNo']) . '%', Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['InsuredName'] != '') {
+            $filterCriteria = $criteria->add(SubmissionSearchPeer::INSUREDNAME, '%' . trim($input['InsuredName']) . '%', Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['NewRenewal'] != '') {
+            $filterCriteria = $criteria->add(SubmissionSearchPeer::NEWRENEWAL, trim($input['NewRenewal']), Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['SubmissionFromDate'] != '' && $input['SubmissionToDate'] != '') {
+            $isCreateDateFilterChoosen = true;
+            $createDateCriteria = $criteria->getNewCriterion(SubmissionSearchPeer::CREATEDDATE, date("Y-m-d H:i:s", strtotime(str_replace('-', '/', $input['SubmissionFromDate']))), Criteria::GREATER_EQUAL);
+            $createEndDateCriteria = $criteria->getNewCriterion(SubmissionSearchPeer::CREATEDDATE, date("Y-m-d H:i:s", strtotime(str_replace('-', '/', $input['SubmissionToDate']) . ' + 1 day')), Criteria::LESS_THAN);
+            $createDateCriteria->addAnd($createEndDateCriteria);
+        } else {
+            if ($input['SubmissionFromDate'] != '') {
+                $dateCriteria = $criteria->add(SubmissionSearchPeer::CREATEDDATE, date("Y-m-d H:i:s", strtotime(str_replace('-', '/', $input['SubmissionFromDate']))), Criteria::GREATER_EQUAL);
+                $isFilterChoosen = true;
+            }
+
+            if ($input['SubmissionToDate'] != '') {
+                $dateCriteria = $criteria->add(SubmissionSearchPeer::CREATEDDATE, date("Y-m-d H:i:s", strtotime(str_replace('-', '/', $input['SubmissionToDate']) . ' + 1 day')), Criteria::LESS_THAN);
+                $isFilterChoosen = true;
+            }
+        }
+
+        if ($input['UnderwriterName'] != '') {
+            $filterCriteria = $criteria->add(SubmissionSearchPeer::UNDERWRITERNAME, '%' . trim($input['UnderwriterName']), Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['Branch'] != '') {
+            $filterCriteria = $criteria->add(SubmissionSearchPeer::BRANCHOFFICE, trim($input['Branch']), Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['Status'] != '') {
+            $filterCriteria = $criteria->add(SubmissionSearchPeer::CURRENTSTATUS, trim($input['Status']), Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['ReasonCode'] != '') {
+            $filterCriteria = $criteria->add(SubmissionSearchPeer::REASONCODE, trim($input['ReasonCode']), Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['ProductLine'] != '') {
+            $filterCriteria = $criteria->add(SubmissionSearchPeer::PROPERTYTYPE, trim($input['ProductLine']), Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['ProductLineSubType'] != '') {
+            $filterCriteria = $criteria->add(SubmissionSearchPeer::PROPERTYLINESUBTYPE, trim($input['ProductLineSubType']), Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['Section'] != '') {
+            $filterCriteria = $criteria->add(SubmissionSearchPeer::SECTIONCODE, trim($input['Section']), Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['ProfitCode'] != '') {
+            $filterCriteria = $criteria->add(SubmissionSearchPeer::PROFITCODE, trim($input['ProfitCode']), Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['BrokerName'] != '') {
+            $filterCriteria = $criteria->add(SubmissionSearchPeer::BROKERNAME, trim($input['BrokerName']), Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['BrokerType'] != '') {
+            $filterCriteria = $criteria->add(SubmissionSearchPeer::BROKERTYPE, trim($input['BrokerType']), Criteria::EQUAL);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['BrokerCity'] != '') {
+            $filterCriteria = $criteria->add(SubmissionSearchPeer::BROKERCITY, '%' . trim($input['BrokerCity']) . '%', Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['CabCompanies'] != '') {
+            $filterCriteria = $criteria->add(SubmissionSearchPeer::CABCOMPANIES, trim($input['CabCompanies']), Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['EffectiveFromDate'] != '' && $input['EffectiveToDate'] != '') {
+            $isEffectiveFilterChoosen = true;
+            $effectiveDateCriteria = $criteria->getNewCriterion(SubmissionSearchPeer::EFFECTIVEDATE, date("Y-m-d", strtotime(str_replace('-', '/', $input['EffectiveFromDate']))), Criteria::GREATER_EQUAL);
+            $effectiveEndDateCriteria = $criteria->getNewCriterion(SubmissionSearchPeer::EFFECTIVEDATE, date("Y-m-d", strtotime(str_replace('-', '/', $input['EffectiveToDate']) . ' + 1 day')), Criteria::LESS_THAN);
+            $effectiveDateCriteria->addAnd($effectiveEndDateCriteria);
+        } else {
+
+            if ($input['EffectiveFromDate'] != '') {
+                $dateCriteria = $criteria->add(SubmissionSearchPeer::EFFECTIVEDATE, date("Y-m-d", strtotime(str_replace('-', '/', $input['EffectiveFromDate']))), Criteria::GREATER_EQUAL);
+                $isFilterChoosen = true;
+            }
+
+            if ($input['EffectiveToDate'] != '') {
+                $dateCriteria = $criteria->add(SubmissionSearchPeer::EFFECTIVEDATE, date("Y-m-d", strtotime(str_replace('-', '/', $input['EffectiveToDate']) . ' + 1 day')), Criteria::LESS_THAN);
+                $isFilterChoosen = true;
+            }
+        }
+
+        if ($input['ExpirationFromDate'] != '' && $input['ExpirationToDate'] != '') {
+            $isExpDateFilterChoosen = true;
+            $ExpDateCriteria = $criteria->getNewCriterion(SubmissionSearchPeer::EXPIRYDATE, date("Y-m-d", strtotime(str_replace('-', '/', $input['ExpirationFromDate']))), Criteria::GREATER_EQUAL);
+            $ExpEndDateCriteria = $criteria->getNewCriterion(SubmissionSearchPeer::EXPIRYDATE, date("Y-m-d", strtotime(str_replace('-', '/', $input['ExpirationToDate']) . ' + 1 day')), Criteria::LESS_THAN);
+            $ExpDateCriteria->addAnd($ExpEndDateCriteria);
+        } else {
+
+            if ($input['ExpirationFromDate'] != '') {
+                $dateCriteria = $criteria->add(SubmissionSearchPeer::EXPIRYDATE, date("Y-m-d", strtotime(str_replace('-', '/', $input['ExpirationFromDate']))), Criteria::GREATER_EQUAL);
+                $isFilterChoosen = true;
+            }
+
+            if ($input['ExpirationToDate'] != '') {
+                $dateCriteria = $criteria->add(SubmissionSearchPeer::EXPIRYDATE, date("Y-m-d", strtotime(str_replace('-', '/', $input['ExpirationToDate']) . ' + 1 day')), Criteria::LESS_THAN);
+                $isFilterChoosen = true;
+            }
+        }
+
+        if ($input['ProcessFromDate'] != '' && $input['ProcessToDate'] != '') {
+            $isProcessDateFilterChoosen = true;
+            $ProcessDateCriteria = $criteria->getNewCriterion(SubmissionSearchPeer::PROCESSDATE, date("Y-m-d", strtotime(str_replace('-', '/', $input['ProcessFromDate']))), Criteria::GREATER_EQUAL);
+            $ProcessEndDateCriteria = $criteria->getNewCriterion(SubmissionSearchPeer::PROCESSDATE, date("Y-m-d", strtotime(str_replace('-', '/', $input['ProcessToDate']) . ' + 1 day')), Criteria::LESS_THAN);
+            $ProcessDateCriteria->addAnd($ProcessEndDateCriteria);
+        } else {
+
+            if ($input['ProcessFromDate'] != '') {
+                $dateCriteria = $criteria->add(SubmissionSearchPeer::PROCESSDATE, date("Y-m-d", strtotime(str_replace('-', '/', $input['ProcessFromDate']))), Criteria::GREATER_EQUAL);
+                $isFilterChoosen = true;
+            }
+
+            if ($input['ProcessToDate'] != '') {
+                $dateCriteria = $criteria->add(SubmissionSearchPeer::PROCESSDATE, date("Y-m-d", strtotime(str_replace('-', '/', $input['ProcessToDate']) . ' + 1 day')), Criteria::LESS_THAN);
+                $isFilterChoosen = true;
+            }
+        }
+
+        if ($input['EditFromDate'] != '' && $input['EditToDate'] != '') {
+            $isEditDateFilterChoosen = true;
+            $EditDateCriteria = $criteria->getNewCriterion(SubmissionSearchPeer::MODIFIEDDATE, date("Y-m-d", strtotime(str_replace('-', '/', $input['EditFromDate']))), Criteria::GREATER_EQUAL);
+            $EditEndDateCriteria = $criteria->getNewCriterion(SubmissionSearchPeer::MODIFIEDDATE, date("Y-m-d", strtotime(str_replace('-', '/', $input['EditToDate']) . ' + 1 day')), Criteria::LESS_THAN);
+            $EditDateCriteria->addAnd($EditEndDateCriteria);
+        } else {
+
+            if ($input['EditFromDate'] != '') {
+                $dateCriteria = $criteria->add(SubmissionSearchPeer::MODIFIEDDATE, date("Y-m-d", strtotime(str_replace('-', '/', $input['EditFromDate']))), Criteria::GREATER_EQUAL);
+                $isFilterChoosen = true;
+            }
+
+            if ($input['EditToDate'] != '') {
+                $dateCriteria = $criteria->add(SubmissionSearchPeer::MODIFIEDDATE, date("Y-m-d", strtotime(str_replace('-', '/', $input['EditToDate']) . ' + 1 day')), Criteria::LESS_THAN);
+                $isFilterChoosen = true;
+            }
+        }
+
+        if ($input['QcStatus'] != '') {
+            $filterCriteria = $criteria->add(SubmissionSearchPeer::QCSTATUS, trim($input['QcStatus']), Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($isCreateDateFilterChoosen) {
+            $criteria->add($createDateCriteria);
+        }
+
+        if ($isEffectiveFilterChoosen) {
+            $criteria->add($effectiveDateCriteria);
+        }
+
+        if ($isExpDateFilterChoosen) {
+            $criteria->add($ExpDateCriteria);
+        }
+
+        if ($isProcessDateFilterChoosen) {
+            $criteria->add($ProcessDateCriteria);
+        }
+
+        if ($isEditDateFilterChoosen) {
+            $criteria->add($EditDateCriteria);
+        }
+        if (isset($column)) {
+            if ($column == 0 && $order == 'ASC') {
+                return $criteria->addAscendingOrderByColumn(SubmissionSearchPeer::QCSTATUS);
+            } else if ($column == 0 && $order == 'DESC') {
+                return $criteria->addDescendingOrderByColumn(SubmissionSearchPeer::QCSTATUS);
+            } else if ($column == 1 && $order == 'ASC') {
+                return $criteria->addAscendingOrderByColumn(SubmissionSearchPeer::ALTERNATIVECITY);
+            } else if ($column == 1 && $order == 'DESC') {
+                return $criteria->addDescendingOrderByColumn(SubmissionSearchPeer::ALTERNATIVECITY);
+            } else if ($column == 2 && $order == 'ASC') {
+                return $criteria->addAscendingOrderByColumn(SubmissionSearchPeer::NEWRENEWAL);
+            } else if ($column == 2 && $order == 'DESC') {
+                return $criteria->addDescendingOrderByColumn(SubmissionSearchPeer::NEWRENEWAL);
+            } else if ($column == 3 && $order == 'ASC') {
+                return $criteria->addAscendingOrderByColumn(SubmissionSearchPeer::INSUREDNAME);
+            } else if ($column == 3 && $order == 'DESC') {
+                return $criteria->addDescendingOrderByColumn(SubmissionSearchPeer::INSUREDNAME);
+            } else if ($column == 4 && $order == 'ASC') {
+                return $criteria->addAscendingOrderByColumn(SubmissionSearchPeer::UNDERWRITERNAME);
+            } else if ($column == 4 && $order == 'DESC') {
+                return $criteria->addDescendingOrderByColumn(SubmissionSearchPeer::UNDERWRITERNAME);
+            } else if ($column == 5 && $order == 'ASC') {
+                return $criteria->addAscendingOrderByColumn(SubmissionSearchPeer::PROPERTYTYPE);
+            } else if ($column == 5 && $order == 'DESC') {
+                return $criteria->addDescendingOrderByColumn(SubmissionSearchPeer::PROPERTYTYPE);
+            } else if ($column == 6 && $order == 'ASC') {
+                return $criteria->addAscendingOrderByColumn(SubmissionSearchPeer::CURRENTSTATUS);
+            } else if ($column == 6 && $order == 'DESC') {
+                return $criteria->addDescendingOrderByColumn(SubmissionSearchPeer::CURRENTSTATUS);
+            } else if ($column == 7 && $order == 'ASC') {
+                return $criteria->addAscendingOrderByColumn(SubmissionSearchPeer::EFFECTIVEDATE);
+            } else if ($column == 7 && $order == 'DESC') {
+                return $criteria->addDescendingOrderByColumn(SubmissionSearchPeer::EFFECTIVEDATE);
+            } else if ($column == 8 && $order == 'ASC') {
+                return $criteria->addAscendingOrderByColumn(SubmissionSearchPeer::BRANCHOFFICE);
+            } else if ($column == 8 && $order == 'DESC') {
+                return $criteria->addDescendingOrderByColumn(SubmissionSearchPeer::BRANCHOFFICE);
+            } else if ($column == 9 && $order == 'ASC') {
+                return $criteria->addAscendingOrderByColumn(SubmissionSearchPeer::BROKERNAME);
+            } else if ($column == 9 && $order == 'DESC') {
+                return $criteria->addDescendingOrderByColumn(SubmissionSearchPeer::BROKERNAME);
+            } else if ($column == 10 && $order == 'ASC') {
+                return $criteria->addAscendingOrderByColumn(SubmissionSearchPeer::CABCOMPANIES);
+            } else if ($column == 10 && $order == 'DESC') {
+                return $criteria->addDescendingOrderByColumn(SubmissionSearchPeer::CABCOMPANIES);
+            } else if ($column == 11 && $order == 'ASC') {
+                return $criteria->addAscendingOrderByColumn(SubmissionSearchPeer::GROSSPREMIUM);
+            } else if ($column == 11 && $order == 'DESC') {
+                return $criteria->addDescendingOrderByColumn(SubmissionSearchPeer::GROSSPREMIUM);
+            } else if ($column == 12 && $order == 'ASC') {
+                return $criteria->addAscendingOrderByColumn(SubmissionSearchPeer::PROJECTNAME);
+            } else if ($column == 12 && $order == 'DESC') {
+                return $criteria->addDescendingOrderByColumn(SubmissionSearchPeer::PROJECTNAME);
+            } else if ($column == 13 && $order == 'ASC') {
+                return $criteria->addAscendingOrderByColumn(SubmissionSearchPeer::TOTALINSUREDVALUE);
+            } else if ($column == 13 && $order == 'DESC') {
+                return $criteria->addDescendingOrderByColumn(SubmissionSearchPeer::TOTALINSUREDVALUE);
+            } else if ($column == 14 && $order == 'ASC') {
+                return $criteria->addAscendingOrderByColumn(SubmissionSearchPeer::PROCESSDATE);
+            } else if ($column == 14 && $order == 'DESC') {
+                return $criteria->addDescendingOrderByColumn(SubmissionSearchPeer::PROCESSDATE);
+            } else if ($column == 15 && $order == 'ASC') {
+                return $criteria->addAscendingOrderByColumn(SubmissionSearchPeer::DATEOFRECIEVINGBYINDIA);
+            } else if ($column == 15 && $order == 'DESC') {
+                return $criteria->addDescendingOrderByColumn(SubmissionSearchPeer::DATEOFRECIEVINGBYINDIA);
+            }
+        } else {
+            return $criteria->addDescendingOrderByColumn(SubmissionSearchPeer::ALTERNATIVECITY);
+        }
+    }
+
+    public static function getQcSearchCriteria($input, $column, $order) {
+        $criteria = new Criteria();
+        $isFilterChoosen = false;
+
+        if ($input['SubmissionNo'] != '') {
+            $filterCriteria = $criteria->add(QcSearchPeer::SUBMISSIONNUMBER, trim($input['SubmissionNo']) . '%', Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['InsuredName'] != '') {
+            $filterCriteria = $criteria->add(QcSearchPeer::INSUREDNAME, '%' . trim($input['InsuredName']) . '%', Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['NewRenewal'] != '') {
+            $filterCriteria = $criteria->add(QcSearchPeer::NEWRENEWAL, trim($input['NewRenewal']), Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['SubmissionFromDate'] != '' && $input['SubmissionToDate'] != '') {
+            $isCreateDateFilterChoosen = true;
+            $createDateCriteria = $criteria->getNewCriterion(QcSearchPeer::CREATEDDATE, date("Y-m-d H:i:s", strtotime(str_replace('-', '/', $input['SubmissionFromDate']))), Criteria::GREATER_EQUAL);
+            $createEndDateCriteria = $criteria->getNewCriterion(QcSearchPeer::CREATEDDATE, date("Y-m-d H:i:s", strtotime(str_replace('-', '/', $input['SubmissionToDate']) . ' + 1 day')), Criteria::LESS_THAN);
+            $createDateCriteria->addAnd($createEndDateCriteria);
+        } else {
+            if ($input['SubmissionFromDate'] != '') {
+                $dateCriteria = $criteria->add(QcSearchPeer::CREATEDDATE, date("Y-m-d H:i:s", strtotime(str_replace('-', '/', $input['SubmissionFromDate']))), Criteria::GREATER_EQUAL);
+                $isFilterChoosen = true;
+            }
+
+            if ($input['SubmissionToDate'] != '') {
+                $dateCriteria = $criteria->add(QcSearchPeer::CREATEDDATE, date("Y-m-d H:i:s", strtotime(str_replace('-', '/', $input['SubmissionToDate']) . ' + 1 day')), Criteria::LESS_THAN);
+                $isFilterChoosen = true;
+            }
+        }
+
+        if ($input['Underwriter'] != '') {
+            $filterCriteria = $criteria->add(QcSearchPeer::UNDERWRITERNAME, trim($input['Underwriter']), Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['Branch'] != '') {
+            $filterCriteria = $criteria->add(QcSearchPeer::BRANCHOFFICE, trim($input['Branch']), Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['Status'] != '') {
+            $filterCriteria = $criteria->add(QcSearchPeer::CURRENTSTATUS, trim($input['Status']), Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['ReasonCode'] != '') {
+            $filterCriteria = $criteria->add(QcSearchPeer::REASONCODE, trim($input['ReasonCode']), Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['ProductLine'] != '') {
+            $filterCriteria = $criteria->add(QcSearchPeer::PROPERTYTYPE, trim($input['ProductLine']), Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['ProductLineSubType'] != '') {
+            $filterCriteria = $criteria->add(QcSearchPeer::PROPERTYLINESUBTYPE, trim($input['ProductLineSubType']), Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['Section'] != '') {
+            $filterCriteria = $criteria->add(QcSearchPeer::SECTIONCODE, trim($input['Section']), Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['ProfitCode'] != '') {
+            $filterCriteria = $criteria->add(QcSearchPeer::PROFITCODE, trim($input['ProfitCode']), Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['BrokerName'] != '') {
+            $filterCriteria = $criteria->add(QcSearchPeer::BROKERNAME, trim($input['BrokerName']), Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['BrokerType'] != '') {
+            $filterCriteria = $criteria->add(QcSearchPeer::BROKERTYPE, trim($input['BrokerType']), Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['BrokerCity'] != '') {
+            $filterCriteria = $criteria->add(QcSearchPeer::BROKERCITY, '%' . trim($input['BrokerCity']) . '%', Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['CabCompanies'] != '') {
+            $filterCriteria = $criteria->add(QcSearchPeer::CABCOMPANIES, trim($input['CabCompanies']), Criteria::LIKE);
+            $isFilterChoosen = true;
+        }
+
+        if ($input['EffectiveFromDate'] != '' && $input['EffectiveToDate'] != '') {
+            $isEffectiveFilterChoosen = true;
+            $effectiveDateCriteria = $criteria->getNewCriterion(QcSearchPeer::EFFECTIVEDATE, date("Y-m-d", strtotime(str_replace('-', '/', $input['EffectiveFromDate']))), Criteria::GREATER_EQUAL);
+            $effectiveEndDateCriteria = $criteria->getNewCriterion(QcSearchPeer::EFFECTIVEDATE, date("Y-m-d", strtotime(str_replace('-', '/', $input['EffectiveToDate']) . ' + 1 day')), Criteria::LESS_THAN);
+            $effectiveDateCriteria->addAnd($effectiveEndDateCriteria);
+        } else {
+
+            if ($input['EffectiveFromDate'] != '') {
+                $dateCriteria = $criteria->add(QcSearchPeer::EFFECTIVEDATE, date("Y-m-d", strtotime(str_replace('-', '/', $input['EffectiveFromDate']))), Criteria::GREATER_EQUAL);
+                $isFilterChoosen = true;
+            }
+
+            if ($input['EffectiveToDate'] != '') {
+                $dateCriteria = $criteria->add(QcSearchPeer::EFFECTIVEDATE, date("Y-m-d", strtotime(str_replace('-', '/', $input['EffectiveToDate']) . ' + 1 day')), Criteria::LESS_THAN);
+                $isFilterChoosen = true;
+            }
+        }
+
+        if ($input['ExpirationFromDate'] != '' && $input['ExpirationToDate'] != '') {
+            $isExpDateFilterChoosen = true;
+            $ExpDateCriteria = $criteria->getNewCriterion(QcSearchPeer::EXPIRYDATE, date("Y-m-d", strtotime(str_replace('-', '/', $input['ExpirationFromDate']))), Criteria::GREATER_EQUAL);
+            $ExpEndDateCriteria = $criteria->getNewCriterion(QcSearchPeer::EXPIRYDATE, date("Y-m-d", strtotime(str_replace('-', '/', $input['ExpirationToDate']) . ' + 1 day')), Criteria::LESS_THAN);
+            $ExpDateCriteria->addAnd($ExpEndDateCriteria);
+        } else {
+
+            if ($input['ExpirationFromDate'] != '') {
+                $dateCriteria = $criteria->add(QcSearchPeer::EXPIRYDATE, date("Y-m-d", strtotime(str_replace('-', '/', $input['ExpirationFromDate']))), Criteria::GREATER_EQUAL);
+                $isFilterChoosen = true;
+            }
+
+            if ($input['ExpirationToDate'] != '') {
+                $dateCriteria = $criteria->add(QcSearchPeer::EXPIRYDATE, date("Y-m-d", strtotime(str_replace('-', '/', $input['ExpirationToDate']) . ' + 1 day')), Criteria::LESS_THAN);
+                $isFilterChoosen = true;
+            }
+        }
+
+        if ($input['ProcessFromDate'] != '' && $input['ProcessToDate'] != '') {
+            $isProcessDateFilterChoosen = true;
+            $ProcessDateCriteria = $criteria->getNewCriterion(QcSearchPeer::PROCESSDATE, date("Y-m-d", strtotime(str_replace('-', '/', $input['ProcessFromDate']))), Criteria::GREATER_EQUAL);
+            $ProcessEndDateCriteria = $criteria->getNewCriterion(QcSearchPeer::PROCESSDATE, date("Y-m-d", strtotime(str_replace('-', '/', $input['ProcessToDate']) . ' + 1 day')), Criteria::LESS_THAN);
+            $ProcessDateCriteria->addAnd($ProcessEndDateCriteria);
+        } else {
+
+            if ($input['ProcessFromDate'] != '') {
+                $dateCriteria = $criteria->add(QcSearchPeer::PROCESSDATE, date("Y-m-d", strtotime(str_replace('-', '/', $input['ProcessFromDate']))), Criteria::GREATER_EQUAL);
+                $isFilterChoosen = true;
+            }
+
+            if ($input['ProcessToDate'] != '') {
+                $dateCriteria = $criteria->add(QcSearchPeer::PROCESSDATE, date("Y-m-d", strtotime(str_replace('-', '/', $input['ProcessToDate']) . ' + 1 day')), Criteria::LESS_THAN);
+                $isFilterChoosen = true;
+            }
+        }
+
+        if ($input['EditFromDate'] != '' && $input['EditToDate'] != '') {
+            $isEditDateFilterChoosen = true;
+            $EditDateCriteria = $criteria->getNewCriterion(QcSearchPeer::MODIFIEDDATE, date("Y-m-d", strtotime(str_replace('-', '/', $input['EditFromDate']))), Criteria::GREATER_EQUAL);
+            $EditEndDateCriteria = $criteria->getNewCriterion(QcSearchPeer::MODIFIEDDATE, date("Y-m-d", strtotime(str_replace('-', '/', $input['EditToDate']) . ' + 1 day')), Criteria::LESS_THAN);
+            $EditDateCriteria->addAnd($EditEndDateCriteria);
+        } else {
+
+            if ($input['EditFromDate'] != '') {
+                $dateCriteria = $criteria->add(QcSearchPeer::MODIFIEDDATE, date("Y-m-d", strtotime(str_replace('-', '/', $input['EditFromDate']))), Criteria::GREATER_EQUAL);
+                $isFilterChoosen = true;
+            }
+
+            if ($input['EditToDate'] != '') {
+                $dateCriteria = $criteria->add(QcSearchPeer::MODIFIEDDATE, date("Y-m-d", strtotime(str_replace('-', '/', $input['EditToDate']) . ' + 1 day')), Criteria::LESS_THAN);
+                $isFilterChoosen = true;
+            }
+        }
+
+        if ($isCreateDateFilterChoosen) {
+            $criteria->add($createDateCriteria);
+        }
+
+        if ($isEffectiveFilterChoosen) {
+            $criteria->add($effectiveDateCriteria);
+        }
+
+        if ($isExpDateFilterChoosen) {
+            $criteria->add($ExpDateCriteria);
+        }
+
+        if ($isProcessDateFilterChoosen) {
+            $criteria->add($ProcessDateCriteria);
+        }
+
+        if ($isEditDateFilterChoosen) {
+            $criteria->add($EditDateCriteria);
+        }
+        if (isset($column)) {
+            if ($column == 0 && $order == 'ASC') {
+                return $criteria->addAscendingOrderByColumn(QcSearchPeer::QCSTATUS);
+            } else if ($column == 0 && $order == 'DESC') {
+                return $criteria->addDescendingOrderByColumn(QcSearchPeer::QCSTATUS);
+            } else if ($column == 1 && $order == 'ASC') {
+                return $criteria->addAscendingOrderByColumn(QcSearchPeer::ALTERNATIVECITY);
+            } else if ($column == 1 && $order == 'DESC') {
+                return $criteria->addDescendingOrderByColumn(QcSearchPeer::ALTERNATIVECITY);
+            } else if ($column == 2 && $order == 'ASC') {
+                return $criteria->addAscendingOrderByColumn(QcSearchPeer::NEWRENEWAL);
+            } else if ($column == 2 && $order == 'DESC') {
+                return $criteria->addDescendingOrderByColumn(QcSearchPeer::NEWRENEWAL);
+            } else if ($column == 3 && $order == 'ASC') {
+                return $criteria->addAscendingOrderByColumn(QcSearchPeer::INSUREDNAME);
+            } else if ($column == 3 && $order == 'DESC') {
+                return $criteria->addDescendingOrderByColumn(QcSearchPeer::INSUREDNAME);
+            } else if ($column == 4 && $order == 'ASC') {
+                return $criteria->addAscendingOrderByColumn(QcSearchPeer::UNDERWRITERNAME);
+            } else if ($column == 4 && $order == 'DESC') {
+                return $criteria->addDescendingOrderByColumn(QcSearchPeer::UNDERWRITERNAME);
+            } else if ($column == 5 && $order == 'ASC') {
+                return $criteria->addAscendingOrderByColumn(QcSearchPeer::PROPERTYTYPE);
+            } else if ($column == 5 && $order == 'DESC') {
+                return $criteria->addDescendingOrderByColumn(QcSearchPeer::PROPERTYTYPE);
+            } else if ($column == 6 && $order == 'ASC') {
+                return $criteria->addAscendingOrderByColumn(QcSearchPeer::CURRENTSTATUS);
+            } else if ($column == 6 && $order == 'DESC') {
+                return $criteria->addDescendingOrderByColumn(QcSearchPeer::CURRENTSTATUS);
+            } else if ($column == 7 && $order == 'ASC') {
+                return $criteria->addAscendingOrderByColumn(QcSearchPeer::EFFECTIVEDATE);
+            } else if ($column == 7 && $order == 'DESC') {
+                return $criteria->addDescendingOrderByColumn(QcSearchPeer::EFFECTIVEDATE);
+            } else if ($column == 8 && $order == 'ASC') {
+                return $criteria->addAscendingOrderByColumn(QcSearchPeer::BRANCHOFFICE);
+            } else if ($column == 8 && $order == 'DESC') {
+                return $criteria->addDescendingOrderByColumn(QcSearchPeer::BRANCHOFFICE);
+            } else if ($column == 9 && $order == 'ASC') {
+                return $criteria->addAscendingOrderByColumn(QcSearchPeer::BROKERNAME);
+            } else if ($column == 9 && $order == 'DESC') {
+                return $criteria->addDescendingOrderByColumn(QcSearchPeer::BROKERNAME);
+            } else if ($column == 10 && $order == 'ASC') {
+                return $criteria->addAscendingOrderByColumn(QcSearchPeer::CABCOMPANIES);
+            } else if ($column == 10 && $order == 'DESC') {
+                return $criteria->addDescendingOrderByColumn(QcSearchPeer::CABCOMPANIES);
+            } else if ($column == 11 && $order == 'ASC') {
+                return $criteria->addAscendingOrderByColumn(QcSearchPeer::GROSSPREMIUM);
+            } else if ($column == 11 && $order == 'DESC') {
+                return $criteria->addDescendingOrderByColumn(QcSearchPeer::GROSSPREMIUM);
+            } else if ($column == 12 && $order == 'ASC') {
+                return $criteria->addAscendingOrderByColumn(QcSearchPeer::PROJECTNAME);
+            } else if ($column == 12 && $order == 'DESC') {
+                return $criteria->addDescendingOrderByColumn(QcSearchPeer::PROJECTNAME);
+            } else if ($column == 13 && $order == 'ASC') {
+                return $criteria->addAscendingOrderByColumn(QcSearchPeer::TOTALINSUREDVALUE);
+            } else if ($column == 13 && $order == 'DESC') {
+                return $criteria->addDescendingOrderByColumn(QcSearchPeer::TOTALINSUREDVALUE);
+            } else if ($column == 14 && $order == 'ASC') {
+                return $criteria->addAscendingOrderByColumn(QcSearchPeer::PROCESSDATE);
+            } else if ($column == 14 && $order == 'DESC') {
+                return $criteria->addDescendingOrderByColumn(QcSearchPeer::PROCESSDATE);
+            } else if ($column == 15 && $order == 'ASC') {
+                return $criteria->addAscendingOrderByColumn(QcSearchPeer::DATEOFRECIEVINGBYINDIA);
+            } else if ($column == 15 && $order == 'DESC') {
+                return $criteria->addDescendingOrderByColumn(QcSearchPeer::DATEOFRECIEVINGBYINDIA);
+            }
+        } else {
+            return $criteria->addDescendingOrderByColumn(QcSearchPeer::ALTERNATIVECITY);
+        }
+    }
+
+    public function submitData($postValues, $userId) {
+        
+        if (empty($postValues['insured_name'])) {
+            $postValues['insured_name'] = 'N';
+        }
+        if (empty($postValues['insured_mailingaddress'])) {
+            $postValues['insured_mailingaddress'] = 'N';
+        }
+        if (isset($postValues['yesTrue'])) {
+            $postValues['yesTrue'] = $postValues['yesTrue'];
+        } else {
+            $postValues['yesTrue'] = 'N';
+        }
+        if (isset($postValues['yesBroker'])) {
+            $postValues['yesBroker'] = $postValues['yesBroker'];
+        } else {
+            $postValues['yesBroker'] = 'N';
+        }
+
+        if (isset($postValues['yesIndia'])) {
+            $postValues['yesIndia'] = $postValues['yesIndia'];
+        } else {
+            $postValues['yesIndia'] = 'N';
+        }
+
+        $newRenewalLookUpId = $postValues['new_renewal'];
+        $underWritterId = $postValues['underwriter'];
+        $product = $this->getLobList($postValues['product_line']);
+        $productLineId = $product[0]['Id'];
+        $productLinePrefix = $postValues['productLinePrefix'];
+        $completeProductLine .= $productLinePrefix;
+        $completeProductLine .= $postValues['product_line'];
+        $submissionNumber = $this->createSubmissionNumber($completeProductLine);
+        $propductLineSubTypeId = $postValues['product_line_subtype'];
+        if (!empty($postValues['section'])) {
+            $sectionId = $postValues['section'];
+        } else {
+            $sectionId = null;
+        }
+        $profitCodeId = $postValues['profitcode'];
+        $primaryStatus = $postValues['primarystatus'];
+        $effectiveDate = date("Y-m-d", strtotime($postValues['effectivedate']));
+        $expiryDate = date("Y-m-d", strtotime($postValues['expirydate']));
+        $insuredId = $postValues['insuredId'];
+        $isDifferentDba = $postValues['insured_name'];
+        $isDifferentMailingAddress = $postValues['insured_mailingaddress'];
+        if ($isDifferentDba == 'Y') {
+            $dbaName = $postValues['dbaname'];
+        } else {
+            $dbaName = null;
+        }
+        $dbNember = $postValues['dbnumber'];
+        $cabCompaniesLookupId = $postValues['cab_companies'];
+        if (!empty($postValues['reinsured_company'])) {
+            $reinsuredCompany = $postValues['reinsured_company'];
+        } else {
+            $reinsuredCompany = null;
+        }
+        if (!empty($postValues['submission_type_idrntifier'])) {
+            $submissionTypeIdentifier = $postValues['submission_type_idrntifier'];
+        } else {
+            $submissionTypeIdentifier = null;
+        }
+
+        if (!empty($postValues['total_insured_value_text'])) {
+            $totalInsuredValue = $postValues['total_insured_value_text'];
+        } elseif ($postValues['yesTrue'] == 'Y') {
+            $totalInsuredValue = $postValues['total_insured_value_select'];
+        } else {
+            $totalInsuredValue = null;
+        }
+        $brokerWiseCityId = $postValues['citycode'];
+        if (!empty($postValues['brokercontactperson'])) {
+            $brokerContactPerson = $postValues['brokercontactperson'];
+        } else {
+            $brokerContactPerson = null;
+        }
+
+        if (!empty($postValues['broker_contact_person_email'])) {
+            $brokerContactPersonEmail = $postValues['broker_contact_person_email'];
+        } else {
+            $brokerContactPersonEmail = null;
+        }
+
+        if (!empty($postValues['borker_contact_peson_number'])) {
+            $brokerContactPersonNumber = $postValues['borker_contact_peson_number'];
+        } else {
+            $brokerContactPersonNumber = null;
+        }
+
+        $BrokerCode = $postValues['brokerCodeGen1'];
+        if (!empty($postValues['byBerkSi'])) {
+            $byBerkSi = date("Y-m-d H:i:s", strtotime($postValues['byBerkSi']));
+        } else {
+            $byBerkSi = null;
+        }
+        if (!empty($postValues['byIndia'])) {
+            $byIndia = date("Y-m-d", strtotime($postValues['byIndia']));
+        } else {
+            $byIndia = null;
+        }
+        $qcStatus = $this->getLookUpTypeList('QCStatus');
+        $qcStatusId = $qcStatus[0]['Id'];
+
+        $branchCode = $postValues['branchcode1'];
+        if (!empty($postValues['branchcode1'])) {
+            $branchId = $this->getBranchId($branchCode);
+        } else {
+            $branchId = null;
+        }
+
+        if ($postValues['product_line'] == 'Property') {
+            $projrctArray = array();
+            if (!empty($postValues['projectname'])) {
+                $projrctArray['projectName'] = $postValues['projectname'];
+            } else {
+                $projrctArray['projectName'] = null;
+            }
+            if (!empty($postValues['generalcontratorname'])) {
+                $projrctArray['generalContractorName'] = $postValues['generalcontratorname'];
+            } else {
+                $projrctArray['generalContractorName'] = null;
+            }
+            if (!empty($postValues['projectownername'])) {
+                $projrctArray['projectOwnerName'] = $postValues['projectownername'];
+            } else {
+                $projrctArray['projectOwnerName'] = null;
+            }
+            if (!empty($postValues['projectstreetaddress'])) {
+                $projrctArray['address1'] = $postValues['projectstreetaddress'];
+            } else {
+                $projrctArray['address1'] = null;
+            }
+            if (!empty($postValues['projectcountry'])) {
+                $projrctArray['countryName'] = $this->GetCountryById($postValues['projectcountry']);
+            } else {
+                $projrctArray['countryName'] = null;
+            }
+            if (!empty($postValues['projectstate'])) {
+                $projrctArray['stateName'] = $this->GetStateById($postValues['projectstate']);
+            } else {
+                $projrctArray['stateName'] = null;
+            }
+            if (!empty($postValues['projectcity'])) {
+                $projrctArray['cityName'] = $this->GetCityById($postValues['projectcity']);
+            } else {
+                $projrctArray['cityName'] = null;
+            }
+            $projrctArray['zipcode'] = null;
+            $projrctArray['projectBidSituationLookupId'] = $postValues['bidsituation'];
+            $businessDependentdetailsId = $this->insertBusinessDependentDetails($projrctArray);
+        } else {
+            $businessDependentdetailsId = null;
+        }
+
+        if ($postValues['insured_mailingaddress'] == 'Y') {
+            $mailingAddressArray = array();
+            $mailingAddressArray['address1'] = $postValues['newaddress1'];
+            $mailingAddressArray['cityId'] = $postValues['newcity'];
+            $mailingAddressArray['zipcode'] = $postValues['newzipcode'];
+            $altAddressId = $this->insertIntoAddress($mailingAddressArray);
+        } else {
+            $altAddressId = null;
+        }
+
+        if (!empty($userId)) {
+            $dataRecorderMetaDataId = $this->insertDataRecorderMetaData($userId);
+        } else {
+            $dataRecorderMetaDataId = null;
+        }
+
+
+        $con = Propel::getConnection();
+        $query = "INSERT INTO Submission (SubmissionNumber ,NewRenewalLookupId ,UnderwriterId ,LobId ,LobSubTypeId ,SectionId ,ProfitCodeId ,CurrentStatusId ,EffectiveDate ,ExpiryDate ,InsuredId ,IsDifferentDba ,IsDifferentMaillingAddress ,DbaName ,AlternativeAddressId ,DBNumber ,CABCompaniesLookupId ,ReinsuredCompany ,SubmissionIdentifier ,BusinessDependentDetailId ,TotalInsuredValue ,BrokerWiseCityId ,BrokerContactPerson ,BrokerContactPersonEmail ,BrokerContactPersonNumber ,BrokerCode ,BerkSIDateFromBroker ,BerkSiDateFromIndia ,BranchId ,QCStatus ,DataRecorderMetaDataId ,IsTotalInsuredValue , IsBerksiBroker ,IsBerksiIndia ,IsGrossPremium ,IsLimit ,IsAttachmentPoint) 
+                  VALUES 
+                  ('" . $submissionNumber->SUBMISSION_NO . "','" . $newRenewalLookUpId . "','" . $underWritterId . "','" . $productLineId . "', '" . $propductLineSubTypeId . "', '" . $sectionId . "', '" . $profitCodeId . "', '" . $primaryStatus . "', '" . $effectiveDate . "', '" . $expiryDate . "', '" . $insuredId . "', '" . $isDifferentDba . "', '" . $isDifferentMailingAddress . "', '" . $dbaName . "', '" . $altAddressId . "', '" . $dbNember . "', '" . $cabCompaniesLookupId . "', '" . $reinsuredCompany . "', '" . $submissionTypeIdentifier . "', '" . $businessDependentdetailsId . "', '" . $totalInsuredValue . "', '" . $brokerWiseCityId . "', '" . $brokerContactPerson . "','" . $brokerContactPersonEmail . "', '" . $brokerContactPersonNumber . "', '" . $BrokerCode . "', '" . $byBerkSi . "', '" . $byIndia . "','" . $branchId . "','" . $qcStatusId . "', '" . $dataRecorderMetaDataId . "', '".$postValues['yesTrue']."', '".$postValues['yesBroker']."', '".$postValues['yesIndia']."', 'N', 'N' ,'N')";
+        $insert = $con->prepare($query);
+        $insert->execute();
+        return true;
+    }
+
+    public function createSubmissionNumber($completeProductLine) {
+        $con = Propel::getConnection();
+        $stmt = $con->query("SELECT SUBSTRING( CONVERT(VARCHAR(10),YEAR(GETDATE())), 3,2) + '-' +REPLACE(STR(CONVERT(VARCHAR(2),MONTH(GETDATE())), 2),SPACE(1),'0') + '-' +
+                           SUBSTRING('$completeProductLine',1,2) + '-' +REPLACE(STR(CONVERT(VARCHAR(6),(SELECT MAX(Id) FROM Submission)+1), 6),SPACE(1),'0') + '-' +REPLACE(STR(CONVERT(VARCHAR(2),01), 2),SPACE(1),'0') AS SUBMISSION_NO");
+        $data = $stmt->fetch(PDO::FETCH_OBJ);
+        return $data;
+    }
+
+    public function insertBusinessDependentDetails($projrctArray) {
+        $con = Propel::getConnection();
+        $query = "INSERT INTO BusinessDependentDetail 
+              (ProjectName, ProjectGeneralContractorName, ProjectOwnerName, ProjectAddress, BidSituation, ProjectCity, ProjectState, ProjectCountry) 
+               VALUES 
+               ('" . $projrctArray['projectName'] . "','" . $projrctArray['generalContractorName'] . "','" . $projrctArray['projectOwnerName'] . "' ,'" . $projrctArray['address1'] . "', '" . $projrctArray['projectBidSituationLookupId'] . "', '" . $projrctArray['cityName'] . "', '" . $projrctArray['stateName'] . "', '" . $projrctArray['countryName'] . "')";
+        $insert = $con->prepare($query);
+        if ($insert->execute()) {
+            $STH = $con->query("SELECT CAST(COALESCE(SCOPE_IDENTITY(), @@IDENTITY) AS int)");
+            $STH->execute();
+            $result = $STH->fetch();
+            $businessId = $result[0];
+        }
+        return $businessId;
+    }
+
+    public function insertIntoAddress($AddressArray) {
+        $con = Propel::getConnection();
+        $query = "INSERT INTO Address 
+              (AddressLine1, CityId, Zip) 
+               VALUES 
+               ('" . $AddressArray['address1'] . "','" . $AddressArray['cityId'] . "','" . $AddressArray['zipcode'] . "')";
+        $insert = $con->prepare($query);
+        if ($insert->execute()) {
+            $STH = $con->query("SELECT CAST(COALESCE(SCOPE_IDENTITY(), @@IDENTITY) AS int)");
+            $STH->execute();
+            $result = $STH->fetch();
+            $addressId = $result[0];
+        }
+        return $addressId;
+    }
+
+    public function insertDataRecorderMetaData($userId) {
+        $con = Propel::getConnection();
+        $query = "INSERT INTO DataRecorderMetaData 
+              (CreatedBy, CreatedOn) 
+               VALUES 
+               ('" . $userId . "',GETDATE())";
+        $insert = $con->prepare($query);
+        if ($insert->execute()) {
+            $STH = $con->query("SELECT CAST(COALESCE(SCOPE_IDENTITY(), @@IDENTITY) AS int)");
+            $STH->execute();
+            $result = $STH->fetch();
+            $dataRecorderId = $result[0];
+        }
+        return $dataRecorderId;
+    }
+
+    public function getUserName($userId) {
+        $con = Propel::getConnection();
+        $qry = "SELECT FIRSTNAME ,LASTNAME FROM users WHERE USER_ID = '$userId'";
+        $stmt = $con->query($qry);
+        $result = $stmt->fetchAll();
+        return $result[0];
+    }
+
+    public function getCountryId($country) {
+        $con = Propel::getConnection();
+        $qry = "SELECT Id FROM Country WHERE InsuredCountry LIKE " . "'%$country%'";
+        $stmt = $con->query($qry);
+        $result = $stmt->fetchAll();
+        $stateId = $result[0]['Id'];
+        return $stateId;
+    }
+
+    public function getStateId($state) {
+        $con = Propel::getConnection();
+        $qry = "SELECT Id FROM State WHERE FullCode LIKE " . "'%$state'";
+        $stmt = $con->query($qry);
+        $result = $stmt->fetchAll();
+        $stateId = $result[0]['Id'];
+        return $stateId;
+    }
+
+    public function getCityId($city) {
+        $con = Propel::getConnection();
+        $qry = "SELECT Id FROM City WHERE CityFullCode LIKE " . "'%$city'";
+        $stmt = $con->query($qry);
+        $result = $stmt->fetchAll();
+        $stateId = $result[0]['Id'];
+        return $stateId;
+    }
+
+    public function getUnderWritterId($underwritter) {
+        $con = Propel::getConnection();
+        $qry = "SELECT UNDERWRITER_ID FROM UNDERWRITER WHERE UNDERWRITER_NAME = " . "'$underwritter'";
+        $stmt = $con->query($qry);
+        $result = $stmt->fetchAll();
+        $underWritterId = $result[0]['UNDERWRITER_ID'];
+        return $underWritterId;
+    }
+
+    public function getBranchId($branchCode) {
+        $con = Propel::getConnection();
+        $qry = "SELECT Id FROM  Branch WHERE Branch LIKE " . "'$branchCode'";
+        $stmt = $con->query($qry);
+        $result = $stmt->fetchAll();
+        $branchId = $result[0]['Id'];
+        return $branchId;
+    }
+
+    public function getCountryName() {
+        $con = Propel::getConnection();
+        $query = "SELECT * FROM Country WHERE Id != '6';";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    public function getStateName($countryId) {
+        if (empty($countryId)) {
+            $where = 1;
+        } else if (is_numeric($countryId)) {
+            $where = "CountryId = '" . $countryId . "'";
+        }
+        $con = Propel::getConnection();
+        if (empty($countryId)) {
+            $query = "SELECT * FROM State;";
+        } else if (is_numeric($countryId)) {
+            $query = "SELECT * FROM State WHERE CountryId = '" . $countryId . "';";
+        }
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function getCityName($stateId = 0) {
+        $con = Propel::getConnection();
+        if ($stateId == 0) {
+            $query = "SELECT * FROM City";
+        } else {
+            $query = "SELECT * FROM City WHERE StateId = '$stateId' ";
+        }
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    public function getLookUpTypeData($data) {
+        $con = Propel::getConnection();
+        $query = "SELECT L.Id, L.LookupName, L.Alias FROM LookupType as LT LEFT JOIN Lookup as L ON LT.Id = L.LookupTypeId Where LT.LookupTypeName = '$data' ";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    public function getLobData($underWriterName) {
+        $con = Propel::getConnection();
+        if (empty($underWriterName)) {
+            $query = "SELECT * FROM LOB";
+        } else {
+            $query = "SELECT * FROM LOB WHERE Id = '" . $underWriterName[0]->LOBId . "'";
+        }
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    public function getLobSubTypeData($underWriterName) {
+        $con = Propel::getConnection();
+        if ($underWriterName[0]->Id == '20' || $underWriterName[0]->Id == '23' || $underWriterName[0]->Id == '24' || $underWriterName[0]->Id == '25' || $underWriterName[0]->Id == '26' || $underWriterName[0]->Id == '27' || $underWriterName[0]->Id == '28') {
+            $query = "SELECT Id, ProductLineSubType FROM LOBSubType WHERE Id = '" . $underWriterName[0]->LOBSubTypeId . "' AND ProductLineSubType != 'Not Available' order by ProductLineSubType";
+        } else {
+            $query = "SELECT Id, ProductLineSubType FROM LOBSubType WHERE LOBId = '" . $underWriterName[0]->LOBId . "' order by ProductLineSubType";
+        }
+        $stmt = $con->query($query);
+        $finalResult = $stmt->fetchAll();
+        if (empty($finalResult)) {
+            $finalResult['error'] = "No record Found";
+        }
+        return $finalResult;
+    }
+
+    public function getLobSubTypeList() {
+        $con = Propel::getConnection();
+        $query = "SELECT DISTINCT Id, ProductLineSubType FROM LOBSubType Where ProductLineSubType != 'Not Available' AND ProductLineSubType != 'Not Applicable' ";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    public function getLobList($productType) {
+        $con = Propel::getConnection();
+        $qry = "SELECT * FROM LOB WHERE LOBName = " . "'$productType'";
+        $stmt = $con->query($qry);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    public function getSectionList() {
+        $con = Propel::getConnection();
+        $query = "SELECT Id, SectionCode FROM SectionCodeLookup";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function getProfitCodeList() {
+        $con = Propel::getConnection();
+        $query = "SELECT Id, ProfitCodeName FROM  ProfitCodeLookup";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function getBrokerList() {
+        $con = Propel::getConnection();
+        $query = "SELECT Id, BrokerName FROM Broker";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    public function getLookUpTypeList($where) {
+        $con = Propel::getConnection();
+        $query = "SELECT L.Id, L.LookupName, L.Alias FROM  LookupType as LT INNER JOIN Lookup as L ON LT.Id = L.LookupTypeId WHERE LT.LookupTypeName = '$where'";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    public function getStatusList() {
+        $con = Propel::getConnection();
+        $query = "SELECT * FROM Status";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    public function getReasonCodeByStatus() {
+        $con = Propel::getConnection();
+        $query = "SELECT REASON FROM REASON_CODE WHERE STATUS = " . "'declined'";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    public static function getReasonCode() {
+        $con = Propel::getConnection();
+        $query = "SELECT ReasonCodeName,Meaning FROM ReasonCode";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    public function getReasonCodeById($reasonCodeId) {
+        $con = Propel::getConnection();
+        $query = "SELECT ReasonCodeName, Meaning FROM ReasonCode WHERE Id = " . "'$reasonCodeId'";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll();
+        $final = $result[0]['ReasonCodeName'] . '-' . $result[0]['Meaning'];
+        return $final;
+    }
+
+    public static function getPostContent() {
+        return trim(file_get_contents("php://input"));
+    }
+
+    public function getBroker($token = 0) {
+        if ($token == 0) {
+            $where = "";
+        } else if (is_numeric($token)) {
+            $where = "WHERE B.BrokerCode = '" . $token . "'";
+        } else {
+            $where = "WHERE B.BrokerCode = '" . $token . "'";
+        }
+        $con = Propel::getConnection();
+        $query = "SELECT B.Id, B.BrokerCode AS code, B.BrokerName AS name, L.LookupName AS cat  FROM Broker as B LEFT JOIN Lookup as L ON B.BrokerTypeId = L.Id " . $where . " order by BrokerName;";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function getUnderwriterBranchOffice($underwriterID) {
+        $con = Propel::getConnection();
+        $query = "SELECT U.BranchId, B.Branch FROM Underwriter as U LEFT JOIN Branch as B ON U.BranchId = B.Id WHERE U.Id = '" . $underwriterID . "'";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function getSectionCodeName($productDetails) {
+        $con = Propel::getConnection();
+        $propertyName = $productDetails->productLineId;
+        $lobData = $this->getLobList($propertyName);
+        $lobId = $lobData[0]['Id'];
+        $propertySubTypeId = $productDetails->subTypeId;
+        if ($propertyName == 'Property') {
+            $query = "SELECT S.Id, SL.SectionCode from sectioncode S join SectionCodeLookup SL on S.SectionCodeLookupId = SL.Id WHERE S.LobId = '" . $lobId . "' AND S.SectionCodeLookupId != 30 order by SL.SectionCode";
+        } else {
+            $query = "SELECT S.Id, SL.SectionCode from sectioncode S join SectionCodeLookup SL on S.SectionCodeLookupId = SL.Id WHERE S.ProductLineSubTypeId = '" . $propertySubTypeId . "' AND S.SectionCodeLookupId != '30' AND S.LobId !=0 order by SL.SectionCode";
+        }
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if (empty($result)) {
+            $result['error'] = "No record Found";
+        }
+        return $result;
+    }
+
+    public function getProfitCodeId($sectionCodeId, $subTypeId, $lobId) {
+        $con = Propel::getConnection();
+        $sectionQuery = "SELECT SectionCodeLookupId from SectionCode WHERE Id = '" . $sectionCodeId . "' AND LobId is not null";
+        $stmt1 = $con->query($sectionQuery);
+        $sectionResult = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+        $sectionId = $sectionResult[0]['SectionCodeLookupId'];
+        if ($lobId == 'Property') {
+            $query = "SELECT P.Id, PL.ProfitCodeName from ProfitCode P join ProfitCodeLookup PL on P.ProfitCodeLookupId = PL.Id WHERE P.SectionCodeLookupId = '" . $sectionId . "' AND P.LobId is not null order by PL.ProfitCodeName";
+        } else {
+            $query = "SELECT P.Id, PL.ProfitCodeName from ProfitCode P join ProfitCodeLookup PL on P.ProfitCodeLookupId = PL.Id WHERE P.SectionCodeLookupId = '" . $sectionId . "' AND P.LobSubTypeId = '" . $subTypeId . "' AND P.LobId is not null order by PL.ProfitCodeName";
+        }
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if (empty($result)) {
+            $result['error'] = "No record Found";
+        }
+        return $result;
+    }
+
+    public function getProfitCodeIdBySubType($subTypeId) {
+        $con = Propel::getConnection();
+        $query = "SELECT P.Id, PL.ProfitCodeName from ProfitCode P join ProfitCodeLookup PL on P.ProfitCodeLookupId = PL.Id WHERE P.LobSubTypeId = '" . $subTypeId . "' AND P.LobId is not null";
+        $stmt1 = $con->query($query);
+        $result = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+        if (empty($result)) {
+            $result['error'] = "No record Found";
+        }
+        return $result;
+    }
+
+    public static function getSubmissionNumber($submissionId) {
+        $con = Propel::getConnection();
+        $query = "SELECT SubmissionNumber FROM Submission WHERE Id =" . $submissionId;
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result[0]['SubmissionNumber'];
+    }
+
+    public static function getUserGroup($group_id) {
+        $con = Propel::getConnection();
+        $query = "SELECT GROUP_NAME FROM Groups WHERE GROUP_ID =" . $group_id;
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result[0]['GROUP_NAME'];
+    }
+
+    public function getInsuredSuggestionList($queryString) {
+        $con = Propel::getConnection();
+        $query = "SELECT I.Id as InsuredId, I.InsuredName, I.AddressLine1 as Address, I.Zip, I.City,I.State as StateName, I.Country as InsuredCountry FROM Insured as I WHERE I.InsuredName LIKE '" . $queryString . "%';";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $string = '';
+        if (!empty($result)) {
+            foreach ($result as $values) {
+                $string.= '<tr>';
+                $string .= '<td><input type="radio" id="chooseinsured" name="choose-insured" value= "' . $values['InsuredId'] . '" /></td>';
+                $string .= '<td> ' . $values['InsuredName'] . '</td>';
+                $string .= '<td> ' . $values['Address'] . '</td>';
+                $string .= '<td> ' . $values['InsuredCountry'] . '</td>';
+                $string .= '<td> ' . $values['StateName'] . '</td>';
+                $string .= '<td> ' . $values['City'] . '</td>';
+                $string .= '<td> ' . $values['Zip'] . '</td>';
+                $string.= '</tr>';
+            }
+        } else {
+            $string.= '<tr>';
+            $string.= '<td>No Record found</td>';
+            $string.= '</tr>';
+        }
+        echo $string;
+        exit;
+    }
+
+    public function getInsuredDetails($queryString) {
+        $con = Propel::getConnection();
+        $query = "SELECT I.Id as InsuredId, I.InsuredName, I.AddressLine1 as Address, I.Zip, I.City, I.State as StateName, I.Country as InsuredCountry FROM Insured as I WHERE I.Id = $queryString ";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $finalArray = array();
+        $finalArray['insuredId'] = $result[0]['InsuredId'];
+        $finalArray['insuredName'] = $result[0]['InsuredName'];
+        $finalArray['address'] = $result[0]['Address'];
+        $finalArray['country'] = $result[0]['InsuredCountry'];
+        $finalArray['state'] = $result[0]['StateName'];
+        $finalArray['city'] = $result[0]['City'];
+        $finalArray['zipcode'] = $result[0]['Zip'];
+        return $finalArray;
+    }
+
+    public function validateSubmissionForm($request) {
+        if ($request->hasParameter('new_renewal') && !$request->getPostParameter('new_renewal')) {
+            array_push($error, "Please select submission type");
+        } else if ($request->hasParameter('underwriter') && !$request->getPostParameter('underwriter')) {
+            array_push($error, "Please select underwriter");
+        } else if ($request->hasParameter('INSURED_NAME') && !$request->getPostParameter('INSURED_NAME')) {
+            array_push($error, "Please enter insured name");
+        } else if ($request->hasParameter('IS_NAME_DIFFERENT') && $request->getPostParameter('IS_NAME_DIFFERENT') == 'Y' && !$request->getPostParameter('INSURED_NAME_DNB')) {
+            array_push($error, "Please enter new insured name");
+        } else if ($request->hasParameter('MAIL_ADDRESS_LINE1') && !$request->getPostParameter('MAIL_ADDRESS_LINE1')) {
+            array_push($error, "Please enter mailing address line1");
+        } else if ($request->hasParameter('MAIL_ADDRESS_LINE2') && !$request->getPostParameter('MAIL_ADDRESS_LINE2')) {
+            array_push($error, "Please enter mailing address line2");
+        } else if ($request->hasParameter('MAIL_STATE_ID') && !$request->getPostParameter('MAIL_STATE_ID')) {
+            array_push($error, "Please select mailing state");
+        } else if ($request->hasParameter('MAIL_CITY') && !$request->getPostParameter('MAIL_CITY')) {
+            array_push($error, "Please enter mailing city");
+        } else if ($request->hasParameter('MAIL_ZIP_CODE') && !$request->getPostParameter('MAIL_ZIP_CODE')) {
+            array_push($error, "Please enter mailing zipcode");
+        } else if ($request->hasParameter('MAIL_COUNTRY') && !$request->getPostParameter('MAIL_COUNTRY')) {
+            array_push($error, "Please enter mailing country");
+        } else if ($request->hasParameter('SUB_ADDRESS_LINE1') && !$request->getPostParameter('SUB_ADDRESS_LINE1') && $request->getPostParameter('insured_address_status') == 'Y') {
+            array_push($error, "Please enter submission address line1");
+        } else if ($request->hasParameter('SUB_ADDRESS_LINE2') && !$request->getPostParameter('SUB_ADDRESS_LINE2') && $request->getPostParameter('insured_address_status') == 'Y') {
+            array_push($error, "Please enter submission address line2");
+        } else if ($request->hasParameter('SUB_STATE_ID') && !$request->getPostParameter('SUB_STATE_ID') && $request->getPostParameter('insured_address_status') == 'Y') {
+            array_push($error, "Please select submission state");
+        } else if ($request->hasParameter('SUB_CITY') && !$request->getPostParameter('SUB_CITY') && $request->getPostParameter('insured_address_status') == 'Y') {
+            array_push($error, "Please enter submission city");
+        } else if ($request->hasParameter('SUB_ZIP_CODE') && !$request->getPostParameter('SUB_ZIP_CODE') && $request->getPostParameter('insured_address_status') == 'Y') {
+            array_push($error, "Please enter submission zipcode");
+        } else if ($request->hasParameter('SUB_COUNTRY') && !$request->getPostParameter('SUB_COUNTRY') && $request->getPostParameter('insured_address_status') == 'Y') {
+            array_push($error, "Please enter submission country");
+        } else if ($request->hasParameter('EFFECTIVE_DATE') && !$request->getPostParameter('EFFECTIVE_DATE')) {
+            array_push($error, "Please enter effective date");
+        } else if ($request->hasParameter('EXPIRATION_DATE') && !$request->getPostParameter('EXPIRATION_DATE')) {
+            array_push($error, "Please enter expiration date");
+        } else if ($request->hasParameter('brokerCode') && !$request->getPostParameter('brokerCode')) {
+            array_push($error, "Please select broker code");
+        } else if ($request->hasParameter('brokerCountryCode') && !$request->getPostParameter('brokerCountryCode')) {
+            array_push($error, "Please select broker country code");
+        } else if ($request->hasParameter('brokerStateCode') && !$request->getPostParameter('brokerStateCode')) {
+            array_push($error, "Please select broker state code");
+        } else if ($request->hasParameter('brokerCityCode') && !$request->getPostParameter('brokerCityCode')) {
+            array_push($error, "Please enter broker city code");
+        } else if ($request->hasParameter('SUBMISSION_BRANCH_ID') && !$request->getPostParameter('SUBMISSION_BRANCH_ID')) {
+            array_push($error, "Please select branch code");
+        } else if ($request->hasParameter('UNDERWRITER_ID') && !$request->getPostParameter('UNDERWRITER_ID')) {
+            array_push($error, "Please select underwriter");
+        } else if ($request->hasParameter('PRODUCT_ID') && !$request->getPostParameter('PRODUCT_ID')) {
+            array_push($error, "Please select product");
+        } else if ($request->hasParameter('PRIMARY_STATUS') && !$request->getPostParameter('PRIMARY_STATUS')) {
+            array_push($error, "Please select primary status");
+        } else if ($request->hasParameter('SECONDARY_STATUS') && !$request->getPostParameter('SECONDARY_STATUS')) {
+            array_push($error, "Please select secondary status");
+        } else if ($request->hasParameter('OCCUR_LIMIT') && !$request->getPostParameter('OCCUR_LIMIT') && $request->getPostParameter('PRIMARY_STATUS') == 'quoted') {
+            array_push($error, "Please enter occur limit");
+        } else if ($request->hasParameter('PREMIUM_DAMAGE') && !$request->getPostParameter('PREMIUM_DAMAGE') && $request->getPostParameter('PRIMARY_STATUS') != 'quoted') {
+            array_push($error, "Please enter premium damage");
+        } else if ($request->hasParameter('MEDICAL_LIMIT') && !$request->getPostParameter('MEDICAL_LIMIT') && $request->getPostParameter('PRIMARY_STATUS') != 'quoted') {
+            array_push($error, "Please enter medical limit");
+        } else if ($request->hasParameter('PER_INJURY_LIMIT') && !$request->getPostParameter('PER_INJURY_LIMIT') && $request->getPostParameter('PRIMARY_STATUS') != 'quoted') {
+            array_push($error, "Please enter per injury limit");
+        } else if ($request->hasParameter('AGGREGATE_LIMIT') && !$request->getPostParameter('AGGREGATE_LIMIT') && $request->getPostParameter('PRIMARY_STATUS') != 'quoted') {
+            array_push($error, "Please enter aggregate limit");
+        } else if ($request->hasParameter('OPERATION_AGGREGATE') && !$request->getPostParameter('OPERATION_AGGREGATE') && $request->getPostParameter('PRIMARY_STATUS') != 'quoted') {
+            array_push($error, "Please enter operation aggregate");
+        } else if ($request->hasParameter('PREMIUM') && !$request->getPostParameter('PREMIUM') && $request->getPostParameter('PRIMARY_STATUS') != 'quoted') {
+            array_push($error, "Please enter premium");
+        }
+    }
+
+    public function GetBrokerCountry($brokerCode) {
+        $con = Propel::getConnection();
+        $query = "SELECT DISTINCT Co.Id, Co.InsuredCountry FROM  Broker as B LEFT JOIN BrokerWiseCity as BW ON B.Id = BW.BrokerId LEFT JOIN City as C ON BW.CityId = C.Id LEFT JOIN State as S ON C.StateId = S.Id LEFT JOIN Country as Co ON S.CountryId = Co.Id  WHERE B.BrokerCode = '$brokerCode' ";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function GetBrokerState($brokerCode, $country) {
+        $con = Propel::getConnection();
+        $query = "SELECT DISTINCT S.Id, S.FullCode,S.StateCode FROM  Broker as B LEFT JOIN BrokerWiseCity as BW ON B.Id = BW.BrokerId LEFT JOIN City as C ON BW.CityId = C.Id LEFT JOIN State as S ON C.StateId = S.Id  WHERE B.BrokerCode = '$brokerCode' AND S.CountryId = '$country'";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function GetBrokerCity($brokerCode, $stateId) {
+        $con = Propel::getConnection();
+        $query = "SELECT DISTINCT C.Id, C.CityFullCode FROM  Broker as B LEFT JOIN BrokerWiseCity as BW ON B.Id = BW.BrokerId LEFT JOIN City as C ON BW.CityId = C.Id WHERE B.BrokerCode = '$brokerCode' AND C.StateId = '$stateId'";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function BrokerBranchOffice($stateCode, $brokerType) {
+        $con = Propel::getConnection();
+        if ($brokerType == 'Retailer') {
+            $query = "SELECT Retailer FROM  BrokerStateBranch WHERE StateCode = '$stateCode' ";
+        } else {
+            $query = "SELECT WholeSaler FROM  BrokerStateBranch WHERE StateCode = '$stateCode' ";
+        }
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function GetCountryById($countryId) {
+        $con = Propel::getConnection();
+        $query = "SELECT * FROM Country Where Id = '" . $countryId . "';";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll();
+        return $result[0]['InsuredCountry'];
+    }
+
+    public function GetStateById($stateId) {
+        $con = Propel::getConnection();
+        $query = "SELECT * FROM State Where Id = '" . $stateId . "';";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll();
+        return $result[0]['FullCode'];
+    }
+
+    public function GetCityById($cityId) {
+        $con = Propel::getConnection();
+        $query = "SELECT * FROM City Where Id = '" . $cityId . "';";
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll();
+        return $result[0]['CityFullCode'];
+    }
+
+    public static function getSubmissionIdentifier($submissionIdentifierId) {
+        $con = Propel::getConnection();
+        if (empty($submissionIdentifierId)) {
+            $query = "SELECT Id, Name FROM SubmissionTypeIndicator";
+        } else {
+            $query = "SELECT Id, Name FROM SubmissionTypeIndicator WHERE Id =" . $submissionIdentifierId;
+        }
+        $stmt = $con->query($query);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+}

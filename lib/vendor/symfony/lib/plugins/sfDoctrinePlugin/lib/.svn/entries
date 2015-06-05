@@ -1,0 +1,104 @@
+10
+
+dir
+65
+http://svn.bil.com/reservation/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib
+http://svn.bil.com/reservation
+
+
+
+2013-12-03T06:16:34.784112Z
+4
+sumit.pachouri
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+721f21b2-5006-11e3-9cba-e33837192d26
+
+pager
+dir
+
+task
+dir
+
+form
+dir
+
+database
+dir
+
+cli
+dir
+
+mailer
+dir
+
+sfDoctrineException.class.php
+file
+
+
+
+
+2013-12-03T06:27:23.777462Z
+29381328202ea19cc35c83378f73cca1
+2013-12-03T06:16:34.784112Z
+4
+sumit.pachouri
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+656
+
+record
+dir
+
+test
+dir
+
+widget
+dir
+
+validator
+dir
+
+debug
+dir
+
+generator
+dir
+
+routing
+dir
+
+vendor
+dir
+

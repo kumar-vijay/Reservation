@@ -1,0 +1,149 @@
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/model/doctrine/base
+END
+BaseModelWithNumberInColumn.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 193
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/model/doctrine/base/BaseModelWithNumberInColumn.class.php
+END
+BaseFormGeneratorTest.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 187
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/model/doctrine/base/BaseFormGeneratorTest.class.php
+END
+BaseAuthorInheritance.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 187
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/model/doctrine/base/BaseAuthorInheritance.class.php
+END
+BaseCamelCase.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 179
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/model/doctrine/base/BaseCamelCase.class.php
+END
+BaseUser.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 174
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/model/doctrine/base/BaseUser.class.php
+END
+BaseDefaultValueTest.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 186
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/model/doctrine/base/BaseDefaultValueTest.class.php
+END
+BaseArticle.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 177
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/model/doctrine/base/BaseArticle.class.php
+END
+BaseSubscription.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 182
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/model/doctrine/base/BaseSubscription.class.php
+END
+BaseBlogArticle.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 181
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/model/doctrine/base/BaseBlogArticle.class.php
+END
+BaseUserPermission.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 184
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/model/doctrine/base/BaseUserPermission.class.php
+END
+BaseAttachment.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 180
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/model/doctrine/base/BaseAttachment.class.php
+END
+BasePermission.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 180
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/model/doctrine/base/BasePermission.class.php
+END
+BaseResourceType.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 182
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/model/doctrine/base/BaseResourceType.class.php
+END
+BaseUserGroup.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 179
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/model/doctrine/base/BaseUserGroup.class.php
+END
+BaseModelFromLinkedSchema.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 191
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/model/doctrine/base/BaseModelFromLinkedSchema.class.php
+END
+BaseGroup.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 175
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/model/doctrine/base/BaseGroup.class.php
+END
+BaseFormGeneratorTest2.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 188
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/model/doctrine/base/BaseFormGeneratorTest2.class.php
+END
+BaseFormGeneratorTest3.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 188
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/model/doctrine/base/BaseFormGeneratorTest3.class.php
+END
+BaseAuthorInheritanceConcrete.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 195
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/model/doctrine/base/BaseAuthorInheritanceConcrete.class.php
+END
+BaseProfile.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 177
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/model/doctrine/base/BaseProfile.class.php
+END
+BaseAuthor.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 176
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/model/doctrine/base/BaseAuthor.class.php
+END
+BaseGroupPermission.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 185
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/model/doctrine/base/BaseGroupPermission.class.php
+END
+BaseBlogAuthor.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 180
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/model/doctrine/base/BaseBlogAuthor.class.php
+END
+BaseUniqueTest.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 180
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/lib/model/doctrine/base/BaseUniqueTest.class.php
+END

@@ -1,0 +1,106 @@
+YUI.add("button-tabs", function(Y) {
+	
+	function buttonTabs(config) {
+		buttonTabs.superclass.constructor.apply(this, arguments);
+	}
+	buttonTabs.NAME = 'buttonTabs';
+	buttonTabs.NS = 'bT';
+	
+	buttonTabs.ATTRS = {
+		'host' : {
+			'value' : null
+		},
+		'duration' : {
+			'value' : 0.2			// Tabs Switch Animation Duration
+		},
+		'tabsContentContainer' : {
+			'value' : null			// Class/ID of content parent div
+		},
+		'activeClass' : {
+			'value' : null			// Class to add on button on Mouseover/Click
+		},
+		'alreadyActive' : {
+			'value' : false			// is button already active/clicked
+		}
+	}
+	
+	Y.extend(buttonTabs, Y.Plugin.Base, {
+		'initializer' : function(config) {
+			this.set('host' , config.host);
+			this._setupTabs();
+		},
+		'destructor' : function() {
+			
+		},
+		'_setupTabs' : function() {
+			var Bt = this.get('host'),
+				BtContainer = Y.one(this.get('tabsContentContainer')),
+				activeClass = this.get('activeClass'),
+				lastOpened = 0,
+				that = this;
+				
+			Bt.get('children').each(function(node,index){
+				node.on('click', function(e){
+					node.addClass(activeClass);
+					node.siblings().removeClass(activeClass);
+					if(lastOpened != index){
+						that._setUpAnim(BtContainer.get('children').item(index),BtContainer.get('children').item(lastOpened));
+					}
+					lastOpened = index;
+				});
+			});
+			
+		},
+		'_setUpAnim' : function (showNode, hideNode){
+			var Bt = this.get('host'),
+				BtContainer = Y.one(this.get('tabsContentContainer'));
+		
+			var showAnim = new Y.Anim({
+				'node' : showNode,
+				'duration' : 0.2,
+				'easing' : 'easeOut',
+				'from' : {
+					'opacity' : 0
+				},
+				'to' : {
+					'opacity' : 1
+				},
+				'on' : {
+					'start' : function(){
+						showNode.setStyle('opacity','0');
+						showNode.removeClass('display-none');
+					},
+					'end' : function(){
+						
+					}
+				}
+			});
+			
+			var hideAnim = new Y.Anim({
+				'node' : hideNode,
+				'duration' : 0.2,
+				'easing' : 'easeOut',
+				'from' : {
+					'opacity' : 1
+				},
+				'to' : {
+					'opacity' : 0
+				},
+				'on' : {
+					'start' : function(){
+						
+					},
+					'end' : function(){
+						showAnim.run();
+						hideNode.addClass('display-none');
+					}
+				}
+			});
+		
+		hideAnim.run();
+		
+		}
+	});
+	
+	Y.namespace('Plugin').buttonTabs = buttonTabs;
+}, "3.5.1", {requires:['plugin','anim','event','node']});

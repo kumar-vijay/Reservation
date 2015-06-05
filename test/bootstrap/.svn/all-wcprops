@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/test/bootstrap
+END
+unit.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/test/bootstrap/unit.php
+END
+functional.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/test/bootstrap/functional.php
+END

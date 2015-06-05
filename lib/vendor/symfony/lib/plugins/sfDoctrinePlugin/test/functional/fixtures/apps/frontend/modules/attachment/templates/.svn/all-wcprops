@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 174
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/apps/frontend/modules/attachment/templates
+END
+editableSuccess.php
+K 25
+svn:wc:ra_dav:version-url
+V 194
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/apps/frontend/modules/attachment/templates/editableSuccess.php
+END
+indexInput.php
+K 25
+svn:wc:ra_dav:version-url
+V 189
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/apps/frontend/modules/attachment/templates/indexInput.php
+END
+editableInput.php
+K 25
+svn:wc:ra_dav:version-url
+V 192
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/apps/frontend/modules/attachment/templates/editableInput.php
+END
+indexSuccess.php
+K 25
+svn:wc:ra_dav:version-url
+V 191
+/reservation/!svn/ver/8/branches/03-12-2013_Newreservation/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/test/functional/fixtures/apps/frontend/modules/attachment/templates/indexSuccess.php
+END

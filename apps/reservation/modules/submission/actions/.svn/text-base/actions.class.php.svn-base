@@ -1,0 +1,733 @@
+<?php
+
+/**
+ * submission actions.
+ *
+ * @package    reservation
+ * @subpackage submission
+ * @author     Your name here
+ * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
+ */
+class submissionActions extends sfActions {
+
+    /**
+     * Executes index action
+     *
+     * @param sfRequest $request A request object
+     */
+    public function executeIndex(sfWebRequest $request) {
+        $this->forward("submission", "List");
+    }
+
+    public function executeList(sfWebRequest $request) {
+
+        $obj = new SubmissionDetails();
+        $this->nerrenewal = $obj->getLookUpTypeList('NewRenewal');
+        $this->branchOffice = SubmissionDetails::getBranchOffice();
+        $this->status = $obj->getStatusList();
+        $this->underWriter = SubmissionDetails::getUnderWriterName();
+        $this->reasonCode = SubmissionDetails::getReasonCode();
+        $this->lobData = $obj->getLobData();
+        $this->lobSubTypeList = $obj->getLobSubTypeList();
+        $this->sectionList = $obj->getSectionList();
+        $this->profitCodeList = $obj->getProfitCodeList();
+        $this->brokerList = $obj->getBrokerList();
+        $this->brokerType = $obj->getLookUpTypeList('BrokerType');
+        $this->brokerCity = $obj->getCityName();
+        $this->cabCompanies = $obj->getLookUpTypeList('CabCompanies');
+        $this->qcStatus = $obj->getLookUpTypeList('QCStatus');
+
+        if ($request->getParameter('niddle')) {
+            $this->lastSearchCriteria = $this->getUser()->getAttribute('searchNiddle');
+        } else {
+            $this->getUser()->setAttribute('searchNiddle', '');
+        }
+        
+        if ($request->isMethod('GET')) {
+            if($request->getParameter('sort')){;
+               $column = $request->getParameter('sort');
+               $order = $request->getParameter('order');
+            }
+        }
+        if ($request->isMethod('POST')) {
+            $this->getUser()->setAttribute('searchNiddle', '');
+            $SubmissionNumber = $request->getParameter('submissionNo', '');
+            $InsuredName = $request->getParameter('InsuredName', '');
+            $newRenewal = $request->getParameter('newrenewal', '');
+            $SubmissionFromDate = $request->getParameter('SubmissionFromDate', '');
+            $SubmissionToDate = $request->getParameter('SubmissionToDate', '');
+            $Underwriter = $request->getParameter('Underwriter', '');
+            $Branch = $request->getParameter('Branch', '');
+            $Status = $request->getParameter('Status', '');
+            $ReasonCode = $request->getParameter('reasoncode', '');
+            $ProductLine = $request->getParameter('productline', '');
+            $ProductLineSubType = $request->getParameter('productsubtype', '');
+            $Section = $request->getParameter('section', '');
+            $ProfitCode = $request->getParameter('profitcode', '');
+            $BrokerName = $request->getParameter('brokername', '');
+            $BrokerType = $request->getParameter('brokertype', '');
+            $BrokerCity = $request->getParameter('brokercity', '');
+            $CabCompanies = $request->getParameter('cabcompanies', '');
+            $EffectiveFromDate = $request->getParameter('EffectiveFromDate', '');
+            $EffectiveToDate = $request->getParameter('EffectiveToDate', '');
+            $ExpirationFromDate = $request->getParameter('ExpirationFromDate', '');
+            $ExpirationToDate = $request->getParameter('ExpirationToDate', '');
+            $ProcessFromDate = $request->getParameter('ProcessFromDate', '');
+            $ProcessToDate = $request->getParameter('ProcessToDate', '');
+            $EditFromDate = $request->getParameter('EditFromDate', '');
+            $EditToDate = $request->getParameter('EditToDate', '');
+            $QcStatus = $request->getParameter('qcstatus', '');
+
+            $this->lastSearchCriteria = array(
+                'SubmissionNo' => $SubmissionNumber,
+                'InsuredName' => $InsuredName,
+                'NewRenewal' => $newRenewal,
+                'SubmissionFromDate' => $SubmissionFromDate,
+                'SubmissionToDate' => $SubmissionToDate,
+                'UnderwriterName' => $Underwriter,
+                'Branch' => $Branch,
+                'Status' => $Status,
+                'ReasonCode' => $ReasonCode,
+                'ProductLine' => $ProductLine,
+                'ProductLineSubType' => $ProductLineSubType,
+                'Section' => $Section,
+                'ProfitCode' => $ProfitCode,
+                'BrokerName' => $BrokerName,
+                'BrokerType' => $BrokerType,
+                'BrokerCity' => $BrokerCity,
+                'CabCompanies' => $CabCompanies,
+                'EffectiveFromDate' => $EffectiveFromDate,
+                'EffectiveToDate' => $EffectiveToDate,
+                'ExpirationFromDate' => $ExpirationFromDate,
+                'ExpirationToDate' => $ExpirationToDate,
+                'ProcessFromDate' => $ProcessFromDate,
+                'ProcessToDate' => $ProcessToDate,
+                'EditFromDate' => $EditFromDate,
+                'EditToDate' => $EditToDate,
+                'QcStatus' => $QcStatus
+            );
+
+            $this->getUser()->setAttribute('searchNiddle', $this->lastSearchCriteria);
+        }
+
+        //Saving this last search criteria
+        $criteria = SubmissionDetails::getSearchCriteria($this->lastSearchCriteria, $column,$order);
+        $this->numberofResults = SubmissionSearchPeer::doCount($criteria);
+        $this->arrData = new sfPropelPager('SubmissionSearch', sfConfig::get('app_paginationlimit', 1));
+        $this->arrData->setCriteria($criteria);
+        $this->arrData->setPage($request->getParameter('page', 1));
+        $this->arrData->init();
+    }
+
+    public function executeQCList($request) {
+
+        $obj = new SubmissionDetails();
+        $this->nerrenewal = $obj->getLookUpTypeList('NewRenewal');
+        $this->branchOffice = SubmissionDetails::getBranchOffice();
+        $this->status = $obj->getStatusList();
+        $this->underWriter = SubmissionDetails::getUnderWriterName();
+        $this->reasonCode = SubmissionDetails::getReasonCode();
+        $this->lobData = $obj->getLobData();
+        $this->lobSubTypeList = $obj->getLobSubTypeList();
+        $this->sectionList = $obj->getSectionList();
+        $this->profitCodeList = $obj->getProfitCodeList();
+        $this->brokerList = $obj->getBrokerList();
+        $this->brokerType = $obj->getLookUpTypeList('BrokerType');
+        $this->brokerCity = $obj->getCityName();
+        $this->cabCompanies = $obj->getLookUpTypeList('CabCompanies');
+
+        if ($request->getParameter('niddle')) {
+            $this->lastSearchCriteria = $this->getUser()->getAttribute('searchNiddle');
+        } else {
+            $this->getUser()->setAttribute('searchNiddle', '');
+        }
+        
+        if ($request->isMethod('GET')) {
+            if($request->getParameter('sort')){;
+               $column = $request->getParameter('sort');
+               $order = $request->getParameter('order');
+            }
+        }
+
+        if ($request->isMethod('POST')) {
+            $this->getUser()->setAttribute('searchNiddle', '');
+            $SubmissionNumber = $request->getParameter('submissionNo', '');
+            $InsuredName = $request->getParameter('InsuredName', '');
+            $newRenewal = $request->getParameter('newrenewal', '');
+            $SubmissionFromDate = $request->getParameter('SubmissionFromDate', '');
+            $SubmissionToDate = $request->getParameter('SubmissionToDate', '');
+            $Underwriter = $request->getParameter('Underwriter', '');
+            $Branch = $request->getParameter('Branch', '');
+            $Status = $request->getParameter('Status', '');
+            $ReasonCode = $request->getParameter('reasoncode', '');
+            $ProductLine = $request->getParameter('productline', '');
+            $ProductLineSubType = $request->getParameter('productsubtype', '');
+            $Section = $request->getParameter('section', '');
+            $ProfitCode = $request->getParameter('profitcode', '');
+            $BrokerName = $request->getParameter('brokername', '');
+            $BrokerType = $request->getParameter('brokertype', '');
+            $BrokerCity = $request->getParameter('brokercity', '');
+            $CabCompanies = $request->getParameter('cabcompanies', '');
+            $EffectiveFromDate = $request->getParameter('EffectiveFromDate', '');
+            $EffectiveToDate = $request->getParameter('EffectiveToDate', '');
+            $ExpirationFromDate = $request->getParameter('ExpirationFromDate', '');
+            $ExpirationToDate = $request->getParameter('ExpirationToDate', '');
+            $ProcessFromDate = $request->getParameter('ProcessFromDate', '');
+            $ProcessToDate = $request->getParameter('ProcessToDate', '');
+            $EditFromDate = $request->getParameter('EditFromDate', '');
+            $EditToDate = $request->getParameter('EditToDate', '');
+
+            $this->lastSearchCriteria = array(
+                'SubmissionNo' => $SubmissionNumber,
+                'InsuredName' => $InsuredName,
+                'NewRenewal' => $newRenewal,
+                'SubmissionFromDate' => $SubmissionFromDate,
+                'SubmissionToDate' => $SubmissionToDate,
+                'Underwriter' => $Underwriter,
+                'Branch' => $Branch,
+                'Status' => $Status,
+                'ReasonCode' => $ReasonCode,
+                'ProductLine' => $ProductLine,
+                'ProductLineSubType' => $ProductLineSubType,
+                'Section' => $Section,
+                'ProfitCode' => $ProfitCode,
+                'BrokerName' => $BrokerName,
+                'BrokerType' => $BrokerType,
+                'BrokerCity' => $BrokerCity,
+                'CabCompanies' => $CabCompanies,
+                'EffectiveFromDate' => $EffectiveFromDate,
+                'EffectiveToDate' => $EffectiveToDate,
+                'ExpirationFromDate' => $ExpirationFromDate,
+                'ExpirationToDate' => $ExpirationToDate,
+                'ProcessFromDate' => $ProcessFromDate,
+                'ProcessToDate' => $ProcessToDate,
+                'EditFromDate' => $EditFromDate,
+                'EditToDate' => $EditToDate,
+            );
+            $this->getUser()->setAttribute('searchNiddle', $this->lastSearchCriteria);
+        }
+
+        //Saving this last search criteria
+        $criteria = SubmissionDetails::getQcSearchCriteria($this->lastSearchCriteria, $column,$order);
+        $this->numberofResults = QcSearchPeer::doCount($criteria);
+        $this->arrData = new sfPropelPager('QcSearch', sfConfig::get('app_paginationlimit', 1));
+        $this->arrData->setCriteria($criteria);
+        $this->arrData->setPage($request->getParameter('page', 1));
+        $this->arrData->init();
+    }
+
+    public function executeExportFile() {
+        $niddle = $this->getUser()->getAttribute('searchNiddle');
+        $objSubmission = new SubmissionDetails();
+        $objSubmission->exportCSV($niddle);
+        exit;
+    }
+
+    public function executeExportQCFile() {
+        $niddle = $this->getUser()->getAttribute('searchNiddle');
+        $objSubmission = new SubmissionDetails();
+        $objSubmission->exportQCCSV($niddle);
+        exit;
+    }
+
+    public function executeCreateSubmission(sfWebRequest $request) {
+        $userId = $this->getUser()->getAttribute('id');
+        $postValues = $request->getPostParameters();
+
+        $obj = new SubmissionDetails();
+        $this->countryName = $obj->getCountryName();
+        $this->newRenew = $obj->getLookUpTypeData('NewRenewal');
+        $this->underwritterName = $obj->getUnderWriterName();
+        $this->cabCompanies = $obj->getLookUpTypeData('CabCompanies');
+        $this->bidSituation = $obj->getLookUpTypeData('Bidsituation');
+        $this->brokerDetails = $obj->getBroker();
+        $this->submissionIdentifier = $obj->getSubmissionIdentifier();
+        if ($request->getPostParameters()) {
+            $result = $obj->submitData($postValues, $userId);
+            $this->redirect('submission/List');
+        }
+    }
+
+    public function executeEditSubmission(sfWebRequest $request) {
+        $userId = $this->getUser()->getAttribute('id');
+        $this->submissionId = 0;
+        $postedValues = $request->getPostParameters();
+        $editObj = new EditSubmissionDetails();
+        $objSubmision = new SubmissionDetails();
+        $this->country = $objSubmision->getCountryName();
+        $error = array();
+        // Back end validations starts
+        if ($request->hasParameter('submission') && $request->getPostParameter()) {
+            if ($request->hasParameter('newrenewal') && !$request->getPostParameter('newrenewal')) {
+                array_push($error, "Please select submission type");
+            } else if ($request->hasParameter('editunderwriter') && !$request->getPostParameter('editunderwriter')) {
+                array_push($error, "Please select underwriter");
+            } else if ($request->hasParameter('editproductlinesubtype') && !$request->getPostParameter('editproductlinesubtype')) {
+                array_push($error, "Please select submission sub type");
+            } else if ($request->hasParameter('editsection') && !$request->getPostParameter('editsection')) {
+                array_push($error, "Please select section");
+            } else if ($request->hasParameter('editprofitcode') && !$request->getPostParameter('editprofitcode')) {
+                array_push($error, "Please select Profit code");
+            } else if ($request->hasParameter('db_number') && !$request->getPostParameter('db_number')) {
+                array_push($error, "Please enter DB number");
+            } else if ($request->hasParameter('editinsuredname') && !$request->getPostParameter('editinsuredname')) {
+                array_push($error, "Please enter insured name");
+            } else if ($request->hasParameter('insured_name_status') && $request->getPostParameter('insured_name_status') == 'Y' && !$request->getPostParameter('dbaName')) {
+                array_push($error, "Please enter new insured name");
+            } else if ($request->hasParameter('altAddressLine1') && !$request->getPostParameter('altAddressLine1')) {
+                array_push($error, "Please enter alternate mailing address line1");
+            } else if ($request->hasParameter('altState') && !$request->getPostParameter('altState')) {
+                array_push($error, "Please select alternate mailing state");
+            } else if ($request->hasParameter('altCity') && !$request->getPostParameter('altCity')) {
+                array_push($error, "Please enter alternate mailing city");
+            } else if ($request->hasParameter('altZipCode') && !$request->getPostParameter('altZipCode')) {
+                array_push($error, "Please enter alternate mailing zipcode");
+            } else if ($request->hasParameter('altCountry') && !$request->getPostParameter('altCountry')) {
+                array_push($error, "Please enter alternate mailing country");
+            } else if ($request->hasParameter('insured_address') && !$request->getPostParameter('insured_address') && $request->getPostParameter('insured_address_status') == 'Y') {
+                array_push($error, "Please enter submission address line1");
+            } else if ($request->hasParameter('insured_state') && !$request->getPostParameter('insured_state') && $request->getPostParameter('insured_address_status') == 'Y') {
+                array_push($error, "Please select submission state");
+            } else if ($request->hasParameter('insured_city') && !$request->getPostParameter('insured_city') && $request->getPostParameter('insured_address_status') == 'Y') {
+                array_push($error, "Please enter submission city");
+            } else if ($request->hasParameter('insured_zipcode') && !$request->getPostParameter('insured_zipcode') && $request->getPostParameter('insured_address_status') == 'Y') {
+                array_push($error, "Please enter submission zipcode");
+            } else if ($request->hasParameter('insured_country') && !$request->getPostParameter('insured_country') && $request->getPostParameter('insured_address_status') == 'Y') {
+                array_push($error, "Please enter submission country");
+            } else if ($request->hasParameter('effectiveDate') && !$request->getPostParameter('effectiveDate')) {
+                array_push($error, "Please enter effective date");
+            } else if ($request->hasParameter('expityDate') && !$request->getPostParameter('expityDate')) {
+                array_push($error, "Please enter expiration date");
+            } else if ($request->hasParameter('brokerCode') && !$request->getPostParameter('brokerCode')) {
+                array_push($error, "Please select broker name");
+            } else if ($request->hasParameter('brokerCountryCode') && !$request->getPostParameter('brokerCountryCode')) {
+                array_push($error, "Please select broker country code");
+            } else if ($request->hasParameter('brokerStateCode') && !$request->getPostParameter('brokerStateCode')) {
+                array_push($error, "Please select broker state code");
+            } else if ($request->hasParameter('brokerCityCode') && !$request->getPostParameter('brokerCityCode')) {
+                array_push($error, "Please enter broker city code");
+            } else if ($request->hasParameter('broker_contact_person') && !$request->getPostParameter('broker_contact_person')) {
+                array_push($error, "Please enter broker contact person");
+            } else if ($request->hasParameter('broker_contact_person_email') && !$request->getPostParameter('broker_contact_person_email')) {
+                array_push($error, "Please enter broker contact person email");
+            } else if ($request->hasParameter('borker_contact_peson_number') && !$request->getPostParameter('borker_contact_peson_number')) {
+                array_push($error, "Please enter broker contact person mobile");
+            } else if ($request->hasParameter('editprimarystatus') && !$request->getPostParameter('editprimarystatus')) {
+                array_push($error, "Please select current status");
+            } else if ($request->hasParameter('editcabcompanies') && !$request->getPostParameter('editcabcompanies')) {
+                array_push($error, "Please enter Cab companies");
+            } else if ($request->hasParameter('reason_code') && !$request->getPostParameter('reason_code')) {
+                array_push($error, "Please select reason code");
+            } else if ($request->hasParameter('processdate') && !$request->getPostParameter('processdate')) {
+                array_push($error, "Please enter process date");
+            } else if ($request->hasParameter('gross_premium') && !$request->getPostParameter('gross_premium')) {
+                array_push($error, "Please enter gross premium");
+            } else if ($request->hasParameter('limit') && !$request->getPostParameter('limit')) {
+                array_push($error, "Please enter limit");
+            } else if ($request->hasParameter('attachment_point') && !$request->getPostParameter('attachment_point')) {
+                array_push($error, "Please enter attachment point");
+            } else if ($request->hasParameter('project_name') && !$request->getPostParameter('project_name')) {
+                array_push($error, "Please enter project name");
+            } else if ($request->hasParameter('general_contrator_name') && !$request->getPostParameter('general_contrator_name')) {
+                array_push($error, "Please enter general contractor name");
+            } else if ($request->hasParameter('project_owner_name') && !$request->getPostParameter('project_owner_name')) {
+                array_push($error, "Please enter project owner name");
+            } else if ($request->hasParameter('project_country') && !$request->getPostParameter('project_country')) {
+                array_push($error, "Please select project country");
+            } else if ($request->hasParameter('project_state') && !$request->getPostParameter('project_state')) {
+                array_push($error, "Please select project state");
+            } else if ($request->hasParameter('project_city') && !$request->getPostParameter('project_city')) {
+                array_push($error, "Please select project city");
+            } else if ($request->hasParameter('project_street_address') && !$request->getPostParameter('project_street_address')) {
+                array_push($error, "Please enter project street address");
+            }
+        }
+        // Back end validations ends
+        $submissionId = $request->getParameter('submission');
+        // Update submission details starts
+        if ($request->hasParameter('submission') && $request->getPostParameters()) {
+            $oldSubmissionRow = $editObj->GetSubmissionDetails($submissionId);
+            $oldSubmissionData = $oldSubmissionRow[0];
+            $submissionHistoryId = $editObj->SaveSubmissionHistory($oldSubmissionData, $postedValues, $userId, $submissionId);
+            $updateSubmissionDetails = $editObj->UpdateSubmissionDetails($postedValues, $userId, $submissionId);
+            $this->redirect('submission/List');
+        }
+        // Fetch submission starts
+        $submission = $request->getParameter('submission');
+        if ($request->hasParameter('submission')) {
+            $submissionRecord = $editObj->FetchSubmissionDetails($submission);
+            $submissionRow = array_change_key_case($submissionRecord);
+            $this->brokerDetails = $objSubmision->getBroker();
+            $objSubmisionDetails = new SubmissionDetails();
+
+            if (count($submissionRow) > 0) {
+                $submissionRecord[0]['EffectiveDate'] = date('m/d/Y', strtotime($submissionRecord[0]['EffectiveDate']));
+                $submissionRecord[0]['ExpiryDate'] = date('m/d/Y', strtotime($submissionRecord[0]['ExpiryDate']));
+                if (!empty($submissionRecord[0]['BerkSIDateFromBroker'])) {
+                    $submissionRecord[0]['byBerkSi'] = date('m/d/Y H:i', strtotime($submissionRecord[0]['BerkSIDateFromBroker']));
+                } else {
+                    $submissionRecord[0]['byBerkSi'] = '';
+                }
+                if (!empty($submissionRecord[0]['BerkSiDateFromIndia'])) {
+                    $submissionRecord[0]['byIndia'] = date('m/d/Y', strtotime($submissionRecord[0]['BerkSiDateFromIndia']));
+                } else {
+                    $submissionRecord[0]['byIndia'] = '';
+                }
+
+                $this->submissionRow = $submissionRecord[0];
+                $brokerDetailArr = explode('-', $submissionRecord[0]['BrokerCode']);
+                $this->brokerCode = $brokerDetailArr[0];
+                $this->brokerCountryCode1 = isset($brokerDetailArr[1]) && $brokerDetailArr[1] ? $brokerDetailArr[1] : '';
+                $this->brokerCountryCode = $objSubmisionDetails->getCountryId($this->brokerCountryCode1);
+                $this->brokerStateCode = $objSubmisionDetails->getStateId($brokerDetailArr[2]);
+                $this->brokerCityCode = $objSubmisionDetails->getCityId($brokerDetailArr[3]);
+            }
+            
+            $submissionAddressRow = $editObj->FetchAddressDetails($submissionRecord[0]['AlternativeAddressId']);
+            if (count($submissionAddressRow) > 0) {
+                $this->submissionAddressSubmission = $submissionAddressRow[0];
+            }
+            
+            $brokerTypeRow = $editObj->FetchBrokerType($this->brokerCode);
+            if (count($brokerTypeRow) > 0) {
+                $this->brokerType = $brokerTypeRow[0];
+            }
+
+            $insuredRows = $editObj->FetchInsuredDetails();
+            if (count($insuredRows) > 0) {
+                $this->insuredDetails = $insuredRows;
+                $insuredDetails = $editObj->FetchInsuredDetails($this->submissionRow['InsuredId']);
+
+                $this->insuredName = $insuredDetails[0]['InsuredName'];
+                $this->insuredaddress = $insuredDetails[0]['Address'];
+                $this->insuredCountry = $insuredDetails[0]['InsuredCountry'];
+                $this->insuredState = $insuredDetails[0]['StateName'];
+                $this->insuredCity = $insuredDetails[0]['City'];
+                $this->insuredZipcode = $insuredDetails[0]['Zip'];
+            }
+
+            $businessDependentRows = $editObj->FetchBusinessDependentDetails($this->submissionRow['BusinessDependentDetailId']);
+            if (count($businessDependentRows) > 0) {
+                $this->businessDetails = $businessDependentRows;
+            }
+            
+            $bidSituationRow = $objSubmision->getLookUpTypeData('Bidsituation');
+            if (count($bidSituationRow) > 0) {
+                $this->bidSituation = $bidSituationRow;
+            }
+
+            $newRenewRow = $objSubmision->getLookUpTypeList('NewRenewal');
+            if (count($newRenewRow > 0)) {
+                $this->nerrenewal = $newRenewRow;
+            }
+
+            $cabCompaniesRow = $objSubmision->getLookUpTypeList('CabCompanies');
+            if (count($cabCompaniesRow > 0)) {
+                $this->cabCompanies = $cabCompaniesRow;
+            }
+            $statusDependentRows = $editObj->FetchBusinessStatusDetails($submissionRecord[0]['StatusDependentDetailsId']);
+            if (count($statusDependentRows) > 0) {
+                $this->statusDetails = $statusDependentRows[0];
+            }
+
+            $submissionBranchRows = $editObj->FetchSubmissionBranch($submissionRow[0]['BranchId']);
+            if (count($submissionBranchRows) > 0) {
+                $this->branches = $submissionBranchRows[0]['Branch'];
+            }
+
+            $submissionStatusRows = $editObj->FetchCurrentStatus();
+            if (count($submissionStatusRows) > 0) {
+                $this->status = $submissionStatusRows;
+            }
+            $dataRecorderTypeRows = $editObj->FetchDataRecorderType($submissionRow[0]['DataRecorderMetaDataId']);
+            if (count($dataRecorderTypeRows) > 0) {
+                $this->DataRecorder = $dataRecorderTypeRows[0];
+            }
+
+            $submissionIdentifier = $editObj->FetchSubmissionIdentifier();
+            if (count($submissionIdentifier) > 0) {
+                $this->submissionIdetifier = $submissionIdentifier;
+            }
+
+            $remarkRow = $editObj->FetchHistoryDetails($submissionId);
+            if (count($remarkRow) > 0) {
+                $this->remarks = $remarkRow;
+            }
+
+            $objS = new SubmissionDetails();
+            $this->underwriters = $objS->getUnderWriterName();
+            $this->submissionId = $request->getParameter('submission');
+        }
+    }
+
+    public function executeSubmissionHistory(sfWebRequest $request) {
+        $obj = new SubmissionDetails();
+        $this->submissionId = 0;
+        $this->submissionId = $request->getParameter('submission');
+        if ($request->hasParameter('submission')) {
+            $con = Propel::getConnection();
+            $qry = "SELECT * FROM SubmissionHistory WHERE SubmissionId = '$this->submissionId'";
+            $stmt = $con->query($qry);
+            $this->result = $stmt->fetchAll();
+            foreach ($this->result as $value) {
+                $this->user = $obj->getUserName($value['ModifiedBy']);
+            }
+            $dataqry = "SELECT DR.* FROM Submission AS S LEFT JOIN DataRecorderMetaData AS DR ON S.DataRecorderMetaDataId = DR.Id  WHERE S.Id = '$this->submissionId'";
+            $stmt1 = $con->query($dataqry);
+            $this->dataResult = $stmt1->fetchAll();
+        }
+    }
+
+    public function executeViewHistory(sfWebRequest $request) {
+        $obj = new SubmissionDetails();
+        $this->submissionId = 0;
+        $this->submissionId = $request->getParameter('submission');
+        if ($request->hasParameter('submission')) {
+            $con = Propel::getConnection();
+            $qry = "SELECT * FROM SubmissionHistory WHERE SubmissionId = '$this->submissionId'";
+            $stmt = $con->query($qry);
+            $this->result = $stmt->fetchAll();
+            foreach ($this->result as $value) {
+                $this->user = $obj->getUserName($value['ModifiedBy']);
+            }
+            $dataqry = "SELECT DR.* FROM Submission AS S LEFT JOIN DataRecorderMetaData AS DR ON S.DataRecorderMetaDataId = DR.Id  WHERE S.Id = '$this->submissionId'";
+            $stmt1 = $con->query($dataqry);
+            $this->dataResult = $stmt1->fetchAll();
+        }
+    }
+
+    public function executeGetState(sfWebRequest $request) {
+
+        $groupId = $this->getUser()->getAttribute('groupId');
+        $userGroup = SubmissionDetails::getUserGroup($groupId);
+        $arrStateData = json_decode(SubmissionDetails::getPostContent());
+        $countryId = $arrStateData->body->data;
+        $objSubmission = new SubmissionDetails();
+        if ($userGroup == 'master') {
+            $data = $objSubmission->getStateName();
+        } else {
+            $data = $objSubmission->getStateName($countryId);
+        }
+        echo json_encode($data);
+        exit;
+    }
+
+    public function executeGetCity(sfWebRequest $request) {
+        $groupId = $this->getUser()->getAttribute('groupId');
+        $userGroup = SubmissionDetails::getUserGroup($groupId);
+        $arrCityData = json_decode(SubmissionDetails::getPostContent());
+        $StateId = $arrCityData->body->data;
+        $objSubmission = new SubmissionDetails();
+        if ($userGroup == 'master') {
+            $data = $objSubmission->getCityName();
+        } else {
+            $data = $objSubmission->getCityName($StateId);
+        }
+        echo json_encode($data);
+        exit;
+    }
+
+    public function executeGetSubmissionTypeData(sfWebRequest $request) {
+        $jsonObj = json_decode(SubmissionDetails::getPostContent());
+        $groupId = $this->getUser()->getAttribute('groupId');
+        $userGroup = SubmissionDetails::getUserGroup($groupId);
+
+        $submissionType = $jsonObj->body->data;
+        $objSubmission = new SubmissionDetails();
+        $brokerName = $objSubmission->getBroker();
+        $productLineSubTypeName = $objSubmission->getProductLineSubTypeName($submissionType);
+        $data = array('brokerDetail' => $brokerName, 'productlinesubtypeDetail' => $productLineSubTypeName);
+        echo json_encode($data);
+        exit;
+    }
+
+    public function executeGetSubmissionTypeDataDetails(sfWebRequest $request) {
+        $jsonObj = json_decode(SubmissionDetails::getPostContent());
+        $groupId = $this->getUser()->getAttribute('groupId');
+        $userGroup = SubmissionDetails::getUserGroup($groupId);
+
+        $underWriterId = $jsonObj->body->data;
+        $objSubmission = new SubmissionDetails();
+        $underWriterName = $objSubmission->getUnderWriterName($underWriterId);
+
+        $lobData = $objSubmission->getLobData($underWriterName);
+        $lobSubTypeData = $objSubmission->getLobSubTypeData($underWriterName);
+        $data = array('lobDetail' => $lobData, 'lobsubtypeDetail' => $lobSubTypeData);
+        echo json_encode($data);
+        exit;
+    }
+
+    public function executeGetSectionCodeDetails(sfWebRequest $request) {
+        $jsonObj = json_decode(SubmissionDetails::getPostContent());
+        $productDetails = $jsonObj->body->data;
+        $objSubmission = new SubmissionDetails();
+        $sectionCodeDetails = $objSubmission->getSectionCodeName($productDetails);
+        echo json_encode($sectionCodeDetails);
+        exit;
+    }
+
+    public function executeGetProfitCodeDetails(sfWebRequest $request) {
+        $jsonObj = json_decode(SubmissionDetails::getPostContent());
+        $sectionCodeId = $jsonObj->body->data->sectionCodeID;
+        $subTypeId = $jsonObj->body->data->subTypeID;
+        $lobId = $jsonObj->body->data->TypeID;
+        $objSubmission = new SubmissionDetails();
+        $profitCodeDetails = $objSubmission->getProfitCodeId($sectionCodeId, $subTypeId, $lobId);
+        echo json_encode($profitCodeDetails);
+        exit;
+    }
+
+    public function executeGetProfitCodeDetailsBySubType(sfWebRequest $request) {
+        $jsonObj = json_decode(SubmissionDetails::getPostContent());
+        $subTypeId = $jsonObj->body->data;
+        $objSubmission = new SubmissionDetails();
+        $profitCodeDetails = $objSubmission->getProfitCodeIdBySubType($subTypeId);
+        echo json_encode($profitCodeDetails);
+        exit;
+    }
+
+    public function executeGetUnderWritersBranchOffice(sfWebRequest $request) {
+        $jsonObj = json_decode(SubmissionDetails::getPostContent());
+        $underwriterID = $jsonObj->body->data;
+        $objSubmission = new SubmissionDetails();
+        $underwriterBranch = $objSubmission->getUnderwriterBranchOffice($underwriterID);
+        echo json_encode($underwriterBranch);
+        exit;
+    }
+
+    public function executeGetBrokerBranchOfficeName(sfWebRequest $request) {
+        $jsonObj = json_decode(SubmissionDetails::getPostContent());
+        $StateCode = $jsonObj->body->data->stateId;
+        $brokerType = $jsonObj->body->data->Brokertype;
+        $objSubmission = new SubmissionDetails();
+        $data = $objSubmission->BrokerBranchOffice($StateCode, $brokerType);
+        echo json_encode($data);
+        exit;
+    }
+
+    public function executeGetBrokerSubType(sfWebRequest $request) {
+        $arrStateData = json_decode(SubmissionDetails::getPostContent());
+        $brokerCode = $arrStateData->body->data;
+        $objSubmission = new SubmissionDetails();
+        $data = $objSubmission->getBroker($brokerCode);
+        echo json_encode($data);
+        exit;
+    }
+
+    Public function executeGetInsuredName(sfWebRequest $request) {
+        if (isset($_REQUEST['queryString'])) {
+            $queryString = $_REQUEST['queryString'];
+            $objSubmision = new SubmissionDetails();
+            $result = $objSubmision->getInsuredSuggestionList($queryString);
+            return $result;
+        }
+    }
+
+    Public function executeGetInsuredDetails(sfWebRequest $request) {
+        if (isset($_REQUEST['queryString'])) {
+            $queryString = $_REQUEST['queryString'];
+            $objSubmision = new SubmissionDetails();
+            $result = $objSubmision->getInsuredDetails($queryString);
+            echo json_encode($result);
+            exit;
+        }
+    }
+
+    Public function executeSaveInsuredName(sfWebRequest $request) {
+        $insuredName = $_REQUEST['insuredname'];
+        $objSubmision = new SubmissionDetails();
+        $result = $objSubmision->saveInsuredName($insuredName);
+        echo $result;
+        exit;
+    }
+
+    public function executeViewSubmission($request) {
+        $this->submissionId = $request->getParameter('submission');
+        $obj = new ViewSubmissionDetails();
+        $this->result = $obj->ViewSubmissionDetail($this->submissionId);
+    }
+
+    public function executeQCView($request) {
+        $this->submissionId = $request->getParameter('submission');
+        $obj = new ViewSubmissionDetails();
+        $this->result = $obj->ViewSubmissionDetail($this->submissionId);
+    }
+
+    public function executeQCUpdate($request) {
+        $userId = $this->getUser()->getAttribute('id');
+        $submissionId = $request->getParameter('submission');
+        $postValues = $request->getPostParameters();
+        $obj = new ViewSubmissionDetails();
+        $this->result = $obj->UpdateSubmissionDetail($postValues, $submissionId, $userId);
+        $this->redirect('submission/QCList');
+    }
+
+    public function executeGetProductLine($request) {
+        
+    }
+
+    public function executeGetBrokerCountry($request) {
+        $arrStateData = json_decode(SubmissionDetails::getPostContent());
+        $groupId = $this->getUser()->getAttribute('groupId');
+        $userGroup = SubmissionDetails::getUserGroup($groupId);
+
+        $brokerCode = $arrStateData->body->data;
+        $objSubmision = new SubmissionDetails();
+        if ($userGroup == 'master') {
+            $result = $objSubmision->getCountryName();
+        } else {
+            $result = $objSubmision->getBrokerCountry($brokerCode);
+        }
+        echo json_encode($result);
+        exit;
+    }
+
+    public function executeGetBrokerState($request) {
+        $arrStateData = json_decode(SubmissionDetails::getPostContent());
+        $groupId = $this->getUser()->getAttribute('groupId');
+        $userGroup = SubmissionDetails::getUserGroup($groupId);
+
+        $brokerCode = $arrStateData->body->BrokerCode;
+        $country = $arrStateData->body->countryId;
+        $objSubmision = new SubmissionDetails();
+        if ($userGroup == 'master') {
+            $result = $objSubmision->getStateName();
+        } else {
+            $result = $objSubmision->getBrokerState($brokerCode,$country);
+        }
+        echo json_encode($result);
+        exit;
+    }
+
+    public function executeGetBrokerCity($request) {
+        $arrStateData = json_decode(SubmissionDetails::getPostContent());
+        $groupId = $this->getUser()->getAttribute('groupId');
+        $userGroup = SubmissionDetails::getUserGroup($groupId);
+
+        $brokerCode = $arrStateData->body->BrokerCode;
+        $stateId = $arrStateData->body->stateId;
+        $objSubmision = new SubmissionDetails();
+        if ($userGroup == 'master') {
+            $result = $objSubmision->getCityName();
+        } else {
+            $result = $objSubmision->getBrokerCity($brokerCode,$stateId);
+        }
+        echo json_encode($result);
+        exit;
+    }
+
+    public function executeSubmission($request) {
+        
+    }
+    
+    public function executeGetReasonCode($request) {
+        $arrStateData = json_decode(SubmissionDetails::getPostContent());
+        $statusId = $arrStateData->body->data;
+        $objSubmision = new EditSubmissionDetails();
+        $result = $objSubmision->FetchReasonCode($statusId);
+        echo json_encode($result);
+        exit;
+    }
+
+}
+

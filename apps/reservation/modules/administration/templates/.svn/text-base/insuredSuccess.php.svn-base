@@ -1,0 +1,170 @@
+<?php $niddle = $sf_user->getAttribute('searchNiddle'); ?>
+<div id="content">
+<div class="container"> 
+    <ul id="breadcrumb">
+        <li class="selected-2"><a href="/">Home</a></li>
+        <li class="selected-1"><a href="/admin/manageadmin">Admin</a></li>
+        <li class="selected">Manage Insured Details</li>
+    </ul>
+</div>
+
+<div class="clear"></div>
+<?php if ($sf_user->hasFlash('success')): ?>
+    <div class="success"><?php echo $sf_user->getFlash('success'); ?> </div>    
+<?php endif; ?>
+
+<div class="container">
+    <div class="white-bg black-border border-radius-10">
+        <h1 class="section-header border-radius-10">Filter (<?php echo $numberofResults; ?> results found)
+            <div class="arrow"></div>
+        </h1>
+        <div class="content">
+            <form method="POST" action="/admin/insured" name="insuredSearchForm" id="insuredSearchForm">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="12%">Insured Name</td>
+                        <td width="22%">
+                            <input type="text" name="insuredname" id="insuredname" value="<?php echo $niddle['insuredName']; ?>" class="txtbox-small"/>
+                        </td>
+                        <td width="12%">Address Line 1</td>
+                        <td width="22%"><input type="text" name="insuredaddress" id="insuredaddress" value="<?php echo $niddle['insuredaddress']; ?>" class="txtbox-small"></td>
+                        <td width="4%">&nbsp;</td>
+                        <td width="30%">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>Country</td>
+                        <td> 
+                            <select name="insuredcountry" id="insuredcountry" class="listbox-small">
+                                <option value="">--Select--</option>
+                                <?php
+                                foreach ($country as $value) {
+                                    if ($value['InsuredCountry'] == $niddle['insuredCountry'])
+                                        $select = 'selected="selected"';
+                                    else
+                                        $select = '';
+                                    ?>
+                                    <option value="<?php echo $value['InsuredCountry'] ?>" <?php echo $select; ?>><?php echo $value['InsuredCountry'] ?></option>
+                                <?php } ?>
+                            </select>
+                        </td>
+                        <td>State</td>
+                        <td> 
+                            <select name="insuredstate" id="insuredstate" class="listbox-small">
+                                <option value="">--Select--</option>
+                                <?php
+                                foreach ($states as $state) {
+                                    if ($state['StateName'] == $niddle['insuredState'])
+                                        $select = 'selected="selected"';
+                                    else
+                                        $select = '';
+                                ?>
+                                    <option value="<?php echo $state['StateName']; ?>" <?php echo $select; ?>><?php echo $state['StateName']; ?></option>
+                                <?php } ?>
+                            </select>
+                        </td>
+                        <td>City</td>
+                        <td> 
+                            <select name="insuredcity" id="insuredcity" class="listbox-small">
+                                <option value="">--Select--</option>
+                                <?php
+                                foreach ($city as $cityvalue) {
+                                    if ($cityvalue['City'] == $niddle['insuredCity'])
+                                        $select = 'selected="selected"';
+                                    else
+                                        $select = '';
+                                ?>
+                                    <option value="<?php echo $cityvalue['City']; ?>" <?php echo $select; ?>><?php echo $cityvalue['City']; ?></option>
+                                <?php } ?>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" colspan="6" style="padding-top: 20px;">
+                            <input type="submit" value="Search" class="button" />
+                            <input type="reset" value="Reset" class="button" id="resetInsuredValue" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <a href="/admin/addinsured"><input type="button" class="button fright" value="Add Insured" /></a>
+</div>
+
+<div class="container">
+    <h2>Insured Details List</h2>
+    <div class="insured-details-list">
+        <table class="dataTable">
+            <thead>
+                <tr>
+                    <th>Edit/View Details</th>
+                    <th>Insured name</th>
+                    <th>Address Line 1</th>
+                    <th> Country</th>
+                    <th>State</th>
+                    <th>City</th>
+                    <th>Created By</th>
+                    <th>Created On</th>
+                    <th>Modified By</th>
+                    <th>Modified On</th>
+                </tr>
+            </thead> 
+            <tbody>
+                <?php
+                if ($numberofResults != 0) {
+                    foreach ($pager->getResults() as $result) {
+                        ?>
+                        <tr> 
+                            <td><a href="<?php echo url_for('@edit_insured') . '?insuredId=' . $result->getId(); ?>" style="margin-right:4px;"><input type="button" value="edit" /><a href="<?php echo url_for('@view_insured') . '?insuredId=' . $result->getId(); ?>"><input type="button" value="view" /></a></a></td>
+                            <td><?php echo $result->getInsuredName(); ?></td>
+                            <td><?php echo $result->getAddress(); ?></td>
+                            <td><?php echo $result->getInsuredcountry(); ?></td>
+                            <td><?php echo $result->getInsuredstate(); ?></td>
+                            <td><?php echo $result->getInsuredcity(); ?></td>
+                            <td><?php echo MyReservationUser::getUserNameFromID($result->getCreatedBy()); ?></td>
+                            <td><?php echo date('m-d-Y h:i:s', strtotime($result->getCreatedOn())); ?></td>
+                            <td><?php echo MyReservationUser::getUserNameFromID($result->getModifiedBy()); ?></td>
+                            <?php if ($result->getModifiedOn() == '') { ?>
+                                <td></td>
+                            <?php } else { ?>
+                                <td><?php echo date('m-d-Y h:i:s', strtotime($result->getModifiedOn())); ?></td>
+                            <?php } ?>
+                        </tr>          
+                        <?php
+                    }
+                } else {
+                    ?>
+                    <tr>
+                        <td colspan="11" align="center" class="login-error">Sorry, No Record Found.</td>
+                    </tr>
+                    <?php
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+<?php if ($pager->haveToPaginate()): ?>
+    <!--Pagination start-->
+    <ul class="pagination">
+        <li class="first"><a href="<?php echo url_for('@insured_list') . '?page=' . $pager->getFirstPage() . '&niddle=true'; ?>" class="pagination-link" id="page-<?php echo $pager->getFirstPage(); ?>">&lt;&lt;First</a></li>
+         <li class="prev"><a href="<?php echo url_for('@insured_list') . '?page=' . $pager->getPreviousPage() . '&niddle=true'; ?>" class="pagination-link" id="page-<?php echo $pager->getPreviousPage(); ?>">&lt;&lt;Previous</a></li>
+        <?php foreach ($pager->getLinks() as $page): ?>
+            <?php if ($page == $pager->getPage()): ?>
+                <?php echo '<li class="selected">' . $page . '</li>' ?>
+            <?php else: ?>
+                <?php echo '<li><a href="' . url_for('@insured_list') . '?page=' . $page . '&niddle=true" class="pagination-link" id="page-' . $page . '">' . $page . '</a></li>'; ?>
+            <?php endif; ?> 
+        <?php endforeach; ?>
+        <li class="next"><a href="<?php echo url_for('@insured_list') . '?page=' . $pager->getNextPage() . '&niddle=true'; ?>" id="page-<?php echo $pager->getNextPage(); ?>">Next &gt;&gt;</a></li>
+        <li class="last"><a href="<?php echo url_for('@insured_list') . '?page=' . $pager->getLastPage() . '&niddle=true'; ?>" id="page-<?php echo $pager->getLastPage(); ?>">Last &gt;&gt;</a></li>
+    </ul>
+<?php endif; ?>
+<!--Pagination end--> 
+<!-- Quotes -->
+</div>>
+
+

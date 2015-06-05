@@ -1,0 +1,59 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/08-Security
+
+all:
+  is_secure: true
+
+forgotPassword: 
+  is_secure: false
+
+List:
+  credentials: [[VIEW_SUBMISSION,VIEW_EDIT_SUBMISSION]]
+
+CreateSubmission:
+  credentials: [VIEW_EDIT_SUBMISSION]
+
+EditSubmission:
+  credentials: [VIEW_EDIT_SUBMISSION]
+
+ExportFile:
+  credentials: [EXPORT_SUBMISSION]
+
+users:
+  credentials: [VIEW_USER_LIST]
+
+addUser:
+  credentials: [VIEW_EDIT_USER]    
+
+editUser:
+  credentials: [VIEW_EDIT_USER]
+  
+viewUser:
+  credentials: [VIEW_EDIT_USER]
+
+groups:
+  credentials: [[VIEW_GROUP_LIST,VIEW_EDIT_GROUP]]
+
+addgroup:
+  credentials: [VIEW_EDIT_GROUP]
+
+editGroup:
+  credentials: [VIEW_EDIT_GROUP] 
+
+viewgroup:
+  credentials: [VIEW_EDIT_GROUP]
+  
+QCList:
+  credentials: [VIEW_QCSUBMISSION]
+  
+insured_list:
+  credentials: [[VIEW_INSURED_LIST,VIEW_EDIT_INSURED]]
+  
+add_insured:
+  credentials: [VIEW_EDIT_INSURED]
+  
+edit_insured:
+  credentials: [VIEW_EDIT_INSURED]
+  
+view_insured:
+  credentials: [VIEW_EDIT_INSURED]
